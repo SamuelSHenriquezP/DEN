@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO TÉCNICO -->
+    <title>Dynamic Electric Natale | Ingeniería Eléctrica de Vanguardia</title>
+    <meta name="description"
+        content="Especialista en alta ingeniería eléctrica, fotovoltaica y domótica avanzada por Kerling Natale.">
+    <meta name="keywords"
+        content="electricista premium, ingeniería eléctrica, energía solar, domótica, Dynamic Electric Natale, Loxone Madrid">
+
+    <!-- FUENTES PREMUM -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Syne:wght@700;800&family=Inter:wght@900&display=swap"
+        rel="stylesheet">
+
+    <!-- LIBRERÍAS (GSAP + LENIS) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header class="main-header">
+        <a href="#inicio" class="header-logo">
+            <img src="Logo DEN.png" alt="Dynamic Natale Logo" style="height: 65px; width: auto;">
+        </a>
+        <div style="display: flex; align-items: center; gap: 30px;">
+            <a href="https://wa.me/34682178499" class="header-contact-link">Presupuesto Rápido</a>
+        </div>
+    </header>
+
+    <div class="noise"></div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
+
+    <!-- WHATSAPP CONSTANTE -->
+    <a href="https://wa.me/34682178499" class="whatsapp-constant" target="_blank" aria-label="Contacto WhatsApp">
+        <svg viewBox="0 0 448 512">
+            <path
+                d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.7 17.8 69.4 27.2 106.2 27.2 122.4 0 222-99.6 222-222 0-59.3-23-115.1-65-157.1zM223.9 445.9c-33.1 0-65.7-8.9-94.1-25.7l-6.7-4-69.8 18.3L72 365.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.5-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-5.5-2.8-23.2-8.5-44.2-27.1-16.4-14.6-27.4-32.7-30.6-38.2-3.2-5.6-.3-8.6 2.4-11.3 2.5-2.4 5.5-6.5 8.3-9.7 2.8-3.3 3.7-5.6 5.5-9.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 13.2 5.8 23.5 9.2 31.5 11.8 13.3 4.2 25.4 3.6 35 2.2 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
+        </svg>
+    </a>
+
+    <nav class="dock">
+        <a href="#inicio" class="dock-item active">Inicio</a>
+        <a href="#servicios" class="dock-item">Expertise</a>
+        <a href="#proyectos" class="dock-item">Proyectos</a>
+        <a href="#sobre-mi" class="dock-item">Sobre mí</a>
+        <a href="mailto:info@dynamicelectric.com" class="dock-item dock-cta">Hablemos</a>
+    </nav>
+
+    <main id="main">
+
+        <!-- HERO -->
+        <section id="inicio" class="hero container section-nav">
+            <h1 class="hero-title">
+                <span class="reveal">DYNAMIC</span>
+                <span class="reveal outline">ELECTRIC</span>
+                <span class="reveal">NATALE.</span>
+            </h1>
+            <p style="max-width: 550px; margin-top: 40px; font-size: 1.3rem; color: var(--text-dim); font-weight: 300;">
+                Ingeniería eléctrica de alta fidelidad en Madrid. Precisión técnica y soluciones energéticas respaldadas
+                por certificaciones oficiales.
+            </p>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="#servicios" class="btn-cta">Explorar Soluciones</a>
+                <a href="https://wa.me/34682178499" class="btn-cta outline">Consultoría Técnica Gratis</a>
+            </div>
+        </section>
+
+        <!-- STATS -->
+        <section class="container"
+            style="display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding: 100px 0; flex-wrap: wrap; gap: 40px;">
+            <div>
+                <h4 class="counter" style="font-size: 5rem; font-family: var(--font-head);">5</h4>
+                <p style="color: var(--accent); font-weight: 800; letter-spacing: 3px;">AÑOS DE EXPERIENCIA</p>
+            </div>
+            <div>
+                <h4 class="counter" style="font-size: 5rem; font-family: var(--font-head);">20</h4>
+                <p style="color: var(--accent); font-weight: 800; letter-spacing: 3px;">PROYECTOS REALIZADOS</p>
+            </div>
+            <div>
+                <h4 style="font-size: 5rem; font-family: var(--font-head);">A++</h4>
+                <p style="color: var(--accent); font-weight: 800; letter-spacing: 3px;">EFICIENCIA REAL</p>
+            </div>
+        </section>
+
+        <!-- SERVICES BENTO -->
+        <section id="servicios" class="container section-nav">
+            <h2 style="font-family: var(--font-head); font-size: 4rem; margin-bottom: 50px;">EL BLUEPRINT <br><span
+                    class="accent">TÉCNICO</span></h2>
+            <div class="bento-grid">
+                <div class="bento-card large tilt">
+                    <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?q=80&w=2070" class="card-bg">
+                    <h3>Solar Premium</h3>
+                    <p>Sistemas fotovoltaicos de alta densidad con integración arquitectónica inteligente.</p>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="bento-card tilt">
+                    <h3>Smart Home</h3>
+                    <p>Domótica avanzada Loxone y protocolos de control de iluminación.</p>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="bento-card tilt">
+                    <h3>Industrial</h3>
+                    <p>Redes de potencia y mantenimiento para infraestructuras críticas.</p>
+                    <div class="card-glow"></div>
+                </div>
+                <div class="bento-card wide tilt">
+                    <img src="https://images.unsplash.com/photo-1621905235277-3806a6428c94?q=80&w=2070" class="card-bg">
+                    <h3>Certificados</h3>
+                    <p>Auditorías, boletines oficiales y legalización integral de instalaciones.</p>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SMART ECOSYSTEM -->
+        <section class="container" style="padding: 100px 0;">
+            <div style="margin-bottom: 60px;">
+                <span
+                    style="color: var(--accent); font-weight: 800; letter-spacing: 3px; font-size: 12px; text-transform: uppercase;">Loxone
+                    Certified Partner</span>
+                <h2
+                    style="font-family: var(--font-head); font-size: clamp(3rem, 8vw, 5rem); line-height: 0.9; margin-top: 20px;">
+                    ECOSISTEMA <br><span class="outline">INTELIGENTE</span>
+                </h2>
+            </div>
+
+            <div class="smart-grid">
+                <div class="smart-card tilt">
+                    <div class="smart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        </svg></div>
+                    <h3>Automatización <br><span class="accent">Total</span></h3>
+                    <p>Gestión de iluminación, persianas y clima que aprende de tus hábitos diarios.</p>
+                    <div class="pill-container">
+                        <span class="pill">Auto-Learning</span>
+                        <span class="pill">Escenarios</span>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="smart-card tilt">
+                    <div class="smart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+                        </svg></div>
+                    <h3>Eficiencia <br><span class="accent">Activa</span></h3>
+                    <p>Optimización de excedentes solares y monitorización de consumo en tiempo real.</p>
+                    <div class="pill-container">
+                        <span class="pill">Gestión Fotovoltaica</span>
+                        <span class="pill">Ahorro A++</span>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="smart-card tilt">
+                    <div class="smart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                        </svg></div>
+                    <h3>Seguridad <br><span class="accent">Blindada</span></h3>
+                    <p>Control de accesos y alarmas técnicas integradas en un solo sistema encriptado.</p>
+                    <div class="pill-container">
+                        <span class="pill">Cifrado Militar</span>
+                        <span class="pill">Presencia</span>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="smart-card tilt">
+                    <div class="smart-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M9 18V5l12-2v13"></path>
+                            <circle cx="6" cy="18" r="3"></circle>
+                            <circle cx="18" cy="16" r="3"></circle>
+                        </svg></div>
+                    <h3>Audio <br><span class="accent">Multiroom</span></h3>
+                    <p>Experiencia sonora premium en cada estancia con control centralizado invisible.</p>
+                    <div class="pill-container">
+                        <span class="pill">Hi-Fi</span>
+                        <span class="pill">AirPlay 2</span>
+                    </div>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- HORIZONTAL PROJECTS -->
+        <section id="proyectos" class="horizontal-section section-nav">
+            <div class="horizontal-wrapper">
+                <div class="project-slide">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070">
+                    <div class="project-content">
+                        <span>RESIDENCIAL LUX</span>
+                        <h2>VILLA <br><span class="accent">MADRID</span></h2>
+                    </div>
+                </div>
+                <div class="project-slide">
+                    <img src="https://images.unsplash.com/photo-1558444479-c8482433273e?q=80&w=2070">
+                    <div class="project-content">
+                        <span>INDUSTRIAL SOLAR</span>
+                        <h2>ENERGY <br><span class="accent">PARK X</span></h2>
+                    </div>
+                </div>
+                <div class="project-slide">
+                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2069">
+                    <div class="project-content">
+                        <span>CORPORATIVE</span>
+                        <h2>HEADQUARTERS <br><span class="accent">DATA</span></h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SOBRE MÍ -->
+        <section id="sobre-mi" class="about-modern container section-nav">
+            <div class="about-grid-main">
+                <div class="about-image-side tilt">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=2070"
+                        alt="Kerling Natale Ingeniería">
+                </div>
+                <div class="about-text-side">
+                    <span
+                        style="color: var(--accent); font-weight: 800; letter-spacing: 3px; font-size: 12px; text-transform: uppercase; margin-bottom: 20px; display: block;">Guadarrama, Madrid</span>
+                    <h2>Kerling Abraham <br><span class="accent">Natale Hidalgo</span></h2>
+                    <p>
+                        Como electricista especialista, no solo realizo el trabajo: garantizo su <strong>legalidad,
+                            seguridad y correcto funcionamiento</strong>. Cada proyecto viene respaldado por certificaciones oficiales. <br><br>
+                        Desde instalaciones de obra limpia hasta domótica avanzada con Loxone, pasando por certificaciones, fotovoltaica y telecomunicaciones. Tanto la instalación como la programación de tu casa inteligente.
+                    </p>
+
+                    <div style="margin-bottom: 40px;">
+                        <a href="https://wa.me/34682178499" class="btn-cta">Agendar Llamada Técnica</a>
+                    </div>
+
+                    <div class="cert-grid">
+                        <div class="cert-item tilt">
+                            <h4>Categoría</h4>
+                            <p>Electricista Especialista</p>
+                        </div>
+                        <div class="cert-item tilt">
+                            <h4>Oficial</h4>
+                            <p>Certificación de instalaciones eléctricas</p>
+                        </div>
+                        <div class="cert-item tilt">
+                            <h4>Energía</h4>
+                            <p>Certificación de sistemas fotovoltaicos</p>
+                        </div>
+                        <div class="cert-item tilt" style="border-color: #64be1e;">
+                            <h4 style="color: #64be1e;">Partner</h4>
+                            <p>Loxone — Domótica avanzada</p>
+                        </div>
+                        <div class="cert-item tilt">
+                            <h4>Smart</h4>
+                            <p>Instalación y programación de casa inteligente</p>
+                        </div>
+                        <div class="cert-item tilt">
+                            <h4>Control</h4>
+                            <p>Inspección eléctrica profesional</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- IA AUDIT -->
+        <section class="container">
+            <div class="audit-box">
+                <div class="audit-tool">
+                    <h2>Auditoría <br><span class="accent">Instantánea.</span></h2>
+                    <p>Simula tu ahorro energético con ingeniería Natale.</p>
+                    <input type="range" id="audit-range" min="100" max="2000" value="300">
+                    <p>Gasto mensual: <span id="bill-val" class="accent">300€</span></p>
+                </div>
+                <div class="audit-res">
+                    <p style="letter-spacing: 3px; font-weight: 800;">POTENCIAL DE AHORRO ANUAL</p>
+                    <h4 id="save-val">2.840€</h4>
+                    <p style="margin-top: 15px; margin-bottom: 30px;">RETORNO ESTIMADO: 3.2 AÑOS</p>
+                    <a href="https://wa.me/34682178499" class="btn-cta" style="margin-top: 0;">Obtener Informe
+                        Detallado</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer id="contacto" class="footer-main">
+            <div class="container">
+                <div class="footer-grid-top">
+                    <div class="footer-brand">
+                        <img src="Logo DEN.png" alt="Dynamic Natale Logo"
+                            style="height: 60px; width: auto; margin-bottom: 20px;">
+                        <p>Alta ingeniería eléctrica, fotovoltaica y domótica avanzada. Soluciones con certificación
+                            oficial en la Comunidad de Madrid.</p>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Servicios</h4>
+                        <ul>
+                            <li><a href="#servicios">Sistemas Fotovoltaicos</a></li>
+                            <li><a href="#servicios">Domótica Loxone</a></li>
+                            <li><a href="#servicios">Boletines Eléctricos</a></li>
+                            <li><a href="#servicios">Mantenimiento Industrial</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Contacto</h4>
+                        <ul>
+                            <li><a href="tel:+34682178499">+34 682 17 84 99</a></li>
+                            <li><a href="mailto:den.informacion@gmail.com">den.informacion@gmail.com</a></li>
+                            <li><a href="#">Guadarrama, Madrid</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Legal</h4>
+                        <ul>
+                            <li><a href="#">Aviso Legal</a></li>
+                            <li><a href="#">Privacidad</a></li>
+                            <li><a href="#">Certificaciones</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="copy">© 2026 DYNAMIC ELECTRIC NATALE.</div>
+                    <div class="social-links" style="display: flex; gap: 20px; align-items: center;">
+                        <a href="#" aria-label="Instagram">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                                </path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                        <a href="https://wa.me/34682178499" aria-label="WhatsApp">
+                            <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2"
+                                fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
