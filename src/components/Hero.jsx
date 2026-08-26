@@ -6,13 +6,18 @@ export default function Hero({ onOpenQuote }) {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from('.animacion-entrada', {
-        y: 30,
-        opacity: 0,
-        duration: 1.1,
-        stagger: 0.1,
-        ease: 'power3.out',
-      });
+      // NATURAL ORGANIC SLIDE & FADE ENTRANCE
+      gsap.fromTo(
+        '.animacion-entrada',
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.4,
+          stagger: 0.12,
+          ease: 'power4.out',
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
@@ -53,11 +58,11 @@ export default function Hero({ onOpenQuote }) {
         </button>
 
         <a
-          href="#cuadro-tecnico"
-          onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
+          href="#proyectos"
+          onClick={(e) => scrollToSection(e, 'proyectos')}
           className="boton-accion contorno-elegante"
         >
-          <span>Ver Cuadro de Protección REBT</span>
+          <span>Ver Proyectos Realizados</span>
         </a>
 
         <a
@@ -99,7 +104,7 @@ export default function Hero({ onOpenQuote }) {
         </div>
       </div>
 
-      {/* TARJETAS DE CARACTERÍSTICAS DENSAS */}
+      {/* TARJETAS DE CARACTERÍSTICAS DENSAS CON LIGERA FÍSICA */}
       <div
         className="animacion-entrada"
         style={{
@@ -111,15 +116,16 @@ export default function Hero({ onOpenQuote }) {
       >
         <div
           style={{
-            background: 'rgba(15, 22, 38, 0.85)',
-            border: '1px solid rgba(255, 238, 0, 0.18)',
+            background: 'rgba(11, 17, 31, 0.85)',
+            border: '1px solid rgba(0, 229, 255, 0.2)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease',
           }}
         >
           <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>📜</span>
-          <h4 style={{ fontSize: '13px', color: '#FFEE00', fontWeight: '700', marginBottom: '4px' }}>
+          <h4 style={{ fontSize: '13px', color: '#00E5FF', fontWeight: '700', marginBottom: '4px' }}>
             Boletines Eléctricos CIE
           </h4>
           <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
@@ -129,11 +135,12 @@ export default function Hero({ onOpenQuote }) {
 
         <div
           style={{
-            background: 'rgba(15, 22, 38, 0.85)',
-            border: '1px solid rgba(0, 229, 255, 0.18)',
+            background: 'rgba(11, 17, 31, 0.85)',
+            border: '1px solid rgba(0, 229, 255, 0.2)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease',
           }}
         >
           <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>🏠</span>
@@ -147,11 +154,12 @@ export default function Hero({ onOpenQuote }) {
 
         <div
           style={{
-            background: 'rgba(15, 22, 38, 0.85)',
-            border: '1px solid rgba(255, 238, 0, 0.18)',
+            background: 'rgba(11, 17, 31, 0.85)',
+            border: '1px solid rgba(0, 229, 255, 0.2)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',
+            transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease',
           }}
         >
           <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>☀️</span>

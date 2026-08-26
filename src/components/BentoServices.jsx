@@ -11,23 +11,28 @@ export default function BentoServices() {
     const ctx = gsap.context(() => {
       const cards = containerRef.current.querySelectorAll('.tarjeta-servicio');
 
-      gsap.from(cards, {
-        y: 60,
-        opacity: 0,
-        scale: 0.94,
-        duration: 0.9,
-        stagger: 0.12,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top 80%',
-        },
-      });
+      gsap.fromTo(
+        cards,
+        { y: 50, opacity: 0, scale: 0.96 },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.1,
+          ease: 'power4.out',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top 82%',
+          },
+        }
+      );
     }, containerRef);
 
     return () => ctx.revert();
   }, []);
 
+  // NATURAL GSAP INERTIA HOVER (quickTo)
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
     const rect = card.getBoundingClientRect();
@@ -35,11 +40,11 @@ export default function BentoServices() {
     const y = e.clientY - rect.top - rect.height / 2;
 
     gsap.to(card, {
-      rotateY: (x / rect.width) * 8,
-      rotateX: (-y / rect.height) * 8,
-      transformPerspective: 1000,
-      duration: 0.4,
-      ease: 'power2.out',
+      rotateY: (x / rect.width) * 6,
+      rotateX: (-y / rect.height) * 6,
+      transformPerspective: 1200,
+      duration: 0.8,
+      ease: 'power3.out',
     });
   };
 
@@ -48,8 +53,8 @@ export default function BentoServices() {
     gsap.to(card, {
       rotateY: 0,
       rotateX: 0,
-      duration: 0.6,
-      ease: 'power2.out',
+      duration: 1.1,
+      ease: 'power4.out',
     });
   };
 
@@ -118,7 +123,7 @@ export default function BentoServices() {
             className={`tarjeta-servicio ${srv.size}`}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
-            style={{ transformStyle: 'preserve-3d', transition: 'box-shadow 0.3s ease' }}
+            style={{ transformStyle: 'preserve-3d', transition: 'box-shadow 0.4s ease, border-color 0.4s ease' }}
           >
             <img src={srv.img} alt={srv.title} className="imagen-fondo-tarjeta" />
             <div className="capa-sombra-tarjeta"></div>
