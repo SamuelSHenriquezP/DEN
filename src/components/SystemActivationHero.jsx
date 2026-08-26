@@ -5,60 +5,96 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
   const [isSystemOnline, setIsSystemOnline] = useState(false);
   const heroRef = useRef(null);
   const lineRef = useRef(null);
+  const flashOverlayRef = useRef(null);
   const onlineContentRef = useRef(null);
 
   const handleActivatePower = () => {
     const line = lineRef.current;
-    if (line) {
-      gsap.timeline()
-        .to(line, {
-          strokeDashoffset: 0,
-          duration: 0.6,
-          ease: 'power3.inOut',
-        })
-        .to('.nodo-sistema-standby', {
-          scale: 1.8,
-          backgroundColor: '#FFEE00',
-          boxShadow: '0 0 35px #FFEE00',
-          duration: 0.3,
-        })
-        .to(heroRef.current, {
-          backgroundColor: '#030508',
-          duration: 0.4,
-          onComplete: () => {
-            setIsSystemOnline(true);
-            if (onPowerOn) onPowerOn();
+    const hero = heroRef.current;
+    const flash = flashOverlayRef.current;
 
-            // 3D SPLIT LETTER & BLOCK EXTRAVAGANT ENTRANCE ANIMATION
-            setTimeout(() => {
-              if (onlineContentRef.current) {
-                const elements = onlineContentRef.current.querySelectorAll('.revelar-3d');
-                gsap.fromTo(
-                  elements,
-                  {
-                    rotationX: -75,
-                    rotationY: 25,
-                    z: -200,
-                    y: 80,
-                    opacity: 0,
-                    transformPerspective: 1200,
-                    transformOrigin: '0% 50% -100',
-                  },
-                  {
-                    rotationX: 0,
-                    rotationY: 0,
-                    z: 0,
-                    y: 0,
-                    opacity: 1,
-                    duration: 1.4,
-                    stagger: 0.15,
-                    ease: 'power4.out',
-                  }
-                );
-              }
-            }, 50);
-          },
-        });
+    // 1. ANIMATE HIGH-VOLTAGE CURRENT LINE TRAVERSAL
+    if (line) {
+      const tl = gsap.timeline();
+
+      // LINE DRAWING AT HIGH SPEED
+      tl.to(line, {
+        strokeDashoffset: 0,
+        duration: 0.45,
+        ease: 'power4.in',
+      })
+      // DRAMATIC CAMERA SHOCKWAVE PULSE
+      .to(hero, {
+        scale: 1.04,
+        duration: 0.08,
+        ease: 'power2.out',
+      })
+      // LIGHT BULB HIGH-VOLTAGE IGNITION FLASH BURST
+      .to(flash, {
+        opacity: 0.95,
+        duration: 0.05,
+        backgroundColor: '#FFFFFF',
+      })
+      .to(flash, {
+        opacity: 0.6,
+        duration: 0.1,
+        backgroundColor: '#FFEE00',
+      })
+      .to(flash, {
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power3.out',
+      })
+      .to(hero, {
+        scale: 1,
+        duration: 0.3,
+        ease: 'power3.out',
+      }, '-=0.3')
+      .call(() => {
+        setIsSystemOnline(true);
+        if (onPowerOn) onPowerOn();
+
+        // SYNCHRONIZED FILAMENT FLICKER TITLE IGNITION
+        setTimeout(() => {
+          if (onlineContentRef.current) {
+            const words = onlineContentRef.current.querySelectorAll('.foco-palabra-encendido');
+            const sub = onlineContentRef.current.querySelectorAll('.foco-subtext-encendido');
+
+            // 1. WORD FILAMENT FLICKER IGNITION
+            gsap.timeline()
+              .fromTo(
+                words,
+                { opacity: 0, scale: 0.92, filter: 'brightness(3)' },
+                {
+                  opacity: 1,
+                  scale: 1,
+                  filter: 'brightness(1)',
+                  duration: 0.15,
+                  stagger: 0.12,
+                  ease: 'steps(2)',
+                }
+              )
+              // ELECTRICAL IGNITION FLICKER BURST
+              .to(words, {
+                opacity: 0.3,
+                duration: 0.06,
+                stagger: 0.05,
+              })
+              .to(words, {
+                opacity: 1,
+                textShadow: '0 0 35px #FFEE00, 0 0 70px #FFEE00',
+                duration: 0.2,
+                stagger: 0.08,
+              })
+              // SUBTEXT FADE IN
+              .fromTo(
+                sub,
+                { opacity: 0, y: 30 },
+                { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', stagger: 0.1 }
+              );
+          }
+        }, 30);
+      });
     } else {
       setIsSystemOnline(true);
       if (onPowerOn) onPowerOn();
@@ -73,8 +109,8 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
 
     gsap.to('.capa-3d-fondo', {
-      rotateY: x * 6,
-      rotateX: -y * 6,
+      rotateY: x * 5,
+      rotateX: -y * 5,
       transformPerspective: 1200,
       duration: 0.8,
       ease: 'power2.out',
@@ -117,6 +153,22 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         perspective: '1200px',
       }}
     >
+      {/* CAPA DE RÁFAGA LUMINOSA TIPO IGNICIÓN DE FOCO DE ALTA POTENCIA */}
+      <div
+        ref={flashOverlayRef}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#FFFFFF',
+          opacity: 0,
+          pointerEvents: 'none',
+          zIndex: 50,
+        }}
+      ></div>
+
       {/* SVG DE LINEA ELÉCTRICA ACTIVADORA */}
       <svg
         style={{
@@ -134,9 +186,10 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           d="M 0,100 L 300,100 L 450,300 L 900,300 L 1100,600 L 1920,600"
           fill="none"
           stroke="#FFEE00"
-          strokeWidth="2.5"
+          strokeWidth="3"
           strokeDasharray="2000"
           strokeDashoffset="2000"
+          filter="drop-shadow(0 0 15px #FFEE00)"
         />
       </svg>
 
@@ -197,7 +250,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             onClick={handleActivatePower}
             style={{
               background: 'transparent',
-              border: '1.5px solid #FFEE00',
+              border: '2px solid #FFEE00',
               color: '#FFEE00',
               padding: '20px 48px',
               borderRadius: '100px',
@@ -209,18 +262,18 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '16px',
-              boxShadow: '0 0 35px rgba(255, 238, 0, 0.25)',
+              boxShadow: '0 0 35px rgba(255, 238, 0, 0.3)',
               transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = '#FFEE00';
               e.currentTarget.style.color = '#030508';
-              e.currentTarget.style.boxShadow = '0 0 60px rgba(255, 238, 0, 0.7)';
+              e.currentTarget.style.boxShadow = '0 0 65px rgba(255, 238, 0, 0.8)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
               e.currentTarget.style.color = '#FFEE00';
-              e.currentTarget.style.boxShadow = '0 0 35px rgba(255, 238, 0, 0.25)';
+              e.currentTarget.style.boxShadow = '0 0 35px rgba(255, 238, 0, 0.3)';
             }}
           >
             <span>POWER ON</span>
@@ -228,7 +281,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           </button>
         </div>
       ) : (
-        /* ESTADO ACTIVADO: SYSTEM ONLINE CON ANIMACIONES 3D EXTRAVAGANTES */
+        /* ESTADO ACTIVADO: SYSTEM ONLINE CON ENCENDIDO TIPO FOCO DE ALTA TENSIÓN */
         <div
           ref={onlineContentRef}
           className="capa-3d-fondo"
@@ -245,7 +298,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         >
           {/* BADGE SYSTEM ONLINE */}
           <div
-            className="revelar-3d"
+            className="foco-subtext-encendido"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
@@ -273,7 +326,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             <span>SYSTEM // ONLINE • MADRID & SIERRA</span>
           </div>
 
-          {/* EDITORIAL 3D EXTRAVAGANT TYPOGRAPHY */}
+          {/* EDITORIAL HIGH-VOLTAGE LIGHT IGNITION TYPOGRAPHY */}
           <h1
             style={{
               fontFamily: 'var(--fuente-titulos)',
@@ -284,29 +337,28 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               letterSpacing: '-0.04em',
               marginBottom: '32px',
               textTransform: 'uppercase',
-              transformStyle: 'preserve-3d',
             }}
           >
-            <div className="revelar-3d" style={{ display: 'block' }}>
+            <div className="foco-palabra-encendido" style={{ display: 'block' }}>
               ENERGÍA.
             </div>
             <div
-              className="revelar-3d"
+              className="foco-palabra-encendido"
               style={{
                 display: 'block',
                 color: 'transparent',
-                WebkitTextStroke: '1.5px rgba(255, 238, 0, 0.85)',
-                filter: 'drop-shadow(0 0 20px rgba(255, 238, 0, 0.3))',
+                WebkitTextStroke: '1.5px rgba(255, 238, 0, 0.9)',
+                filter: 'drop-shadow(0 0 20px rgba(255, 238, 0, 0.35))',
               }}
             >
               PRECISIÓN.
             </div>
             <div
-              className="revelar-3d"
+              className="foco-palabra-encendido"
               style={{
                 display: 'block',
                 color: '#FFEE00',
-                textShadow: '0 0 40px rgba(255, 238, 0, 0.4)',
+                textShadow: '0 0 45px rgba(255, 238, 0, 0.6)',
               }}
             >
               CONFIANZA.
@@ -315,7 +367,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
 
           {/* ETIQUETA INGENIERO KERLING NATALE */}
           <div
-            className="revelar-3d"
+            className="foco-subtext-encendido"
             style={{
               maxWidth: '680px',
               fontSize: 'clamp(1rem, 1.3vw, 1.25rem)',
@@ -333,7 +385,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
 
           {/* BOTONES DE ACCIÓN */}
           <div
-            className="revelar-3d"
+            className="foco-subtext-encendido"
             style={{
               display: 'flex',
               gap: '20px',
