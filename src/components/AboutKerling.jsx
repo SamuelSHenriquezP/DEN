@@ -1,8 +1,54 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function AboutKerling({ onOpenQuote }) {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.lado-imagen-perfil', {
+        x: -50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      });
+
+      gsap.from('.lado-texto-perfil', {
+        x: 50,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+        },
+      });
+
+      gsap.from('.item-certificacion', {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.7,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.rejilla-certificaciones',
+          start: 'top 85%',
+        },
+      });
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <section id="sobre-mi" className="seccion-perfil-ingeniero contenedor seccion-pantalla-completa">
+    <section id="sobre-mi" className="seccion-perfil-ingeniero contenedor seccion-pantalla-completa" ref={sectionRef}>
       <div className="estrucutra-perfil-principal">
         <div className="lado-imagen-perfil">
           <img
@@ -17,7 +63,7 @@ export default function AboutKerling({ onOpenQuote }) {
 
         <div className="lado-texto-perfil">
           <span className="insignia-seccion">
-            <span className="codigo-indice">06 //</span> DIRECCIÓN TÉCNICA PROFESIONAL
+            <span className="codigo-indice">05 //</span> DIRECCIÓN TÉCNICA PROFESIONAL
           </span>
           <h2 className="titulo-perfil">
             Kerling Abraham <br />
