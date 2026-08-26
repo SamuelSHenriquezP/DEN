@@ -9,7 +9,6 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
   const standbyContainerRef = useRef(null);
   const onlineContentRef = useRef(null);
   const electricCurtainRef = useRef(null);
-  const lightningPathRef = useRef(null);
 
   // 1. ANIMACIÓN DE CARGA AL ABRIR LA PÁGINA
   useEffect(() => {
@@ -28,16 +27,15 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA CON PARPADEO LENTO, LÍNEA AMARILLA Y DESAPARICIÓN FINAL DE LA LÍNEA
+  // 2. SECUENCIA ACTIVACIÓN CON BARRIDO Y SALIDA DE LÍNEA HACIA LA DERECHA
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
     const curtain = electricCurtainRef.current;
-    const lightning = lightningPathRef.current;
 
     const mainTl = gsap.timeline();
 
-    // ETAPA 1: PARPADEO MÁS LENTO Y CINEMÁTICO DE "NATALE" TIPO FOCO DE ALTA POTENCIA
+    // ETAPA 1: PARPADEO LENTO DE NATALE
     if (nataleText) {
       mainTl
         .to(nataleText, {
@@ -71,34 +69,24 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     // ETAPA 3: BARRIDO DE PANTALLA AZUL -> LA LÍNEA SE VUELVE AMARILLA (#FFEE00)
     if (curtain) {
       mainTl
-        // CAMBIO DE COLOR DE LA LÍNEA A AMARILLO ELÉCTRICO DURANTE EL PASO DE LA PANTALLA AZUL
+        // CAMBIO DE COLOR DE LA LÍNEA A AMARILLO ELÉCTRICO DURANTE EL BARRIDO DE PANTALLA
         .to(line, {
           stroke: '#FFEE00',
           filter: 'drop-shadow(0 0 25px #FFEE00)',
           duration: 0.4,
           ease: 'power2.out',
         })
-        // DESTELLO Y BARRIDO DE CORTINA DE PANTALLA COMPLETA
+        // BARRIDO FLUIDO DE CORTINA AZUL
         .to(curtain, {
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
           duration: 0.55,
           ease: 'power4.inOut',
         }, '-=0.35')
-        .to(lightning, {
-          opacity: 1,
-          strokeDashoffset: 0,
-          duration: 0.25,
-          ease: 'steps(3)',
-        }, '-=0.25')
-        .to(lightning, {
-          opacity: 0,
-          duration: 0.15,
-        })
         .call(() => {
           setIsSystemOnline(true);
           if (onPowerOn) onPowerOn();
 
-          // REVELADO DE TÍTULOS Y DESAPARICIÓN FINAL DE LA LÍNEA AL CONCLUIR
+          // REVELADO DE TÍTULOS Y SALIDA DE LÍNEA HACIA LA DERECHA AL CONCLUIR
           setTimeout(() => {
             if (onlineContentRef.current) {
               const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
@@ -137,12 +125,13 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                   },
                   '-=0.6'
                 )
-                // LA LÍNEA DESAPARECE FINALMENTE AL CONCLUIR LA ANIMACIÓN DE TÍTULOS
+                // LA LÍNEA SE VA FLUIDAMENTE CON LA ANIMACIÓN HACIA LA DERECHA
                 .to(line, {
+                  x: '100vw',
                   opacity: 0,
-                  duration: 0.8,
-                  ease: 'power2.out',
-                }, '-=0.4');
+                  duration: 0.95,
+                  ease: 'power3.in',
+                }, '-=0.5');
             }
           }, 30);
         })
@@ -182,7 +171,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         boxSizing: 'border-box',
       }}
     >
-      {/* CORTINA DE PANTALLA COMPLETA CON ONDA ELÉCTRICA Y RAYOS */}
+      {/* CORTINA DE PANTALLA COMPLETA CON ONDA ELÉCTRICA AZUL */}
       <div
         ref={electricCurtainRef}
         style={{
@@ -198,32 +187,9 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           zIndex: 90,
           boxShadow: 'inset 0 0 100px #00E5FF, 0 0 150px #00E5FF',
         }}
-      >
-        {/* SVG DE RAYOS ELÉCTRICOS EN TRANSICIÓN */}
-        <svg
-          style={{
-            width: '100%',
-            height: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-          }}
-        >
-          <path
-            ref={lightningPathRef}
-            d="M 100,0 L 250,300 L 200,320 L 450,700 L 400,720 L 700,1080 M 1200,0 L 1100,400 L 1150,420 L 950,800 L 1400,1080"
-            fill="none"
-            stroke="#FFFFFF"
-            strokeWidth="5"
-            strokeDasharray="1500"
-            strokeDashoffset="1500"
-            opacity="0"
-            filter="drop-shadow(0 0 25px #00E5FF)"
-          />
-        </svg>
-      </div>
+      ></div>
 
-      {/* SVG DE LÍNEA ELÉCTRICA QUE CAMBIA A AMARILLO Y DESAPARECE AL FINAL */}
+      {/* SVG DE LÍNEA ELÉCTRICA QUE CAMBIA A AMARILLO Y SALE HACIA LA DERECHA */}
       <svg
         style={{
           position: 'absolute',
