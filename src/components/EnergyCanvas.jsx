@@ -23,6 +23,8 @@ export default function EnergyCanvas() {
     const particulas = [];
     const numParticulas = Math.min(35, Math.floor(width / 35));
 
+    const coloresLogo = ['#FFE600', '#00E5FF', '#0052FF'];
+
     for (let i = 0; i < numParticulas; i++) {
       particulas.push({
         x: Math.random() * width,
@@ -31,14 +33,14 @@ export default function EnergyCanvas() {
         vx: (Math.random() - 0.5) * 0.4,
         vy: (Math.random() - 0.5) * 0.4,
         alpha: Math.random() * 0.5 + 0.2,
-        color: Math.random() > 0.4 ? '#F59E0B' : '#00E5FF',
+        color: coloresLogo[Math.floor(Math.random() * coloresLogo.length)],
       });
     }
 
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // DIBUJAR CONEXIONES ELÉCTRICAS SUTILES
+      // DIBUJAR CONEXIONES ELÉCTRICAS SUTILES CON COLORES DE MARCA
       for (let i = 0; i < particulas.length; i++) {
         for (let j = i + 1; j < particulas.length; j++) {
           const dx = particulas[i].x - particulas[j].x;
@@ -49,7 +51,7 @@ export default function EnergyCanvas() {
             ctx.beginPath();
             ctx.moveTo(particulas[i].x, particulas[i].y);
             ctx.lineTo(particulas[j].x, particulas[j].y);
-            ctx.strokeStyle = `rgba(245, 158, 11, ${0.12 * (1 - dist / 140)})`;
+            ctx.strokeStyle = `rgba(255, 230, 0, ${0.14 * (1 - dist / 140)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }

@@ -4,38 +4,38 @@
    ========================================================================== */
 
 :root {
-    /* Paleta Principal: Fondos Cálidos y Oscuros de Alta Densidad */
-    --fondo-base: #07090E;
-    --fondo-superficie: #0E131F;
-    --tarjeta-base: #141B2D;
-    --tarjeta-cristal: rgba(20, 27, 45, 0.78);
+    /* Paleta Oficial Extraída del Logo DEN (Fondo Negro, Amarillo Eléctrico, Cian y Azul Real) */
+    --fondo-base: #030508;
+    --fondo-superficie: #0A0E17;
+    --tarjeta-base: #0F1524;
+    --tarjeta-cristal: rgba(15, 21, 36, 0.85);
     
-    /* Acentos Elegantes: Dorado Ámbar y Azul Eléctrico Técnico */
-    --dorado-real: #F59E0B;
-    --dorado-calido: #D97706;
-    --dorado-resplandor: rgba(245, 158, 11, 0.28);
+    /* Acentos Directos del Logo */
+    --amarillo-electrico: #FFE600;
+    --dorado-real: #FFE600;
+    --dorado-calido: #F59E0B;
+    --dorado-resplandor: rgba(255, 230, 0, 0.35);
     
     --azul-tecnico: #00E5FF;
-    --azul-resplandor: rgba(0, 229, 255, 0.25);
+    --azul-resplandor: rgba(0, 229, 255, 0.3);
     
-    --violeta-automatizacion: #7C3AED;
-    --violeta-calido: #8B5CF6;
-    --violeta-resplandor: rgba(124, 58, 237, 0.3);
+    --azul-real-den: #0052FF;
+    --azul-real-resplandor: rgba(0, 82, 255, 0.35);
     
-    /* Gradientes Armónicos */
-    --gradiente-dorado: linear-gradient(135deg, #F59E0B 0%, #B45309 100%);
-    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #6366F1 100%);
-    --gradiente-violeta: linear-gradient(135deg, #8B5CF6 0%, #4C1D95 100%);
+    /* Gradientes Oficiales de Marca */
+    --gradiente-dorado: linear-gradient(135deg, #FFE600 0%, #F59E0B 100%);
+    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #0052FF 100%);
+    --gradiente-den-logo: linear-gradient(90deg, #00E5FF 0%, #0052FF 50%, #FFE600 100%);
     
     /* Tipografía y Colores de Texto */
-    --texto-principal: #F8FAFC;
-    --texto-secundario: #94A3B8;
+    --texto-principal: #FFFFFF;
+    --texto-secundario: #CBD5E1;
     --texto-atenuado: #64748B;
     
     /* Bordes y Cristalería */
-    --borde-sutil: rgba(245, 158, 11, 0.14);
-    --borde-destacado: rgba(245, 158, 11, 0.45);
-    --borde-cristal: rgba(255, 255, 255, 0.07);
+    --borde-sutil: rgba(255, 230, 0, 0.18);
+    --borde-destacado: rgba(255, 230, 0, 0.55);
+    --borde-cristal: rgba(255, 255, 255, 0.08);
     
     /* Fuentes Oficiales */
     --fuente-titulos: 'Syne', sans-serif;
@@ -100,8 +100,9 @@ body {
 .capa-textura-suave {
     position: fixed;
     inset: 0;
-    background: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.04) 0%, transparent 60%),
-                radial-gradient(circle at 80% 80%, rgba(124, 58, 237, 0.04) 0%, transparent 60%);
+    background: radial-gradient(circle at 50% 15%, rgba(255, 230, 0, 0.05) 0%, transparent 65%),
+                radial-gradient(circle at 85% 75%, rgba(0, 229, 255, 0.05) 0%, transparent 65%),
+                radial-gradient(circle at 15% 85%, rgba(0, 82, 255, 0.06) 0%, transparent 65%);
     pointer-events: none;
     z-index: -1;
 }
@@ -2052,7 +2053,7 @@ input[type="range"] {
     .cabecera-principal { padding: 14px 4.5vw; }
     .insignia-estado-servicio { display: none; }
     
-    .titulo-portada { font-size: 10vw; }
+    .titulo-portada { font-size: clamp(2.8rem, 8vw, 5rem); }
     
     .rejilla-servicios-bento { grid-template-columns: 1fr; grid-auto-rows: auto; }
     .tarjeta-servicio.grande, .tarjeta-servicio.ancho { grid-column: span 1; grid-row: span 1; min-height: 320px; }
@@ -2072,13 +2073,51 @@ input[type="range"] {
     .elemento-navegacion { padding: 8px 12px; font-size: 10px; }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+    .cabecera-principal {
+        padding: 12px 16px;
+    }
+    
+    .logotipo-marca .subtitulo-marca {
+        display: none;
+    }
+    
+    .enlace-telefono-cabecera span {
+        display: none;
+    }
+
+    .boton-cotizacion-rapida {
+        padding: 8px 16px;
+        font-size: 9px;
+    }
+    
+    .titulo-seccion {
+        font-size: clamp(1.8rem, 6vw, 2.8rem);
+        word-break: break-word;
+    }
+
     .grupo-botones-accion { flex-direction: column; width: 100%; }
     .boton-accion { width: 100%; }
     
-    .barra-pasos-asistente { grid-template-columns: repeat(2, 1fr); }
+    .barra-pasos-asistente { grid-template-columns: repeat(2, 1fr); gap: 6px; }
     .rejilla-superior-pie { grid-template-columns: 1fr; }
     .columna-pie.footer-brand { grid-column: span 1; }
     
-    .barra-navegacion-flotante { width: 94vw; overflow-x: auto; justify-content: flex-start; }
+    .barra-navegacion-flotante {
+        width: 95vw;
+        max-width: 480px;
+        overflow-x: auto;
+        justify-content: flex-start;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+    
+    .barra-navegacion-flotante::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .contenido-modal-proyecto {
+        padding: 24px 20px;
+        border-radius: 24px;
+    }
 }

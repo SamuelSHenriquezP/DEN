@@ -13,7 +13,7 @@ export default function Header({ onOpenQuote }) {
         <img src="/Logo DEN.png" alt="Dynamic Electric Natale Logo" className="imagen-logotipo" />
         <div className="texto-marca">
           <span className="titulo-marca">DYNAMIC ELECTRIC NATALE</span>
-          <span className="subtitulo-marca">GUADARRAMA • MADRID</span>
+          <span className="subtitulo-marca">"ENERGÍA SEGURA, SOLUCIONES CONFIABLES" • MADRID</span>
         </div>
       </a>
 

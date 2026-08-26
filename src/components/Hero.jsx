@@ -29,7 +29,7 @@ export default function Hero({ onOpenQuote }) {
       {/* INVENTARIO DE PRESENTACIÓN */}
       <div className="insignia-encabezado-inicio animacion-entrada">
         <span className="icono-rayo">⚡</span>
-        <span>SEDE EN GUADARRAMA • SERVICIO EN TODA LA COMUNIDAD DE MADRID</span>
+        <span>"ENERGÍA SEGURA, SOLUCIONES CONFIABLES" • GUADARRAMA • MADRID</span>
       </div>
 
       <h1 className="titulo-portada animacion-entrada">
