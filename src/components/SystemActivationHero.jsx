@@ -28,7 +28,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA CON TRANSICIÓN DE PANTALLA ELÉCTRICA COMPLETA
+  // 2. SECUENCIA CON PARPADEO LENTO, LÍNEA AMARILLA Y DESAPARICIÓN FINAL DE LA LÍNEA
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
@@ -37,49 +37,59 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
 
     const mainTl = gsap.timeline();
 
-    // ETAPA 1: PARPADEO DE NATALE COMO UN FOCO DE ALTA POTENCIA
+    // ETAPA 1: PARPADEO MÁS LENTO Y CINEMÁTICO DE "NATALE" TIPO FOCO DE ALTA POTENCIA
     if (nataleText) {
-      mainTl.to(nataleText, {
-        color: '#00E5FF',
-        textShadow: '0 0 35px #00E5FF, 0 0 70px #00E5FF',
-        duration: 0.15,
-      })
-      .to(nataleText, {
-        opacity: 0.2,
-        duration: 0.08,
-      })
-      .to(nataleText, {
-        color: '#00E5FF',
-        opacity: 1,
-        textShadow: '0 0 50px #00E5FF',
-        duration: 0.25,
-      });
+      mainTl
+        .to(nataleText, {
+          color: '#00E5FF',
+          textShadow: '0 0 30px #00E5FF, 0 0 60px #00E5FF',
+          duration: 0.35,
+          ease: 'power2.in',
+        })
+        .to(nataleText, {
+          opacity: 0.3,
+          duration: 0.15,
+        })
+        .to(nataleText, {
+          color: '#00E5FF',
+          opacity: 1,
+          textShadow: '0 0 50px #00E5FF',
+          duration: 0.4,
+          ease: 'power2.out',
+        });
     }
 
-    // ETAPA 2: RECORRIDO DE LA LÍNEA ELÉCTRICA
+    // ETAPA 2: RECORRIDO DE LA LÍNEA ELÉCTRICA EN CIAN
     if (line) {
       mainTl.to(line, {
         strokeDashoffset: 0,
-        duration: 0.7,
+        duration: 0.85,
         ease: 'power2.inOut',
       });
     }
 
-    // ETAPA 3: TRANSICIÓN DE PANTALLA ELÉCTRICA SPECTACULAR (FULL-SCREEN ELECTRICAL WAVE & LIGHTNING ARCS)
+    // ETAPA 3: BARRIDO DE PANTALLA AZUL -> LA LÍNEA SE VUELVE AMARILLA (#FFEE00)
     if (curtain) {
       mainTl
-        // DESTELLO DE RAYOS ELÉCTRICOS EN PANTALLA COMPLETA
+        // CAMBIO DE COLOR DE LA LÍNEA A AMARILLO ELÉCTRICO DURANTE EL PASO DE LA PANTALLA AZUL
+        .to(line, {
+          stroke: '#FFEE00',
+          filter: 'drop-shadow(0 0 25px #FFEE00)',
+          duration: 0.4,
+          ease: 'power2.out',
+        })
+        // DESTELLO Y BARRIDO DE CORTINA DE PANTALLA COMPLETA
         .to(curtain, {
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-          duration: 0.45,
+          duration: 0.55,
           ease: 'power4.inOut',
-        })
+        }, '-=0.35')
         .to(lightning, {
           opacity: 1,
           strokeDashoffset: 0,
-          duration: 0.2,
+          duration: 0.25,
           ease: 'steps(3)',
-        }, '-=0.2')
+        }, '-=0.25')
         .to(lightning, {
           opacity: 0,
           duration: 0.15,
@@ -88,13 +98,15 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           setIsSystemOnline(true);
           if (onPowerOn) onPowerOn();
 
-          // REVELADO SPECTACULAR DE TÍTULOS DESPUÉS DEL BARRIDO ELÉCTRICO
+          // REVELADO DE TÍTULOS Y DESAPARICIÓN FINAL DE LA LÍNEA AL CONCLUIR
           setTimeout(() => {
             if (onlineContentRef.current) {
               const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
               const sub = onlineContentRef.current.querySelectorAll('.revelar-sub-dramatico');
 
-              gsap.timeline()
+              const titleTl = gsap.timeline();
+
+              titleTl
                 .fromTo(
                   words,
                   {
@@ -109,7 +121,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                     scale: 1,
                     filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))',
                     duration: 1.2,
-                    stagger: 0.2,
+                    stagger: 0.22,
                     ease: 'power4.out',
                   }
                 )
@@ -124,14 +136,20 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                     ease: 'power3.out',
                   },
                   '-=0.6'
-                );
+                )
+                // LA LÍNEA DESAPARECE FINALMENTE AL CONCLUIR LA ANIMACIÓN DE TÍTULOS
+                .to(line, {
+                  opacity: 0,
+                  duration: 0.8,
+                  ease: 'power2.out',
+                }, '-=0.4');
             }
           }, 30);
         })
         // DISOLUCIÓN DE LA CORTINA ELÉCTRICA
         .to(curtain, {
           clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
-          duration: 0.6,
+          duration: 0.65,
           ease: 'power3.out',
         });
     } else {
@@ -205,7 +223,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         </svg>
       </div>
 
-      {/* SVG DE LÍNEA ELÉCTRICA CIAN DE ALTA TENSIÓN */}
+      {/* SVG DE LÍNEA ELÉCTRICA QUE CAMBIA A AMARILLO Y DESAPARECE AL FINAL */}
       <svg
         style={{
           position: 'absolute',
@@ -280,7 +298,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             DYNAMIC ELECTRIC <br />
-            {/* TEXTO NATALE QUE SE ENCIENDE COMO FOCO CIAN */}
+            {/* TEXTO NATALE QUE SE ENCIENDE LENTAMENTE EN CIAN */}
             <span
               ref={nataleRef}
               style={{
