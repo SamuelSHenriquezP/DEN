@@ -27,7 +27,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA ACTIVACIÓN CON BARRIDO Y SALIDA DE LÍNEA HACIA LA DERECHA
+  // 2. SECUENCIA CON RECORRIDO CONTINUO DE LA LÍNEA ELÉCTRICA FLUYENDO HACIA LA DERECHA (-2000 OFFSET)
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
@@ -57,7 +57,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         });
     }
 
-    // ETAPA 2: RECORRIDO DE LA LÍNEA ELÉCTRICA EN CIAN
+    // ETAPA 2: RECORRIDO DE ENTRADA DE LA LÍNEA ELÉCTRICA EN CIAN (2000 -> 0)
     if (line) {
       mainTl.to(line, {
         strokeDashoffset: 0,
@@ -86,7 +86,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           setIsSystemOnline(true);
           if (onPowerOn) onPowerOn();
 
-          // REVELADO DE TÍTULOS Y SALIDA DE LÍNEA HACIA LA DERECHA AL CONCLUIR
+          // REVELADO DE TÍTULOS Y RECORRIDO CONTINUO DE LA LÍNEA SALIENDO HACIA LA DERECHA (0 -> -2000)
           setTimeout(() => {
             if (onlineContentRef.current) {
               const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
@@ -125,13 +125,17 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                   },
                   '-=0.6'
                 )
-                // LA LÍNEA SE VA FLUIDAMENTE CON LA ANIMACIÓN HACIA LA DERECHA
+                // LA LÍNEA CONTINÚA SU CURVA Y FLUYE HACIA LA DERECHA HASTA DESAPARECER SIGUIENDO SU PROPIO TRAZADO (0 -> -2000)
                 .to(line, {
-                  x: '100vw',
+                  strokeDashoffset: -2000,
+                  opacity: 0.2,
+                  duration: 1.1,
+                  ease: 'power2.inOut',
+                }, '-=0.7')
+                .to(line, {
                   opacity: 0,
-                  duration: 0.95,
-                  ease: 'power3.in',
-                }, '-=0.5');
+                  duration: 0.3,
+                });
             }
           }, 30);
         })
@@ -189,7 +193,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         }}
       ></div>
 
-      {/* SVG DE LÍNEA ELÉCTRICA QUE CAMBIA A AMARILLO Y SALE HACIA LA DERECHA */}
+      {/* SVG DE LÍNEA ELÉCTRICA QUE SE DIBUJA Y CONTINÚA SU TRAZADO HACIA LA DERECHA */}
       <svg
         style={{
           position: 'absolute',
