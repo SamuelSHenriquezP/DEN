@@ -10,12 +10,7 @@ import DockNav from './components/DockNav';
 import Hero from './components/Hero';
 import Stats from './components/Stats';
 import BentoServices from './components/BentoServices';
-import AISimulator from './components/AISimulator';
-import InteractiveFloorplan from './components/InteractiveFloorplan';
-import InteractiveSchematic from './components/InteractiveSchematic';
-import InspectorCuadro from './components/InspectorCuadro';
 import PortfolioHorizontal from './components/PortfolioHorizontal';
-import EmergencyRadar from './components/EmergencyRadar';
 import SolarCalculator from './components/SolarCalculator';
 import AboutKerling from './components/AboutKerling';
 import WizardQuote from './components/WizardQuote';
@@ -80,48 +75,50 @@ export default function App() {
       {/* NAVEGACIÓN FLOTANTE DOCK */}
       <DockNav onOpenQuote={handleOpenQuote} />
 
-      {/* CONTENIDO PRINCIPAL */}
+      {/* CONTENIDO PRINCIPAL DEL PORTAFOLIO */}
       <main>
+        {/* PORTADA Y BIENVENIDA */}
         <Hero onOpenQuote={handleOpenQuote} />
         
         <div className="linea-separadora-tecnica"></div>
-        <Stats />
-        
-        <div className="linea-separadora-tecnica"></div>
-        <BentoServices />
 
-        <div className="linea-separadora-tecnica"></div>
-        <InteractiveFloorplan />
-
-        <div className="linea-separadora-tecnica"></div>
-        <InteractiveSchematic />
-        
-        <div className="linea-separadora-tecnica"></div>
-        <AISimulator />
-        
-        <div className="linea-separadora-tecnica"></div>
-        <InspectorCuadro />
-        
-        <div className="linea-separadora-tecnica"></div>
+        {/* PROYECTOS DESTACADOS - NÚCLEO DEL PORTAFOLIO */}
         <PortfolioHorizontal onOpenModal={handleOpenModal} />
 
         <div className="linea-separadora-tecnica"></div>
-        <EmergencyRadar />
+
+        {/* SERVICIOS Y ESPECIALIDADES */}
+        <BentoServices />
         
         <div className="linea-separadora-tecnica"></div>
+
+        {/* MÉTRICAS Y TRAYECTORIA */}
+        <Stats />
+
+        <div className="linea-separadora-tecnica"></div>
+
+        {/* CALCULADORA DE AHORRO SOLAR */}
         <SolarCalculator />
         
         <div className="linea-separadora-tecnica"></div>
+
+        {/* PERFIL DEL INGENIERO KERLING NATALE */}
         <AboutKerling onOpenQuote={handleOpenQuote} />
         
         <div className="linea-separadora-tecnica"></div>
+
+        {/* SOLICITUD DE PRESUPUESTO */}
         <WizardQuote />
         
         <div className="linea-separadora-tecnica"></div>
-        <FaqSection />
-        
-        <div className="linea-separadora-tecnica"></div>
+
+        {/* RESEÑAS Y VALORACIONES */}
         <Testimonials />
+
+        <div className="linea-separadora-tecnica"></div>
+
+        {/* PREGUNTAS FRECUENTES */}
+        <FaqSection />
       </main>
 
       {/* PIE DE PÁGINA */}

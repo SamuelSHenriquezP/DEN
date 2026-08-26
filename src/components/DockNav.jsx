@@ -38,34 +38,6 @@ export default function DockNav({ onOpenQuote }) {
         Inicio
       </a>
       <a
-        href="#servicios"
-        onClick={(e) => scrollToSection(e, 'servicios')}
-        className={`elemento-navegacion ${activeSection === 'servicios' ? 'activo' : ''}`}
-      >
-        Servicios
-      </a>
-      <a
-        href="#planificador-domotico"
-        onClick={(e) => scrollToSection(e, 'planificador-domotico')}
-        className={`elemento-navegacion ${activeSection === 'planificador-domotico' ? 'activo' : ''}`}
-      >
-        Plano Domótico
-      </a>
-      <a
-        href="#esquema-unifilar"
-        onClick={(e) => scrollToSection(e, 'esquema-unifilar')}
-        className={`elemento-navegacion ${activeSection === 'esquema-unifilar' ? 'activo' : ''}`}
-      >
-        Unifilar REBT
-      </a>
-      <a
-        href="#cuadro-tecnico"
-        onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
-        className={`elemento-navegacion ${activeSection === 'cuadro-tecnico' ? 'activo' : ''}`}
-      >
-        Inspector FLIR
-      </a>
-      <a
         href="#proyectos"
         onClick={(e) => scrollToSection(e, 'proyectos')}
         className={`elemento-navegacion ${activeSection === 'proyectos' ? 'activo' : ''}`}
@@ -73,11 +45,25 @@ export default function DockNav({ onOpenQuote }) {
         Proyectos
       </a>
       <a
-        href="#urgencias"
-        onClick={(e) => scrollToSection(e, 'urgencias')}
-        className={`elemento-navegacion ${activeSection === 'urgencias' ? 'activo' : ''}`}
+        href="#servicios"
+        onClick={(e) => scrollToSection(e, 'servicios')}
+        className={`elemento-navegacion ${activeSection === 'servicios' ? 'activo' : ''}`}
       >
-        Urgencias
+        Servicios
+      </a>
+      <a
+        href="#calculadora"
+        onClick={(e) => scrollToSection(e, 'calculadora')}
+        className={`elemento-navegacion ${activeSection === 'calculadora' ? 'activo' : ''}`}
+      >
+        Ahorro Solar
+      </a>
+      <a
+        href="#sobre-mi"
+        onClick={(e) => scrollToSection(e, 'sobre-mi')}
+        className={`elemento-navegacion ${activeSection === 'sobre-mi' ? 'activo' : ''}`}
+      >
+        Kerling Natale
       </a>
       <button
         onClick={onOpenQuote}
