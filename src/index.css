@@ -76,14 +76,14 @@ body {
 
 /* --- SECCIONES DE PANTALLA COMPLETA ADAPTABLE --- */
 .seccion-pantalla-completa {
-    min-height: 100vh;
+    min-height: auto;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: clamp(80px, 10vh, 120px) 0 clamp(40px, 6vh, 80px);
+    padding: clamp(50px, 7vh, 85px) 0;
 }
 
 /* --- CANVAS DE AMBIENTE ELÉCTRICO --- */
@@ -375,9 +375,9 @@ a, button, input, select, textarea, .boton-accion, .boton-escena, .unidad-interr
 
 /* --- SECCIÓN PRINCIPAL (INICIO) --- */
 .seccion-inicio {
-    min-height: 100vh;
-    padding-top: 140px;
-    padding-bottom: 60px;
+    min-height: 88vh;
+    padding-top: 125px;
+    padding-bottom: 45px;
     display: flex;
     flex-direction: column;
     justify-content: center;

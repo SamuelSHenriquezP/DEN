@@ -73,8 +73,8 @@ export default function Hero({ onOpenQuote }) {
         </a>
       </div>
 
-      {/* BARRA DE TELEMETRÍA TÉCNICA */}
-      <div className="barra-indicadores-tecnicos animacion-entrada">
+      {/* BARRA DE TELEMETRÍA TÉCNICA Y GARANTÍAS */}
+      <div className="barra-indicadores-tecnicos animacion-entrada" style={{ marginBottom: '24px' }}>
         <div className="item-indicador">
           <span className="etiqueta-indicador">REGISTRO OFICIAL</span>
           <span className="valor-indicador estado-verde">
@@ -96,6 +96,71 @@ export default function Hero({ onOpenQuote }) {
         <div className="item-indicador">
           <span className="etiqueta-indicador">ATENCIÓN DIRECTA</span>
           <span className="valor-indicador dorado">Supervisión por el Ingeniero</span>
+        </div>
+      </div>
+
+      {/* TARJETAS DE CARACTERÍSTICAS DENSAS */}
+      <div
+        className="animacion-entrada"
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '16px',
+          width: '100%',
+        }}
+      >
+        <div
+          style={{
+            background: 'rgba(15, 22, 38, 0.85)',
+            border: '1px solid rgba(255, 238, 0, 0.18)',
+            padding: '20px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>📜</span>
+          <h4 style={{ fontSize: '13px', color: '#FFEE00', fontWeight: '700', marginBottom: '4px' }}>
+            Boletines Eléctricos CIE
+          </h4>
+          <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
+            Emisión y tramitación oficial en 24-48 horas para altas de luz, cambios de titular o aumentos de potencia.
+          </p>
+        </div>
+
+        <div
+          style={{
+            background: 'rgba(15, 22, 38, 0.85)',
+            border: '1px solid rgba(0, 229, 255, 0.18)',
+            padding: '20px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>🏠</span>
+          <h4 style={{ fontSize: '13px', color: '#00E5FF', fontWeight: '700', marginBottom: '4px' }}>
+            Automatización Loxone
+          </h4>
+          <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
+            Control de iluminación DALI, persianas y clima en un único sistema local sin cuotas mensuales.
+          </p>
+        </div>
+
+        <div
+          style={{
+            background: 'rgba(15, 22, 38, 0.85)',
+            border: '1px solid rgba(255, 238, 0, 0.18)',
+            padding: '20px',
+            borderRadius: '20px',
+            backdropFilter: 'blur(12px)',
+          }}
+        >
+          <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>☀️</span>
+          <h4 style={{ fontSize: '13px', color: '#FFEE00', fontWeight: '700', marginBottom: '4px' }}>
+            Placas Solares y Baterías
+          </h4>
+          <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
+            Dimensionamiento preciso y montaje fotovoltaico con acumulación LFP para máxima independencia energética.
+          </p>
         </div>
       </div>
     </section>
