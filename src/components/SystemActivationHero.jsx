@@ -27,7 +27,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA CON RECORRIDO CONTINUO DE LA LÍNEA ELÉCTRICA FLUYENDO HACIA LA DERECHA (-2000 OFFSET)
+  // 2. SECUENCIA CON RECORRIDO CONTINUO DE LA LÍNEA ELÉCTRICA EN AZUL CIAN PURO (#00E5FF)
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
@@ -35,7 +35,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
 
     const mainTl = gsap.timeline();
 
-    // ETAPA 1: PARPADEO LENTO DE NATALE
+    // ETAPA 1: PARPADEO LENTO DE NATALE EN CIAN
     if (nataleText) {
       mainTl
         .to(nataleText, {
@@ -66,16 +66,9 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
       });
     }
 
-    // ETAPA 3: BARRIDO DE PANTALLA AZUL -> LA LÍNEA SE VUELVE AMARILLA (#FFEE00)
+    // ETAPA 3: BARRIDO DE PANTALLA AZUL CIAN (LÍNEA PERMANECE EN AZUL CIAN PURO)
     if (curtain) {
       mainTl
-        // CAMBIO DE COLOR DE LA LÍNEA A AMARILLO ELÉCTRICO DURANTE EL BARRIDO DE PANTALLA
-        .to(line, {
-          stroke: '#FFEE00',
-          filter: 'drop-shadow(0 0 25px #FFEE00)',
-          duration: 0.4,
-          ease: 'power2.out',
-        })
         // BARRIDO FLUIDO DE CORTINA AZUL
         .to(curtain, {
           clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
@@ -125,7 +118,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                   },
                   '-=0.6'
                 )
-                // LA LÍNEA CONTINÚA SU CURVA Y FLUYE HACIA LA DERECHA HASTA DESAPARECER SIGUIENDO SU PROPIO TRAZADO (0 -> -2000)
+                // LA LÍNEA AZUL CONTINÚA SU CURVA Y FLUYE HACIA LA DERECHA HASTA DESAPARECER (0 -> -2000)
                 .to(line, {
                   strokeDashoffset: -2000,
                   opacity: 0.2,
@@ -193,7 +186,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         }}
       ></div>
 
-      {/* SVG DE LÍNEA ELÉCTRICA QUE SE DIBUJA Y CONTINÚA SU TRAZADO HACIA LA DERECHA */}
+      {/* SVG DE LÍNEA ELÉCTRICA PERMANENTE EN CIAN ELÉCTRICO (#00E5FF) */}
       <svg
         style={{
           position: 'absolute',
