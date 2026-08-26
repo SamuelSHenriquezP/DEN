@@ -11,17 +11,17 @@
     --tarjeta-base: #0B111D;
     --tarjeta-cristal: rgba(11, 17, 29, 0.9);
     
-    /* Amarillo Eléctrico: Descarga Escasa, Intensa y Estratégica */
+    /* Color Principal Dominante: Cian Eléctrico #00E5FF */
+    --cian-tecnico: #00E5FF;
+    --cian-glow: rgba(0, 229, 255, 0.5);
+    --azul-tecnico: #00E5FF;
+    --azul-resplandor: rgba(0, 229, 255, 0.5);
+    --dorado-real: #00E5FF;
+    --dorado-resplandor: rgba(0, 229, 255, 0.5);
+    
+    /* Acento Secundario: Amarillo Eléctrico #FFEE00 */
     --amarillo-electrico: #FFEE00;
     --amarillo-glow: rgba(255, 238, 0, 0.45);
-    --dorado-real: #FFEE00;
-    --dorado-resplandor: rgba(255, 238, 0, 0.45);
-    
-    /* Cian Eléctrico Técnico */
-    --cian-tecnico: #00E5FF;
-    --cian-glow: rgba(0, 229, 255, 0.35);
-    --azul-tecnico: #00E5FF;
-    --azul-resplandor: rgba(0, 229, 255, 0.35);
     
     /* Texto & Jerarquía Editorial */
     --texto-principal: #FFFFFF;
@@ -30,8 +30,8 @@
     --texto-atenuado: #475569;
     
     /* Bordes e Hilos de Corriente */
-    --borde-sutil: rgba(255, 255, 255, 0.08);
-    --borde-destacado: rgba(255, 238, 0, 0.45);
+    --borde-sutil: rgba(0, 229, 255, 0.15);
+    --borde-destacado: rgba(0, 229, 255, 0.6);
     --borde-cristal: rgba(255, 255, 255, 0.08);
     
     /* Tipografías Editoriales Awwwards */

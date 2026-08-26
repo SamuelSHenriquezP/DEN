@@ -48,8 +48,8 @@ export default function DockNav({ activeSection, onOpenQuote }) {
               width: '8px',
               height: '8px',
               borderRadius: '50%',
-              backgroundColor: '#FFEE00',
-              boxShadow: '0 0 10px #FFEE00',
+              backgroundColor: '#00E5FF',
+              boxShadow: '0 0 10px #00E5FF',
             }}
           ></span>
           <span
@@ -126,10 +126,10 @@ export default function DockNav({ activeSection, onOpenQuote }) {
         <button
           onClick={onOpenQuote}
           style={{
-            background: '#FFEE00',
+            background: '#00E5FF',
             color: '#030508',
             border: 'none',
-            padding: '6px 14px',
+            padding: '6px 16px',
             borderRadius: '100px',
             fontFamily: 'var(--fuente-tecnica)',
             fontSize: '9px',

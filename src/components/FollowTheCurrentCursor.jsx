@@ -58,14 +58,14 @@ export default function FollowTheCurrentCursor() {
         transform: 'translate(-50%, -50%)',
       }}
     >
-      {/* PUNTO DE CORRIENTE */}
+      {/* PUNTO DE CORRIENTE CIAN ELÉCTRICO */}
       <div
         style={{
           width: '8px',
           height: '8px',
           borderRadius: '50%',
-          backgroundColor: '#FFEE00',
-          boxShadow: '0 0 16px #FFEE00, 0 0 30px #FFEE00',
+          backgroundColor: '#00E5FF',
+          boxShadow: '0 0 16px #00E5FF, 0 0 30px #00E5FF',
         }}
       ></div>
 
@@ -75,8 +75,8 @@ export default function FollowTheCurrentCursor() {
           id="cursor-etiqueta-contextual"
           style={{
             background: 'rgba(3, 5, 8, 0.9)',
-            border: '1px solid #FFEE00',
-            color: '#FFEE00',
+            border: '1px solid #00E5FF',
+            color: '#00E5FF',
             fontFamily: 'var(--fuente-tecnica)',
             fontSize: '9px',
             fontWeight: 800,

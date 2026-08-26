@@ -8,85 +8,118 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
   const nataleRef = useRef(null);
   const standbyContainerRef = useRef(null);
   const onlineContentRef = useRef(null);
+  const flashOverlayRef = useRef(null);
 
-  // 1. ANIMACIÓN AL ABRIR LA PÁGINA (INITIAL ENTRANCE ANIMATION ON PAGE LOAD)
+  // 1. ANIMACIÓN AL ABRIR LA PÁGINA (PAGE LOAD ENTRANCE)
   useEffect(() => {
     if (standbyContainerRef.current) {
       gsap.fromTo(
         standbyContainerRef.current.children,
-        { y: 30, opacity: 0 },
+        { y: 35, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          stagger: 0.15,
+          duration: 1.2,
+          stagger: 0.18,
           ease: 'power3.out',
         }
       );
     }
   }, []);
 
-  // 2. ACTIVACIÓN "POWER ON" CON PARPADEO DE NATALE TIPO PEQUEÑO FOCO Y ENTRADA TENUE
+  // 2. SECUENCIA DRAMÁTICA DE ALTA TENSIÓN EN AZUL / CIAN ELÉCTRICO (#00E5FF)
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
+    const flash = flashOverlayRef.current;
 
-    const tl = gsap.timeline();
+    const mainTl = gsap.timeline();
 
-    // A) PARPADEO DE "NATALE" COMO UN PEQUEÑO FOCO ANTES DE SEPARARSE
+    // ETAPA 1: ACUMULACIÓN DE ENERGÍA Y PARPADEO DE NATALE EN CIAN ELÉCTRICO (0.5s)
     if (nataleText) {
-      tl.to(nataleText, {
-        color: '#FFEE00',
-        textShadow: '0 0 20px #FFEE00',
-        duration: 0.1,
+      mainTl.to(nataleText, {
+        color: '#00E5FF',
+        textShadow: '0 0 30px #00E5FF, 0 0 60px #00E5FF',
+        duration: 0.15,
       })
       .to(nataleText, {
-        opacity: 0.3,
+        opacity: 0.2,
         duration: 0.08,
       })
       .to(nataleText, {
-        color: '#FFEE00',
+        color: '#00E5FF',
         opacity: 1,
-        textShadow: '0 0 35px #FFEE00',
-        duration: 0.15,
+        textShadow: '0 0 50px #00E5FF',
+        duration: 0.25,
       });
     }
 
-    // B) TRAYECTORIA DE LÍNEA DE CORRIENTE
+    // ETAPA 2: RECORRIDO CINEMATOGRÁFICO DE LA LÍNEA ELÉCTRICA EN CIAN (0.9s)
     if (line) {
-      tl.to(line, {
+      mainTl.to(line, {
         strokeDashoffset: 0,
-        duration: 0.5,
-        ease: 'power3.inOut',
+        duration: 0.9,
+        ease: 'power2.inOut',
       });
     }
 
-    // C) TRANSICIÓN A SYSTEM ONLINE CON REVELADO TENUE Y ELEGANTE (SIN EFECTO 3D NI LUZ EXCESIVA)
-    tl.to(heroRef.current, {
-      backgroundColor: '#030508',
-      duration: 0.3,
-      onComplete: () => {
-        setIsSystemOnline(true);
-        if (onPowerOn) onPowerOn();
+    // ETAPA 3: FLASH DE ALTA VOLTAJE CIAN & APARICIÓN DRAMÁTICA DEL TÍTULO
+    mainTl.to(flash, {
+      opacity: 0.7,
+      backgroundColor: '#00E5FF',
+      duration: 0.08,
+    })
+    .to(flash, {
+      opacity: 0,
+      duration: 0.45,
+      ease: 'power3.out',
+    })
+    .call(() => {
+      setIsSystemOnline(true);
+      if (onPowerOn) onPowerOn();
 
-        // ENTRADA TENUE, LIMPIA Y EDITORIAL DE LAS LETRAS
-        setTimeout(() => {
-          if (onlineContentRef.current) {
-            const elements = onlineContentRef.current.querySelectorAll('.revelar-tenue');
-            gsap.fromTo(
-              elements,
-              { y: 24, opacity: 0 },
+      // SECUENCIA SPECTACULAR DE IGNICIÓN DE TÍTULOS
+      setTimeout(() => {
+        if (onlineContentRef.current) {
+          const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
+          const sub = onlineContentRef.current.querySelectorAll('.revelar-sub-dramatico');
+
+          // CADA PALABRA TIENE SU PROPIA IGNICIÓN Y EXPANSION CINEMATOGRÁFICA
+          gsap.timeline()
+            .fromTo(
+              words,
+              {
+                y: 50,
+                opacity: 0,
+                scale: 0.9,
+                letterSpacing: '0.08em',
+                filter: 'drop-shadow(0 0 40px #00E5FF)',
+              },
               {
                 y: 0,
                 opacity: 1,
-                duration: 0.85,
+                scale: 1,
+                letterSpacing: '-0.04em',
+                filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))',
+                duration: 1.2,
+                stagger: 0.22,
+                ease: 'power4.out',
+              }
+            )
+            .fromTo(
+              sub,
+              { y: 30, opacity: 0 },
+              {
+                y: 0,
+                opacity: 1,
+                duration: 0.9,
                 stagger: 0.12,
                 ease: 'power3.out',
-              }
+              },
+              '-=0.6'
             );
-          }
-        }, 30);
-      },
+        }
+      }, 40);
     });
   };
 
@@ -114,7 +147,23 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         boxSizing: 'border-box',
       }}
     >
-      {/* SVG DE LINEA ELÉCTRICA ACTIVADORA */}
+      {/* OVERLAY DE RÁFAGA DE ALTO VOLTAJE CIAN */}
+      <div
+        ref={flashOverlayRef}
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          backgroundColor: '#00E5FF',
+          opacity: 0,
+          pointerEvents: 'none',
+          zIndex: 50,
+        }}
+      ></div>
+
+      {/* SVG DE LINEA ELÉCTRICA CIAN DE ALTA TENSIÓN */}
       <svg
         style={{
           position: 'absolute',
@@ -128,16 +177,17 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
       >
         <path
           ref={lineRef}
-          d="M 0,100 L 300,100 L 450,300 L 900,300 L 1100,600 L 1920,600"
+          d="M 0,120 L 320,120 L 480,320 L 920,320 L 1150,620 L 1920,620"
           fill="none"
-          stroke="#FFEE00"
-          strokeWidth="2"
+          stroke="#00E5FF"
+          strokeWidth="3.5"
           strokeDasharray="2000"
           strokeDashoffset="2000"
+          filter="drop-shadow(0 0 20px #00E5FF)"
         />
       </svg>
 
-      {/* ESTADO INICIAL: SYSTEM OFF (CON ANIMACIÓN AL ABRIR LA PÁGINA) */}
+      {/* ESTADO INICIAL: SYSTEM OFF (CON ANIMACIÓN DE CARGA EN CIAN) */}
       {!isSystemOnline ? (
         <div
           ref={standbyContainerRef}
@@ -149,7 +199,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             zIndex: 10,
           }}
         >
-          {/* SENSACIÓN DE STANDBY */}
+          {/* NODO STANDBY EN CIAN ELÉCTRICO */}
           <div
             style={{
               display: 'flex',
@@ -165,11 +215,11 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           >
             <span
               style={{
-                width: '10px',
-                height: '10px',
+                width: '12px',
+                height: '12px',
                 borderRadius: '50%',
-                backgroundColor: '#FFEE00',
-                boxShadow: '0 0 10px #FFEE00',
+                backgroundColor: '#00E5FF',
+                boxShadow: '0 0 16px #00E5FF',
               }}
             ></span>
             <span>SYSTEM // OFF</span>
@@ -188,12 +238,12 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             DYNAMIC ELECTRIC <br />
-            {/* TEXTO NATALE QUE SE ENCIENDE COMO PEQUEÑO FOCO ANTES DE IRSE */}
+            {/* TEXTO NATALE QUE SE ENCIENDE EN CIAN ELÉCTRICO */}
             <span
               ref={nataleRef}
               style={{
                 color: '#64748B',
-                transition: 'color 0.2s ease',
+                transition: 'color 0.3s ease',
                 display: 'inline-block',
               }}
             >
@@ -205,38 +255,38 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             onClick={handleActivatePower}
             style={{
               background: 'transparent',
-              border: '1px solid #FFEE00',
-              color: '#FFEE00',
-              padding: '18px 44px',
+              border: '2px solid #00E5FF',
+              color: '#00E5FF',
+              padding: '20px 52px',
               borderRadius: '100px',
               fontFamily: 'var(--fuente-tecnica)',
-              fontSize: '13px',
-              fontWeight: 700,
+              fontSize: '14px',
+              fontWeight: 800,
               letterSpacing: '3px',
               cursor: 'pointer',
               display: 'inline-flex',
               alignItems: 'center',
-              gap: '16px',
-              boxShadow: '0 0 25px rgba(255, 238, 0, 0.2)',
-              transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+              gap: '18px',
+              boxShadow: '0 0 35px rgba(0, 229, 255, 0.35)',
+              transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#FFEE00';
+              e.currentTarget.style.background = '#00E5FF';
               e.currentTarget.style.color = '#030508';
-              e.currentTarget.style.boxShadow = '0 0 45px rgba(255, 238, 0, 0.5)';
+              e.currentTarget.style.boxShadow = '0 0 65px rgba(0, 229, 255, 0.85)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.color = '#FFEE00';
-              e.currentTarget.style.boxShadow = '0 0 25px rgba(255, 238, 0, 0.2)';
+              e.currentTarget.style.color = '#00E5FF';
+              e.currentTarget.style.boxShadow = '0 0 35px rgba(0, 229, 255, 0.35)';
             }}
           >
             <span>POWER ON</span>
-            <span style={{ fontSize: '16px' }}>→</span>
+            <span style={{ fontSize: '18px' }}>→</span>
           </button>
         </div>
       ) : (
-        /* ESTADO ACTIVADO: SYSTEM ONLINE CON TIPOGRAFÍA TENUE, ELEGANTE Y EDITORIAL */
+        /* ESTADO ACTIVADO: SYSTEM ONLINE EN CIAN ELÉCTRICO DRAMÁTICO */
         <div
           ref={onlineContentRef}
           style={{
@@ -249,20 +299,20 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             zIndex: 10,
           }}
         >
-          {/* BADGE SYSTEM ONLINE */}
+          {/* BADGE SYSTEM ONLINE EN CIAN */}
           <div
-            className="revelar-tenue"
+            className="revelar-sub-dramatico"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '10px',
-              background: 'rgba(255, 238, 0, 0.06)',
-              border: '1px solid rgba(255, 238, 0, 0.25)',
-              padding: '8px 20px',
+              background: 'rgba(0, 229, 255, 0.08)',
+              border: '1px solid rgba(0, 229, 255, 0.4)',
+              padding: '8px 22px',
               borderRadius: '100px',
               fontFamily: 'var(--fuente-tecnica)',
               fontSize: '11px',
-              color: '#FFEE00',
+              color: '#00E5FF',
               letterSpacing: '2px',
               marginBottom: '40px',
             }}
@@ -272,14 +322,14 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                backgroundColor: '#FFEE00',
-                boxShadow: '0 0 10px #FFEE00',
+                backgroundColor: '#00E5FF',
+                boxShadow: '0 0 16px #00E5FF',
               }}
             ></span>
             <span>SYSTEM // ONLINE • MADRID & SIERRA</span>
           </div>
 
-          {/* EDITORIAL HUGE TYPOGRAPHY - TENUE, SOBRIA Y ELEGANTE SIN EXCESO DE LUZ NI 3D */}
+          {/* EDITORIAL HUGE TYPOGRAPHY - DRAMÁTICO CIAN ELÉCTRICO SPECTACULAR */}
           <h1
             style={{
               fontFamily: 'var(--fuente-titulos)',
@@ -291,26 +341,33 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               textTransform: 'uppercase',
             }}
           >
-            <div className="revelar-tenue" style={{ color: '#FFFFFF' }}>
+            <div className="foco-palabra-dramatica" style={{ color: '#FFFFFF' }}>
               ENERGÍA.
             </div>
             <div
-              className="revelar-tenue"
+              className="foco-palabra-dramatica"
               style={{
                 color: 'transparent',
-                WebkitTextStroke: '1px rgba(255, 255, 255, 0.35)',
+                WebkitTextStroke: '1.8px #00E5FF',
+                filter: 'drop-shadow(0 0 25px rgba(0, 229, 255, 0.5))',
               }}
             >
               PRECISIÓN.
             </div>
-            <div className="revelar-tenue" style={{ color: '#FFEE00' }}>
+            <div
+              className="foco-palabra-dramatica"
+              style={{
+                color: '#00E5FF',
+                textShadow: '0 0 35px rgba(0, 229, 255, 0.6), 0 0 70px rgba(0, 229, 255, 0.3)',
+              }}
+            >
               CONFIANZA.
             </div>
           </h1>
 
           {/* ETIQUETA INGENIERO KERLING NATALE */}
           <div
-            className="revelar-tenue"
+            className="revelar-sub-dramatico"
             style={{
               maxWidth: '680px',
               fontSize: 'clamp(1rem, 1.3vw, 1.25rem)',
@@ -321,14 +378,14 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             Ingeniería eléctrica de alta fidelidad, automatización Loxone Certified Partner, instalaciones fotovoltaicas con acumulación LFP y certificados oficiales en la Comunidad de Madrid por el{' '}
-            <strong style={{ color: '#FFFFFF', fontWeight: 600 }}>
+            <strong style={{ color: '#00E5FF', fontWeight: 700 }}>
               Ingeniero Kerling Abraham Natale Hidalgo
             </strong>.
           </div>
 
-          {/* BOTONES DE ACCIÓN */}
+          {/* BOTONES DE ACCIÓN EN CIAN ELÉCTRICO */}
           <div
-            className="revelar-tenue"
+            className="revelar-sub-dramatico"
             style={{
               display: 'flex',
               gap: '20px',
@@ -339,17 +396,17 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             <button
               onClick={onOpenQuote}
               style={{
-                background: '#FFEE00',
+                background: '#00E5FF',
                 color: '#030508',
                 border: 'none',
-                padding: '18px 40px',
+                padding: '20px 44px',
                 borderRadius: '100px',
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '12px',
                 fontWeight: 800,
                 letterSpacing: '2px',
                 cursor: 'pointer',
-                boxShadow: '0 0 25px rgba(255, 238, 0, 0.3)',
+                boxShadow: '0 0 35px rgba(0, 229, 255, 0.6)',
                 transition: 'all 0.3s ease',
               }}
             >
@@ -361,9 +418,9 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               onClick={(e) => scrollToSection(e, 'proyectos')}
               style={{
                 background: 'transparent',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
+                border: '1px solid rgba(0, 229, 255, 0.4)',
                 color: '#FFFFFF',
-                padding: '18px 40px',
+                padding: '20px 44px',
                 borderRadius: '100px',
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '12px',
