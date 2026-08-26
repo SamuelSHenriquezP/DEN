@@ -7,11 +7,11 @@ export default function Hero({ onOpenQuote }) {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.animacion-entrada', {
-        y: 40,
+        y: 30,
         opacity: 0,
-        duration: 1.25,
-        stagger: 0.12,
-        ease: 'power4.out',
+        duration: 1.1,
+        stagger: 0.1,
+        ease: 'power3.out',
       });
     }, containerRef);
 
@@ -33,20 +33,20 @@ export default function Hero({ onOpenQuote }) {
       </div>
 
       <h1 className="titulo-portada animacion-entrada">
-        <span>INGENIERÍA ELÉCTRICA</span>
-        <span className="texto-dorado-resplandor">DE ALTA PRECISIÓN</span>
-        <span className="texto-silueta">Y AUTOMATIZACIÓN</span>
+        <span>INSTALACIONES ELÉCTRICAS</span>
+        <span className="texto-dorado-resplandor">CONFIABLES Y SEGURAS</span>
+        <span className="texto-silueta">EN MADRID Y SIERRA</span>
       </h1>
 
       <p className="descripcion-portada animacion-entrada">
-        Diseñamos, reformamos y certificamos instalaciones eléctricas complejas en viviendas residenciales y negocios. Especialistas en cuadros de protección REBT, integración de iluminación inteligente y energía solar fotovoltaica bajo la dirección directa del <strong className="destacado-dorado">Ingeniero Kerling Abraham Natale Hidalgo</strong>.
+        Diseñamos, reformamos y certificamos instalaciones eléctricas en viviendas y locales. Trabajos limpios, bien hechos y adaptados al Reglamento Electrotécnico para Baja Tensión, con la tranquilidad de contar con la supervisión directa del <strong className="destacado-dorado">Ingeniero Kerling Abraham Natale Hidalgo</strong>.
       </p>
 
       {/* BOTONES DE INTERACCIÓN PRINCIPALES */}
       <div className="grupo-botones-accion animacion-entrada">
         <button onClick={onOpenQuote} className="boton-accion dorado-principal">
-          <span>Solicitar Estudio o Presupuesto</span>
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
+          <span>Solicitar Presupuesto sin Compromiso</span>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2.5">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
@@ -57,7 +57,7 @@ export default function Hero({ onOpenQuote }) {
           onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
           className="boton-accion contorno-elegante"
         >
-          <span>Examinar Cuadro de Protección REBT</span>
+          <span>Ver Cuadro de Protección REBT</span>
         </a>
 
         <a
@@ -66,7 +66,7 @@ export default function Hero({ onOpenQuote }) {
           rel="noopener noreferrer"
           className="boton-accion estilo-whatsapp"
         >
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.157 4.229 4.229-1.157z" />
           </svg>
           <span>Consulta por WhatsApp</span>
@@ -84,18 +84,18 @@ export default function Hero({ onOpenQuote }) {
         </div>
 
         <div className="item-indicador">
-          <span className="etiqueta-indicador">COBERTURA DE SERVICIO</span>
-          <span className="valor-indicador dorado">Comunidad de Madrid & Sierra</span>
+          <span className="etiqueta-indicador">ZONA DE SERVICIO</span>
+          <span className="valor-indicador dorado">Guadarrama y Comunidad de Madrid</span>
         </div>
 
         <div className="item-indicador">
-          <span className="etiqueta-indicador">CUMPLIMIENTO NORMATIVO</span>
+          <span className="etiqueta-indicador">NORMATIVA</span>
           <span className="valor-indicador">REBT (ITC-BT-03 / ITC-BT-52)</span>
         </div>
 
         <div className="item-indicador">
-          <span className="etiqueta-indicador">GARANTÍA DE TRABAJO</span>
-          <span className="valor-indicador dorado">Auditoría Directa de Ingeniero</span>
+          <span className="etiqueta-indicador">ATENCIÓN DIRECTA</span>
+          <span className="valor-indicador dorado">Supervisión por el Ingeniero</span>
         </div>
       </div>
     </section>
