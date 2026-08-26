@@ -8,9 +8,10 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
   const nataleRef = useRef(null);
   const standbyContainerRef = useRef(null);
   const onlineContentRef = useRef(null);
-  const flashOverlayRef = useRef(null);
+  const electricCurtainRef = useRef(null);
+  const lightningPathRef = useRef(null);
 
-  // 1. ANIMACIÓN AL ABRIR LA PÁGINA (PAGE LOAD ENTRANCE)
+  // 1. ANIMACIÓN DE CARGA AL ABRIR LA PÁGINA
   useEffect(() => {
     if (standbyContainerRef.current) {
       gsap.fromTo(
@@ -27,19 +28,20 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA DRAMÁTICA DE ALTA TENSIÓN EN AZUL / CIAN ELÉCTRICO (#00E5FF)
+  // 2. SECUENCIA CON TRANSICIÓN DE PANTALLA ELÉCTRICA COMPLETA
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
-    const flash = flashOverlayRef.current;
+    const curtain = electricCurtainRef.current;
+    const lightning = lightningPathRef.current;
 
     const mainTl = gsap.timeline();
 
-    // ETAPA 1: ACUMULACIÓN DE ENERGÍA Y PARPADEO DE NATALE EN CIAN ELÉCTRICO (0.5s)
+    // ETAPA 1: PARPADEO DE NATALE COMO UN FOCO DE ALTA POTENCIA
     if (nataleText) {
       mainTl.to(nataleText, {
         color: '#00E5FF',
-        textShadow: '0 0 30px #00E5FF, 0 0 60px #00E5FF',
+        textShadow: '0 0 35px #00E5FF, 0 0 70px #00E5FF',
         duration: 0.15,
       })
       .to(nataleText, {
@@ -54,73 +56,88 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
       });
     }
 
-    // ETAPA 2: RECORRIDO CINEMATOGRÁFICO DE LA LÍNEA ELÉCTRICA EN CIAN (0.9s)
+    // ETAPA 2: RECORRIDO DE LA LÍNEA ELÉCTRICA
     if (line) {
       mainTl.to(line, {
         strokeDashoffset: 0,
-        duration: 0.9,
+        duration: 0.7,
         ease: 'power2.inOut',
       });
     }
 
-    // ETAPA 3: FLASH DE ALTA VOLTAJE CIAN & APARICIÓN DRAMÁTICA DEL TÍTULO
-    mainTl.to(flash, {
-      opacity: 0.7,
-      backgroundColor: '#00E5FF',
-      duration: 0.08,
-    })
-    .to(flash, {
-      opacity: 0,
-      duration: 0.45,
-      ease: 'power3.out',
-    })
-    .call(() => {
+    // ETAPA 3: TRANSICIÓN DE PANTALLA ELÉCTRICA SPECTACULAR (FULL-SCREEN ELECTRICAL WAVE & LIGHTNING ARCS)
+    if (curtain) {
+      mainTl
+        // DESTELLO DE RAYOS ELÉCTRICOS EN PANTALLA COMPLETA
+        .to(curtain, {
+          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+          duration: 0.45,
+          ease: 'power4.inOut',
+        })
+        .to(lightning, {
+          opacity: 1,
+          strokeDashoffset: 0,
+          duration: 0.2,
+          ease: 'steps(3)',
+        }, '-=0.2')
+        .to(lightning, {
+          opacity: 0,
+          duration: 0.15,
+        })
+        .call(() => {
+          setIsSystemOnline(true);
+          if (onPowerOn) onPowerOn();
+
+          // REVELADO SPECTACULAR DE TÍTULOS DESPUÉS DEL BARRIDO ELÉCTRICO
+          setTimeout(() => {
+            if (onlineContentRef.current) {
+              const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
+              const sub = onlineContentRef.current.querySelectorAll('.revelar-sub-dramatico');
+
+              gsap.timeline()
+                .fromTo(
+                  words,
+                  {
+                    y: 60,
+                    opacity: 0,
+                    scale: 0.88,
+                    filter: 'drop-shadow(0 0 50px #00E5FF)',
+                  },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    scale: 1,
+                    filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))',
+                    duration: 1.2,
+                    stagger: 0.2,
+                    ease: 'power4.out',
+                  }
+                )
+                .fromTo(
+                  sub,
+                  { y: 30, opacity: 0 },
+                  {
+                    y: 0,
+                    opacity: 1,
+                    duration: 0.9,
+                    stagger: 0.12,
+                    ease: 'power3.out',
+                  },
+                  '-=0.6'
+                );
+            }
+          }, 30);
+        })
+        // DISOLUCIÓN DE LA CORTINA ELÉCTRICA
+        .to(curtain, {
+          clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
+          duration: 0.6,
+          ease: 'power3.out',
+        });
+    } else {
       setIsSystemOnline(true);
       if (onPowerOn) onPowerOn();
-
-      // SECUENCIA SPECTACULAR DE IGNICIÓN DE TÍTULOS
-      setTimeout(() => {
-        if (onlineContentRef.current) {
-          const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
-          const sub = onlineContentRef.current.querySelectorAll('.revelar-sub-dramatico');
-
-          // CADA PALABRA TIENE SU PROPIA IGNICIÓN Y EXPANSION CINEMATOGRÁFICA
-          gsap.timeline()
-            .fromTo(
-              words,
-              {
-                y: 50,
-                opacity: 0,
-                scale: 0.9,
-                letterSpacing: '0.08em',
-                filter: 'drop-shadow(0 0 40px #00E5FF)',
-              },
-              {
-                y: 0,
-                opacity: 1,
-                scale: 1,
-                letterSpacing: '-0.04em',
-                filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))',
-                duration: 1.2,
-                stagger: 0.22,
-                ease: 'power4.out',
-              }
-            )
-            .fromTo(
-              sub,
-              { y: 30, opacity: 0 },
-              {
-                y: 0,
-                opacity: 1,
-                duration: 0.9,
-                stagger: 0.12,
-                ease: 'power3.out',
-              },
-              '-=0.6'
-            );
-        }
-      }, 40);
-    });
+    }
   };
 
   const scrollToSection = (e, id) => {
@@ -147,9 +164,9 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         boxSizing: 'border-box',
       }}
     >
-      {/* OVERLAY DE RÁFAGA DE ALTO VOLTAJE CIAN */}
+      {/* CORTINA DE PANTALLA COMPLETA CON ONDA ELÉCTRICA Y RAYOS */}
       <div
-        ref={flashOverlayRef}
+        ref={electricCurtainRef}
         style={{
           position: 'absolute',
           top: 0,
@@ -157,13 +174,38 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           width: '100%',
           height: '100%',
           backgroundColor: '#00E5FF',
-          opacity: 0,
+          backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 70%)',
+          clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
           pointerEvents: 'none',
-          zIndex: 50,
+          zIndex: 90,
+          boxShadow: 'inset 0 0 100px #00E5FF, 0 0 150px #00E5FF',
         }}
-      ></div>
+      >
+        {/* SVG DE RAYOS ELÉCTRICOS EN TRANSICIÓN */}
+        <svg
+          style={{
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            top: 0,
+            left: 0,
+          }}
+        >
+          <path
+            ref={lightningPathRef}
+            d="M 100,0 L 250,300 L 200,320 L 450,700 L 400,720 L 700,1080 M 1200,0 L 1100,400 L 1150,420 L 950,800 L 1400,1080"
+            fill="none"
+            stroke="#FFFFFF"
+            strokeWidth="5"
+            strokeDasharray="1500"
+            strokeDashoffset="1500"
+            opacity="0"
+            filter="drop-shadow(0 0 25px #00E5FF)"
+          />
+        </svg>
+      </div>
 
-      {/* SVG DE LINEA ELÉCTRICA CIAN DE ALTA TENSIÓN */}
+      {/* SVG DE LÍNEA ELÉCTRICA CIAN DE ALTA TENSIÓN */}
       <svg
         style={{
           position: 'absolute',
@@ -187,7 +229,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         />
       </svg>
 
-      {/* ESTADO INICIAL: SYSTEM OFF (CON ANIMACIÓN DE CARGA EN CIAN) */}
+      {/* ESTADO INICIAL: SYSTEM OFF */}
       {!isSystemOnline ? (
         <div
           ref={standbyContainerRef}
@@ -238,7 +280,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             DYNAMIC ELECTRIC <br />
-            {/* TEXTO NATALE QUE SE ENCIENDE EN CIAN ELÉCTRICO */}
+            {/* TEXTO NATALE QUE SE ENCIENDE COMO FOCO CIAN */}
             <span
               ref={nataleRef}
               style={{
@@ -286,7 +328,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           </button>
         </div>
       ) : (
-        /* ESTADO ACTIVADO: SYSTEM ONLINE EN CIAN ELÉCTRICO DRAMÁTICO */
+        /* ESTADO ACTIVADO: SYSTEM ONLINE */
         <div
           ref={onlineContentRef}
           style={{
@@ -329,7 +371,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             <span>SYSTEM // ONLINE • MADRID & SIERRA</span>
           </div>
 
-          {/* EDITORIAL HUGE TYPOGRAPHY - DRAMÁTICO CIAN ELÉCTRICO SPECTACULAR */}
+          {/* EDITORIAL HUGE TYPOGRAPHY - CIAN ELÉCTRICO DRAMÁTICO */}
           <h1
             style={{
               fontFamily: 'var(--fuente-titulos)',
