@@ -11,8 +11,11 @@ import Hero from './components/Hero';
 import Stats from './components/Stats';
 import BentoServices from './components/BentoServices';
 import AISimulator from './components/AISimulator';
+import InteractiveFloorplan from './components/InteractiveFloorplan';
+import InteractiveSchematic from './components/InteractiveSchematic';
 import InspectorCuadro from './components/InspectorCuadro';
 import PortfolioHorizontal from './components/PortfolioHorizontal';
+import EmergencyRadar from './components/EmergencyRadar';
 import SolarCalculator from './components/SolarCalculator';
 import AboutKerling from './components/AboutKerling';
 import WizardQuote from './components/WizardQuote';
@@ -86,6 +89,12 @@ export default function App() {
         
         <div className="linea-separadora-tecnica"></div>
         <BentoServices />
+
+        <div className="linea-separadora-tecnica"></div>
+        <InteractiveFloorplan />
+
+        <div className="linea-separadora-tecnica"></div>
+        <InteractiveSchematic />
         
         <div className="linea-separadora-tecnica"></div>
         <AISimulator />
@@ -95,6 +104,9 @@ export default function App() {
         
         <div className="linea-separadora-tecnica"></div>
         <PortfolioHorizontal onOpenModal={handleOpenModal} />
+
+        <div className="linea-separadora-tecnica"></div>
+        <EmergencyRadar />
         
         <div className="linea-separadora-tecnica"></div>
         <SolarCalculator />

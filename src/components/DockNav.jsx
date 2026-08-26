@@ -45,18 +45,25 @@ export default function DockNav({ onOpenQuote }) {
         Servicios
       </a>
       <a
-        href="#simulador"
-        onClick={(e) => scrollToSection(e, 'simulador')}
-        className={`elemento-navegacion ${activeSection === 'simulador' ? 'activo' : ''}`}
+        href="#planificador-domotico"
+        onClick={(e) => scrollToSection(e, 'planificador-domotico')}
+        className={`elemento-navegacion ${activeSection === 'planificador-domotico' ? 'activo' : ''}`}
       >
-        Iluminación
+        Plano Domótico
+      </a>
+      <a
+        href="#esquema-unifilar"
+        onClick={(e) => scrollToSection(e, 'esquema-unifilar')}
+        className={`elemento-navegacion ${activeSection === 'esquema-unifilar' ? 'activo' : ''}`}
+      >
+        Unifilar REBT
       </a>
       <a
         href="#cuadro-tecnico"
         onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
         className={`elemento-navegacion ${activeSection === 'cuadro-tecnico' ? 'activo' : ''}`}
       >
-        Cuadro REBT
+        Inspector FLIR
       </a>
       <a
         href="#proyectos"
@@ -66,18 +73,11 @@ export default function DockNav({ onOpenQuote }) {
         Proyectos
       </a>
       <a
-        href="#calculadora"
-        onClick={(e) => scrollToSection(e, 'calculadora')}
-        className={`elemento-navegacion ${activeSection === 'calculadora' ? 'activo' : ''}`}
+        href="#urgencias"
+        onClick={(e) => scrollToSection(e, 'urgencias')}
+        className={`elemento-navegacion ${activeSection === 'urgencias' ? 'activo' : ''}`}
       >
-        Ahorro Solar
-      </a>
-      <a
-        href="#sobre-mi"
-        onClick={(e) => scrollToSection(e, 'sobre-mi')}
-        className={`elemento-navegacion ${activeSection === 'sobre-mi' ? 'activo' : ''}`}
-      >
-        Kerling Natale
+        Urgencias
       </a>
       <button
         onClick={onOpenQuote}
