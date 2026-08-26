@@ -1,94 +1,101 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 export default function Hero({ onOpenQuote }) {
-  useEffect(() => {
-    gsap.from('#inicio .reveal', {
-      y: 80,
-      opacity: 0,
-      duration: 1.2,
-      stagger: 0.12,
-      ease: 'power3.out',
-      delay: 0.2,
-    });
+  const containerRef = useRef(null);
 
-    gsap.from('#inicio .gsap-fade-up', {
-      y: 40,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.15,
-      ease: 'power3.out',
-      delay: 0.5,
-    });
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.from('.animacion-entrada', {
+        y: 35,
+        opacity: 0,
+        duration: 1.1,
+        stagger: 0.14,
+        ease: 'power3.out',
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const scrollToSimulador = (e) => {
+  const scrollToSection = (e, id) => {
     e.preventDefault();
-    const el = document.getElementById('simulador');
+    const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <section id="inicio" className="hero container section-nav full-screen-section">
-      <div className="hero-header-pill gsap-fade-up">
-        <span className="pulse-icon">⚡</span>
-        <span>INGENIERÍA ELÉCTRICA Y DOMÓTICA DE ALTA FIDELIDAD</span>
+    <section id="inicio" className="seccion-inicio contenedor seccion-pantalla-completa" ref={containerRef}>
+      {/* INVENTARIO DE PRESENTACIÓN */}
+      <div className="insignia-encabezado-inicio animacion-entrada">
+        <span className="icono-rayo">⚡</span>
+        <span>SEDE EN GUADARRAMA • SERVICIO EN TODA LA COMUNIDAD DE MADRID</span>
       </div>
 
-      <h1 className="hero-title">
-        <span className="reveal">DYNAMIC</span>
-        <span className="reveal outline">ELECTRIC</span>
-        <span className="reveal accent-glow">NATALE.</span>
+      <h1 className="titulo-portada animacion-entrada">
+        <span>INGENIERÍA ELÉCTRICA</span>
+        <span className="texto-dorado-resplandor">DE ALTA PRECISIÓN</span>
+        <span className="texto-silueta">Y AUTOMATIZACIÓN</span>
       </h1>
 
-      <p className="hero-description gsap-fade-up">
-        Ingeniería eléctrica de alta precisión en Madrid por el <strong>Ingeniero Kerling Abraham Natale Hidalgo</strong>. Certificación oficial REBT, domótica avanzada{' '}
-        <strong className="highlight-purple">Loxone Certified Partner</strong>, energía solar fotovoltaica con almacenamiento inteligente y cuadros técnicos de máximo nivel.
+      <p className="descripcion-portada animacion-entrada">
+        Diseñamos, reformamos y certificamos instalaciones eléctricas complejas en viviendas residenciales y negocios. Especialistas en cuadros de protección REBT, integración de iluminación inteligente y energía solar fotovoltaica bajo la dirección directa del <strong className="destacado-dorado">Ingeniero Kerling Abraham Natale Hidalgo</strong>.
       </p>
 
-      <div className="hero-cta-group gsap-fade-up">
-        <button onClick={onOpenQuote} className="btn-cta primary-glow">
-          <span>Solicitar Presupuesto Exprés</span>
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2">
+      {/* BOTONES DE INTERACCIÓN */}
+      <div className="grupo-botones-accion animacion-entrada">
+        <button onClick={onOpenQuote} className="boton-accion dorado-principal">
+          <span>Solicitar Estudio o Presupuesto</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.5">
             <line x1="5" y1="12" x2="19" y2="12"></line>
             <polyline points="12 5 19 12 12 19"></polyline>
           </svg>
         </button>
-        <a href="#simulador" onClick={scrollToSimulador} className="btn-cta outline">
-          <span>Probar Escenas de Luz IA</span>
-        </a>
+
         <a
-          href="https://wa.me/34682178499?text=Hola%20Kerling,%20deseo%20una%20consultor%C3%ADa%20t%C3%A9cnica%20gratuita."
-          className="btn-cta wa-style"
+          href="#cuadro-tecnico"
+          onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
+          className="boton-accion contorno-elegante"
+        >
+          <span>Examinar Cuadro de Protección REBT</span>
+        </a>
+
+        <a
+          href="https://wa.me/34682178499"
           target="_blank"
           rel="noopener noreferrer"
+          className="boton-accion estilo-whatsapp"
         >
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.157 4.229 4.229-1.157z" />
           </svg>
-          <span>Asesoría con Kerling</span>
+          <span>Consulta por WhatsApp</span>
         </a>
       </div>
 
-      {/* LIVE TELEMETRY DASHBOARD BAR */}
-      <div className="live-telemetry-bar gsap-fade-up">
-        <div className="telemetry-item">
-          <span className="telemetry-label">ESTADO RED DEN</span>
-          <span className="telemetry-val blue-pulse">
-            <span className="dot-online"></span> OPERATIVO 24/7
+      {/* BARRA DE TELEMETRÍA TÉCNICA */}
+      <div className="barra-indicadores-tecnicos animacion-entrada">
+        <div className="item-indicador">
+          <span className="etiqueta-indicador">REGISTRO OFICIAL</span>
+          <span className="valor-indicador estado-verde">
+            <span className="punto-conectado"></span>
+            <span>Instalador Autorizado en BT</span>
           </span>
         </div>
-        <div className="telemetry-item">
-          <span className="telemetry-label">TENSIÓN RED MADRID</span>
-          <span className="telemetry-val">230V / 400V Tri.</span>
+
+        <div className="item-indicador">
+          <span className="etiqueta-indicador">COBERURA DE SERVICIO</span>
+          <span className="valor-indicador dorado">Comunidad de Madrid & Sierra</span>
         </div>
-        <div className="telemetry-item">
-          <span className="telemetry-label">CUMPLIMIENTO REBT</span>
-          <span className="telemetry-val purple">100% GARANTIZADO</span>
+
+        <div className="item-indicador">
+          <span className="etiqueta-indicador">CUMPLIMIENTO NORMATIVO</span>
+          <span className="valor-indicador">REBT (ITC-BT-03 / ITC-BT-52)</span>
         </div>
-        <div className="telemetry-item">
-          <span className="telemetry-label">LOXONE STATUS</span>
-          <span className="telemetry-val loxone-purple">CERTIFIED PARTNER</span>
+
+        <div className="item-indicador">
+          <span className="etiqueta-indicador">GARANTÍA DE TRABAJO</span>
+          <span className="valor-indicador dorado">Auditoría Directa de Ingeniero</span>
         </div>
       </div>
     </section>

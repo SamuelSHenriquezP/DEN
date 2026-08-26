@@ -1,151 +1,147 @@
 import React, { useState } from 'react';
 
-const scenes = {
+const escenas = {
   relax: {
-    key: 'relax',
+    clave: 'relax',
     img: '/images/sim_relax.png',
-    title: 'ESCENA: CÁLIDO RELAX (2200K) — AMBIENTE ATARDECER',
-    basePower: 0.38,
+    titulo: 'AMBIENTE CÁLIDO DE ATARDECER (2.200 K)',
+    potenciaBase: 0.38,
     kelvin: 2200,
-    icon: '🌅',
-    label: 'Cálido Relax (2200K)',
-    sub: 'Luz cálida indirecta para descanso',
+    icono: '🌅',
+    etiqueta: 'Cálido Atardecer (2.200 K)',
+    descripcion: 'Iluminación indirecta de descanso con baja intensidad visual.',
   },
   focus: {
-    key: 'focus',
+    clave: 'focus',
     img: '/images/sim_focus.png',
-    title: 'ESCENA: LECTURA FOCUS (4000K) — LUZ DÍA PURA',
-    basePower: 0.65,
+    titulo: 'MODO LECTURA Y CONCENTRACIÓN (4.000 K)',
+    potenciaBase: 0.65,
     kelvin: 4000,
-    icon: '💡',
-    label: 'Modo Lectura Focus (4000K)',
-    sub: 'Iluminación nítida de trabajo',
+    icono: '💡',
+    etiqueta: 'Lectura Pura (4.000 K)',
+    descripcion: 'Luz blanca neutra óptima para trabajar o leer sin fatiga.',
   },
   neon: {
-    key: 'neon',
+    clave: 'neon',
     img: '/images/sim_neon.png',
-    title: 'ESCENA: CINE CYBER NEON (6500K) — RESPLANDOR NEÓN',
-    basePower: 0.82,
+    titulo: 'AMBIENTE CINE Y ENTRETENIMIENTO (6.500 K)',
+    potenciaBase: 0.82,
     kelvin: 6500,
-    icon: '🌐',
-    label: 'Cine Cyber Neon (6500K)',
-    sub: 'Acento azul neón y cine nocturno',
+    icono: '🌐',
+    etiqueta: 'Modo Cine Nocturno (6.500 K)',
+    descripcion: 'Luces de acento para experiencia audiovisual inmersiva.',
   },
   ausencia: {
-    key: 'ausencia',
+    clave: 'ausencia',
     img: '/images/sim_ausencia.png',
-    title: 'ESCENA: MODO AUSENCIA GUARD — SEGURIDAD NOCTURNA',
-    basePower: 0.12,
+    titulo: 'MODO VIGILANCIA Y NOCHE (1.800 K)',
+    potenciaBase: 0.12,
     kelvin: 1800,
-    icon: '🔒',
-    label: 'Modo Ausencia Guard',
-    sub: 'Seguridad pasiva y leds violetas',
+    icono: '🔒',
+    etiqueta: 'Vigilancia Nocturna (1.800 K)',
+    descripcion: 'Seguridad pasiva y balizamiento de bajo consumo energético.',
   },
 };
 
 export default function AISimulator() {
-  const [activeSceneKey, setActiveSceneKey] = useState('relax');
-  const [dimmerVal, setDimmerVal] = useState(100);
+  const [escenaActiva, setEscenaActiva] = useState('relax');
+  const [nivelRegulacion, setNivelRegulacion] = useState(100);
 
-  const activeScene = scenes[activeSceneKey];
-  const calculatedPower = (activeScene.basePower * (dimmerVal / 100)).toFixed(2);
-  const filterBrightness = dimmerVal / 100;
-
-  const handleSceneChange = (key) => {
-    setActiveSceneKey(key);
-  };
+  const escena = escenas[escenaActiva];
+  const consumoCalculado = (escena.potenciaBase * (nivelRegulacion / 100)).toFixed(2);
+  const brilloFiltro = nivelRegulacion / 100;
 
   return (
-    <section id="simulador" className="simulator-section container section-nav full-screen-section">
-      <div className="section-header gsap-fade-up">
-        <span className="section-badge loxone-badge">
-          <span className="code-tag">02 //</span> ILUMINACIÓN IA REAL
+    <section id="simulador" className="seccion-simulador contenedor seccion-pantalla-completa">
+      <div className="encabezado-seccion">
+        <span className="insignia-seccion">
+          <span className="codigo-indice">02 //</span> CONTROL ATMOSFÉRICO DE AMBIENTE
         </span>
-        <h2 className="section-title">
+        <h2 className="titulo-seccion">
           SIMULADOR DE <br />
-          <span className="accent-purple">ESCENAS DE LUZ</span>
+          <span className="texto-gradiente-dorado">ESCENAS DE ILUMINACIÓN</span>
         </h2>
-        <p className="section-desc">
-          Cada botón cambia la imagen de la estancia mostrando la transformación atmosférica real programada por el <strong>Ingeniero Kerling Natale</strong>.
+        <p className="descripcion-seccion">
+          Selecciona una escena para observar cómo la combinación de temperatura de color y regulación de intensidad transforma el espacio en tiempo real.
         </p>
       </div>
 
-      <div className="simulator-box gsap-fade-up">
-        <div className="sim-workspace">
-          {/* STAGE PREVIEW CON TRANSICIÓN FOTOGRÁFICA */}
-          <div className="sim-stage" id="sim-stage">
+      <div className="caja-simulador">
+        <div className="espacio-trabajo-simulador">
+          {/* MUESTRA VISUAL INTERACTIVA DE LA ESTANCIA */}
+          <div className="escenario-visual">
             <img
-              src={activeScene.img}
-              alt={activeScene.title}
-              className="stage-img sim-active-img"
-              style={{ filter: `brightness(${filterBrightness})` }}
+              src={escena.img}
+              alt={escena.titulo}
+              className="imagen-escenario"
+              style={{ filter: `brightness(${brilloFiltro})` }}
             />
 
-            <div className="sim-live-badge">
-              <span className="live-dot"></span>
-              <span>{activeScene.title}</span>
+            <div className="insignia-escena-activa">
+              <span className="punto-vivo-dorado"></span>
+              <span>{escena.titulo}</span>
             </div>
 
-            <div className="sim-telemetry-overlay">
-              <div className="sim-stat">
-                <span className="lbl">Consumo Instantáneo</span>
-                <span className="val">{calculatedPower} kW</span>
+            <div className="superposicion-telemetria-escena">
+              <div className="metrica-escena">
+                <span className="label">Consumo Estimado</span>
+                <span className="val">{consumoCalculado} kW</span>
               </div>
-              <div className="sim-stat">
-                <span className="lbl">Temperatura Color</span>
-                <span className="val purple">{activeScene.kelvin} K</span>
+              <div className="metrica-escena">
+                <span className="label">Temperatura Luz</span>
+                <span className="val dorado">{escena.kelvin} K</span>
               </div>
-              <div className="sim-stat">
-                <span className="lbl">Excedente Solar</span>
-                <span className="val">+2.80 kW</span>
+              <div className="metrica-escena">
+                <span className="label">Regulación Actual</span>
+                <span className="val">{nivelRegulacion}% DALI</span>
               </div>
             </div>
           </div>
 
-          {/* PANEL DE CONTROLES REALES DE ILUMINACIÓN */}
-          <div className="sim-controls">
-            <h4 className="sim-control-title">Selecciona Escena de Iluminación Inteligente</h4>
+          {/* CONTROLES DE REGULACIÓN Y SELECCIÓN */}
+          <div className="panel-controles-simulador">
+            <h4 className="titulo-panel-control">Selecciona una Configuración de Luz</h4>
 
-            <div className="scene-buttons">
-              {Object.values(scenes).map((scene) => (
+            <div className="botones-seleccion-escena">
+              {Object.values(escenas).map((esc) => (
                 <button
-                  key={scene.key}
-                  className={`btn-scene ${activeSceneKey === scene.key ? 'active' : ''}`}
-                  onClick={() => handleSceneChange(scene.key)}
+                  key={esc.clave}
+                  className={`boton-escena ${escenaActiva === esc.clave ? 'activo' : ''}`}
+                  onClick={() => setEscenaActiva(esc.clave)}
                 >
-                  <span className="scene-icon">{scene.icon}</span>
+                  <span className="icono-escena">{esc.icono}</span>
                   <div>
-                    <strong>{scene.label}</strong>
-                    <p className="scene-sub">{scene.sub}</p>
+                    <strong>{esc.etiqueta}</strong>
+                    <p className="subtitulo-escena">{esc.descripcion}</p>
                   </div>
                 </button>
               ))}
             </div>
 
-            {/* SLIDER DE REGULACIÓN DALI */}
-            <div className="sim-sliders-group">
-              <div className="sim-slider-row">
-                <label htmlFor="sim-dimmer">
-                  Regulación DALI de Intensidad (<span>{dimmerVal}%</span>)
+            <div className="grupo-deslizadores-regulacion">
+              <div className="fila-deslizador">
+                <label htmlFor="deslizador-regulacion">
+                  <span>Intensidad de Regulación (DALI)</span>
+                  <span style={{ color: 'var(--dorado-real)' }}>{nivelRegulacion}%</span>
                 </label>
                 <input
                   type="range"
-                  id="sim-dimmer"
+                  id="deslizador-regulacion"
                   min="20"
                   max="100"
-                  value={dimmerVal}
-                  onChange={(e) => setDimmerVal(parseInt(e.target.value))}
+                  value={nivelRegulacion}
+                  onChange={(e) => setNivelRegulacion(parseInt(e.target.value, 10))}
                 />
               </div>
             </div>
 
-            <div className="sim-info-note">
+            <div className="nota-informativa-tecnica">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
                 <circle cx="12" cy="12" r="10"></circle>
                 <line x1="12" y1="16" x2="12" y2="12"></line>
                 <line x1="12" y1="8" x2="12.01" y2="8"></line>
               </svg>
-              <span>Cada escena física modifica la imagen ajustando la temperatura K y el consumo energético en tiempo real.</span>
+              <span>El control DALI ajusta la intensidad de forma continua manteniendo el máximo confort de la vivienda.</span>
             </div>
           </div>
         </div>

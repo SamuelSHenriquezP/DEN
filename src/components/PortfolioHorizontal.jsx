@@ -5,102 +5,97 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function PortfolioHorizontal({ onOpenModal }) {
-  const trackRef = useRef(null);
+  const pistaRef = useRef(null);
 
   useEffect(() => {
-    const track = trackRef.current;
-    if (track && window.innerWidth > 1024) {
-      const scrollAnimation = gsap.to(track, {
-        x: () => -(track.scrollWidth - window.innerWidth + 120),
+    const pista = pistaRef.current;
+    if (pista && window.innerWidth > 1200) {
+      const scrollAnim = gsap.to(pista, {
+        x: () => -(pista.scrollWidth - window.innerWidth + 120),
         ease: 'none',
         scrollTrigger: {
-          trigger: '.horizontal-section',
+          trigger: '.seccion-proyectos-horizontal',
           pin: true,
           scrub: 1,
-          end: () => '+=' + (track.scrollWidth - window.innerWidth + 300),
+          end: () => '+=' + (pista.scrollWidth - window.innerWidth + 300),
           invalidateOnRefresh: true,
         },
       });
 
       return () => {
-        if (scrollAnimation.scrollTrigger) {
-          scrollAnimation.scrollTrigger.kill();
+        if (scrollAnim.scrollTrigger) {
+          scrollAnim.scrollTrigger.kill();
         }
       };
     }
   }, []);
 
-  const projects = [
+  const proyectos = [
     {
-      key: 'villa-loxone',
-      title: 'VILLA LOXONE MADRID',
-      category: 'RESIDENCIAL LUXURY • POZUELO DE ALARCÓN',
-      summary: 'Instalación eléctrica integral de 600m², control DALI de 45 zonas, clima radiante por zonas y 15 kWp solar con almacenamiento.',
+      clave: 'villa-loxone',
+      titulo: 'RESIDENCIA UNIFAMILIAR EN POZUELO',
+      categoria: 'VIVIENDA DE ALTA EFICIENCIA • POZUELO DE ALARCÓN',
+      resumen: 'Instalación eléctrica completa de 600m², control de iluminación DALI de 45 zonas y sistema solar fotovoltaico de 15 kWp con baterías.',
       img: '/images/villa_loxone.png',
-      metrics: ['⚡ Loxone Tree & Air', '☀️ 15 kWp Solar', '🔋 15 kWh LFP'],
+      metricas: ['⚡ Control DALI 45 Zonas', '☀️ 15 kWp Generación Solar', '🔋 15 kWh Batería LFP'],
     },
     {
-      key: 'solar-park',
-      title: 'PARQUE SOLAR COMMERCIAL X',
-      category: 'FOTOVOLTAICA & BATERÍAS • GUADARRAMA',
-      summary: 'Sistema fotovoltaico industrial de 120 kWp con inversor trifásico Huawei y acumulación en baterías de 80 kWh con vertido cero.',
+      clave: 'solar-park',
+      titulo: 'SEDE INDUSTRIAL EN GUADARRAMA',
+      categoria: 'FOTOVOLTAICA INDUSTRIAL • GUADARRAMA',
+      resumen: 'Sistema fotovoltaico en cubierta de 120 kWp con inversor trifásico y acumulación en baterías de 80 kWh con inyección cero a red.',
       img: '/images/solar_industrial.png',
-      metrics: ['⚡ 120 kWp Generación', '🔋 80 kWh Batería', '🌱 45 Ton CO₂'],
+      metricas: ['⚡ 120 kWp Fotovoltaica', '🔋 80 kWh Acumulación', '🌱 45 Ton CO₂ Evitadas'],
     },
     {
-      key: 'data-panel',
-      title: 'HEADQUARTERS DATA PANEL',
-      category: 'INFRAESTRUCTURA DE POTENCIA • MADRID CAPITAL',
-      summary: 'Reestructuración total de cuadro trifásico de 250A con análisis termográfico continua y reconexión diferencial automática.',
+      clave: 'data-panel',
+      titulo: 'INFRAESTRUCTURA DE CUADROS EN MADRID',
+      categoria: 'REFORMAS DE POTENCIA • MADRID CAPITAL',
+      resumen: 'Sustitución de cuadro general de mando de 250A con termografía preventiva y sistemas de auto-reenganche diferencial.',
       img: '/images/smart_panel.png',
-      metrics: ['⚡ 250A Trifásico', '🔥 Termografía FLIR', '🛡️ Auto-Rearme'],
+      metricas: ['⚡ 250A Trifásico REBT', '🔥 Termografía FLIR', '🛡️ Auto-Rearme Inteligente'],
     },
     {
-      key: 'ev-charging',
-      title: 'CARGA EV HIGH-POWER',
-      category: 'MOVILIDAD ELÉCTRICA • LA MORALEJA',
-      summary: 'Doble cargador inteligente Wallbox de 22kW con balanceo dinámico de potencia y carga solar directa.',
+      clave: 'ev-charging',
+      titulo: 'PUNTOS DE RECARGA EN LA MORALEJA',
+      categoria: 'MOVILIDAD ELÉCTRICA • LA MORALEJA',
+      resumen: 'Doble cargador trifásico de 22 kW con balanceo dinámico de potencia para proteger la instalación eléctrica de la vivienda.',
       img: '/images/ev_charging.png',
-      metrics: ['⚡ 22 kW Carga Rápida', '🚘 Balanceo Dinámico', '📱 App Sync'],
+      metricas: ['⚡ 22 kW Carga Rápida', '🚘 Balanceo Dinámico', '📱 Gestión App'],
     },
   ];
 
   return (
-    <section id="proyectos" className="horizontal-section section-nav full-screen-section">
-      <div className="horizontal-title-bar container gsap-fade-up">
-        <div>
-          <span className="section-badge">
-            <span className="code-tag">04 //</span> PORTAFOLIO DE FIRMA CON DESPLAZAMIENTO HORIZONTAL
-          </span>
-          <h2 className="section-title">
-            PROYECTOS <span className="accent-text">DESTACADOS</span>
-          </h2>
-          <p className="scroll-hint">
-            <span>← Desliza hacia abajo para recorrer horizontalmente el portafolio →</span>
-          </p>
-        </div>
+    <section id="proyectos" className="seccion-proyectos-horizontal seccion-pantalla-completa">
+      <div className="barra-titulo-horizontal contenedor">
+        <span className="insignia-seccion">
+          <span className="codigo-indice">04 //</span> CASOS DE ESTUDIO REALES
+        </span>
+        <h2 className="titulo-seccion">
+          PROYECTOS Y <span className="texto-gradiente-dorado">INSTALACIONES DESTACADAS</span>
+        </h2>
+        <p className="indicacion-desplazamiento">
+          ← Desliza hacia abajo para recorrer horizontalmente los proyectos →
+        </p>
       </div>
 
-      {/* TRACK HORIZONTAL PINNED */}
-      <div className="horizontal-track-container">
-        <div className="horizontal-wrapper" id="project-horizontal-wrapper" ref={trackRef}>
-          {projects.map((proj) => (
-            <div key={proj.key} className="project-slide">
-              <img src={proj.img} alt={proj.title} />
-              <div className="project-content">
-                <span className="proj-category">{proj.category}</span>
-                <h2>
-                  {proj.title.split(' ')[0]} <br />
-                  <span className="accent-text">{proj.title.split(' ').slice(1).join(' ')}</span>
-                </h2>
-                <p className="proj-summary">{proj.summary}</p>
-                <div className="proj-metrics">
-                  {proj.metrics.map((m, idx) => (
+      {/* PISTA HORIZONTAL */}
+      <div className="contenedor-pista-horizontal">
+        <div className="pista-horizontal" ref={pistaRef}>
+          {proyectos.map((proj) => (
+            <div key={proj.clave} className="diapositiva-proyecto">
+              <img src={proj.img} alt={proj.titulo} />
+              <div className="contenido-proyecto">
+                <span className="categoria-proyecto">{proj.categoria}</span>
+                <h2>{proj.titulo}</h2>
+                <p className="resumen-proyecto">{proj.resumen}</p>
+                <div className="metricas-proyecto">
+                  {proj.metricas.map((m, idx) => (
                     <span key={idx}>{m}</span>
                   ))}
                 </div>
-                <button className="btn-proj-details" onClick={() => onOpenModal(proj.key)}>
-                  Ver Detalles Completos del Proyecto →
+                <button className="boton-ver-detalles-proyecto" onClick={() => onOpenModal(proj.clave)}>
+                  Ver Detalles Técnicos del Proyecto →
                 </button>
               </div>
             </div>

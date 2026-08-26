@@ -8,22 +8,22 @@ export default function Footer({ onOpenQuote }) {
   };
 
   return (
-    <footer className="footer-main">
-      <div className="container">
-        <div className="footer-grid-top">
-          <div className="footer-col footer-brand">
-            <img src="/Logo DEN.png" alt="Dynamic Electric Natale Logo" className="footer-logo" />
-            <p className="footer-tagline">
-              Dynamic Electric Natale (DEN) — Firma de ingeniería eléctrica, domótica Loxone Partner y autoconsumo solar en la Comunidad de Madrid. Liderado por el <strong>Ing. Kerling Abraham Natale Hidalgo</strong>.
+    <footer className="pie-pagina-principal">
+      <div className="contenedor">
+        <div className="rejilla-superior-pie">
+          <div className="columna-pie footer-brand">
+            <img src="/Logo DEN.png" alt="Dynamic Electric Natale Logo" className="logotipo-pie" />
+            <p className="eslogan-pie">
+              Dynamic Electric Natale (DEN) — Firma de ingeniería eléctrica, automatización residencial e instalaciones solares en la Comunidad de Madrid. Liderado por el <strong>Ingeniero Kerling Abraham Natale Hidalgo</strong>.
             </p>
-            <div className="footer-cert-badges">
-              <span className="f-badge">REBT ESPAÑA</span>
-              <span className="f-badge loxone">LOXONE CERTIFIED</span>
-              <span className="f-badge">CIE OFICIAL</span>
+            <div className="insignias-certificacion-pie">
+              <span className="insignia-pie">REBT MADRID</span>
+              <span className="insignia-pie">AUTOMATIZACIÓN</span>
+              <span className="insignia-pie">BOLETÍN CIE</span>
             </div>
           </div>
 
-          <div className="footer-col">
+          <div className="columna-pie">
             <h4>NAVEGACIÓN</h4>
             <ul>
               <li>
@@ -38,12 +38,17 @@ export default function Footer({ onOpenQuote }) {
               </li>
               <li>
                 <a href="#simulador" onClick={(e) => scrollToSection(e, 'simulador')}>
-                  Simulador de Escenas
+                  Simulador de Luz
+                </a>
+              </li>
+              <li>
+                <a href="#cuadro-tecnico" onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}>
+                  Cuadro REBT
                 </a>
               </li>
               <li>
                 <a href="#proyectos" onClick={(e) => scrollToSection(e, 'proyectos')}>
-                  Portafolio Pinned
+                  Proyectos Reales
                 </a>
               </li>
               <li>
@@ -52,35 +57,30 @@ export default function Footer({ onOpenQuote }) {
                 </a>
               </li>
               <li>
-                <a href="#cuadro-tecnico" onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}>
-                  Inspector REBT
-                </a>
-              </li>
-              <li>
                 <a href="#sobre-mi" onClick={(e) => scrollToSection(e, 'sobre-mi')}>
-                  Sobre Kerling Natale
+                  Ing. Kerling Natale
                 </a>
               </li>
             </ul>
           </div>
 
-          <div className="footer-col">
-            <h4>COBERURA MADRID</h4>
+          <div className="columna-pie">
+            <h4>ÁREAS DE COBERTURA</h4>
             <ul>
-              <li><span>Guadarrama (Sede Principal)</span></li>
+              <li><span>Guadarrama (Sede Central)</span></li>
               <li><span>Pozuelo de Alarcón</span></li>
               <li><span>La Moraleja & Alcobendas</span></li>
               <li><span>Las Rozas & Majadahonda</span></li>
               <li><span>Torrelodones & Galapagar</span></li>
-              <li><span>Madrid Capital & Comunidad</span></li>
+              <li><span>Madrid Capital & Sierra</span></li>
             </ul>
           </div>
 
-          <div className="footer-col">
+          <div className="columna-pie">
             <h4>CONTACTO TÉCNICO</h4>
             <ul>
               <li>
-                <a href="tel:+34682178499" className="highlight-link">
+                <a href="tel:+34682178499" className="enlace-destacado-contacto">
                   📞 +34 682 17 84 99
                 </a>
               </li>
@@ -90,29 +90,29 @@ export default function Footer({ onOpenQuote }) {
                 </a>
               </li>
               <li>
-                <span className="schedule">⏰ Lunes a Sábado: 08:00 - 20:00</span>
+                <span className="horario-atencion">⏰ Lunes a Sábado: 08:00 - 20:00</span>
               </li>
-              <li>
+              <li style={{ marginTop: '14px' }}>
                 <button
                   onClick={onOpenQuote}
-                  className="btn-quick-quote"
-                  style={{ marginTop: '10px', cursor: 'pointer' }}
+                  className="boton-cotizacion-rapida"
+                  style={{ cursor: 'pointer' }}
                 >
-                  Cotización Online
+                  Solicitar Presupuesto
                 </button>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="footer-bottom">
+        <div className="parte-inferior-pie">
           <p>© {new Date().getFullYear()} Dynamic Electric Natale (DEN). Todos los derechos reservados. Kerling Abraham Natale Hidalgo.</p>
-          <div className="social-links">
-            <a href="https://wa.me/34682178499" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+          <div className="enlaces-redes-sociales">
+            <a href="https://wa.me/34682178499" target="_blank" rel="noopener noreferrer">
               WhatsApp Directo
             </a>
-            <a href="mailto:den.informacion@gmail.com" aria-label="Email">
-              Email Oficial
+            <a href="mailto:den.informacion@gmail.com">
+              Correo Oficial
             </a>
           </div>
         </div>

@@ -1,64 +1,90 @@
 import React, { useState, useEffect } from 'react';
 
 export default function DockNav({ onOpenQuote }) {
-  const [activeId, setActiveId] = useState('inicio');
-
-  const navItems = [
-    { id: 'inicio', label: 'Inicio', tooltip: 'Inicio' },
-    { id: 'servicios', label: 'Soluciones', tooltip: 'Servicios' },
-    { id: 'simulador', label: 'Simulador Domótico', tooltip: 'Loxone' },
-    { id: 'proyectos', label: 'Portafolio', tooltip: 'Proyectos' },
-    { id: 'calculadora', label: 'Calculadora Solar', tooltip: 'Calculadora' },
-    { id: 'cuadro-tecnico', label: 'Inspector Cuadro', tooltip: 'Cuadro REBT' },
-    { id: 'sobre-mi', label: 'Ing. Kerling', tooltip: 'Sobre Kerling' },
-    { id: 'faq', label: 'FAQ', tooltip: 'Preguntas' },
-  ];
+  const [activeSection, setActiveSection] = useState('inicio');
 
   useEffect(() => {
+    const sections = document.querySelectorAll('.seccion-pantalla-completa');
     const handleScroll = () => {
-      const sections = navItems.map((item) => document.getElementById(item.id)).filter(Boolean);
       let current = 'inicio';
-      sections.forEach((section) => {
-        const sectionTop = section.offsetTop - 220;
-        if (window.pageYOffset >= sectionTop) {
-          current = section.getAttribute('id');
+      sections.forEach((sec) => {
+        const top = sec.offsetTop - 200;
+        if (window.scrollY >= top) {
+          current = sec.getAttribute('id');
         }
       });
-      setActiveId(current);
+      setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleClick = (e, id) => {
+  const scrollToSection = (e, id) => {
     e.preventDefault();
-    setActiveId(id);
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   return (
-    <nav className="dock" id="main-dock">
-      {navItems.map((item) => (
-        <a
-          key={item.id}
-          href={`#${item.id}`}
-          className={`dock-item ${activeId === item.id ? 'active' : ''}`}
-          data-tooltip={item.tooltip}
-          onClick={(e) => handleClick(e, item.id)}
-        >
-          {item.label}
-        </a>
-      ))}
-      <button
-        className="dock-item dock-cta"
-        style={{ border: 'none', cursor: 'pointer' }}
-        onClick={onOpenQuote}
+    <nav className="barra-navegacion-flotante">
+      <a
+        href="#inicio"
+        onClick={(e) => scrollToSection(e, 'inicio')}
+        className={`elemento-navegacion ${activeSection === 'inicio' ? 'activo' : ''}`}
       >
-        Cotizar
+        Inicio
+      </a>
+      <a
+        href="#servicios"
+        onClick={(e) => scrollToSection(e, 'servicios')}
+        className={`elemento-navegacion ${activeSection === 'servicios' ? 'activo' : ''}`}
+      >
+        Servicios
+      </a>
+      <a
+        href="#simulador"
+        onClick={(e) => scrollToSection(e, 'simulador')}
+        className={`elemento-navegacion ${activeSection === 'simulador' ? 'activo' : ''}`}
+      >
+        Iluminación
+      </a>
+      <a
+        href="#cuadro-tecnico"
+        onClick={(e) => scrollToSection(e, 'cuadro-tecnico')}
+        className={`elemento-navegacion ${activeSection === 'cuadro-tecnico' ? 'activo' : ''}`}
+      >
+        Cuadro REBT
+      </a>
+      <a
+        href="#proyectos"
+        onClick={(e) => scrollToSection(e, 'proyectos')}
+        className={`elemento-navegacion ${activeSection === 'proyectos' ? 'activo' : ''}`}
+      >
+        Proyectos
+      </a>
+      <a
+        href="#calculadora"
+        onClick={(e) => scrollToSection(e, 'calculadora')}
+        className={`elemento-navegacion ${activeSection === 'calculadora' ? 'activo' : ''}`}
+      >
+        Ahorro Solar
+      </a>
+      <a
+        href="#sobre-mi"
+        onClick={(e) => scrollToSection(e, 'sobre-mi')}
+        className={`elemento-navegacion ${activeSection === 'sobre-mi' ? 'activo' : ''}`}
+      >
+        Kerling Natale
+      </a>
+      <button
+        onClick={onOpenQuote}
+        className="elemento-navegacion elemento-navegacion-destacado"
+        style={{ border: 'none', cursor: 'pointer' }}
+      >
+        Cotizar Proyecto
       </button>
     </nav>
   );

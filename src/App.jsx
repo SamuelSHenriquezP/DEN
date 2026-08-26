@@ -27,7 +27,6 @@ export default function App() {
   const [activeModalKey, setActiveModalKey] = useState(null);
 
   useEffect(() => {
-    // LENIS SMOOTH SCROLLING SYNCHRONIZATION WITH GSAP
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -66,54 +65,54 @@ export default function App() {
 
   return (
     <div className="den-app">
-      {/* CANVAS ELÉCTRICO DE ENERGÍA Y DESTELLOS */}
+      {/* CANVAS ELÉCTRICO DE AMBIENTE */}
       <EnergyCanvas />
 
-      {/* BOTÓN FLOTANTE DE WHATSAPP CON TOOLTIP */}
+      {/* BOTÓN FLOTANTE DE CONTACTO DIRECTO */}
       <FloatingWhatsApp />
 
-      {/* HEADER DE FIRMA CON LOGO Y LLAMADA RÁPIDA */}
+      {/* ENCABEZADO PRINCIPAL DE FIRMA */}
       <Header onOpenQuote={handleOpenQuote} />
 
-      {/* DOCK FLOTANTE NAVEGACIÓN PANTALLA A PANTALLA */}
+      {/* NAVEGACIÓN FLOTANTE DOCK */}
       <DockNav onOpenQuote={handleOpenQuote} />
 
-      {/* MAIN CONTENT */}
+      {/* CONTENIDO PRINCIPAL */}
       <main>
         <Hero onOpenQuote={handleOpenQuote} />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <Stats />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <BentoServices />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <AISimulator />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <InspectorCuadro />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <PortfolioHorizontal onOpenModal={handleOpenModal} />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <SolarCalculator />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <AboutKerling onOpenQuote={handleOpenQuote} />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <WizardQuote />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <FaqSection />
         
-        <div className="energy-divider"></div>
+        <div className="linea-separadora-tecnica"></div>
         <Testimonials />
       </main>
 
-      {/* FOOTER */}
+      {/* PIE DE PÁGINA */}
       <Footer onOpenQuote={handleOpenQuote} />
 
       {/* MODAL DETALLADO DE PROYECTOS */}

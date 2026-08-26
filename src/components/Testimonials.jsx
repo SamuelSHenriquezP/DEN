@@ -1,46 +1,46 @@
 import React from 'react';
 
 export default function Testimonials() {
-  const reviews = [
+  const opiniones = [
     {
-      stars: '★★★★★',
-      text: 'Kerling diseñó e instaló el sistema Loxone y la energía solar en nuestro chalet de Pozuelo. La precisión del cuadro eléctrico y el acabado de la iluminación DALI son simplemente espectaculares.',
-      author: 'Carlos M. S.',
-      loc: 'Villa Unifamiliar Pozuelo de Alarcón',
+      estrellas: '★★★★★',
+      texto: 'Kerling diseñó e instaló la automatización de iluminación y la energía solar en nuestra vivienda de Pozuelo. El nivel de detalle en la ordenación del cuadro eléctrico y los acabados es excepcional.',
+      autor: 'Carlos M. S.',
+      ubicacion: 'Chalet Unifamiliar • Pozuelo de Alarcón',
     },
     {
-      stars: '★★★★★',
-      text: 'Necesitábamos un Boletín Eléctrico (CIE) urgente para aumento de potencia en un local de restauración. Kerling auditó el cuadro, corrigió fallos de protección y emitió el certificado en 24 horas.',
-      author: 'Elena R. V.',
-      loc: 'Hostelería Madrid Centro',
+      estrellas: '★★★★★',
+      texto: 'Necesitábamos un Boletín Eléctrico (CIE) urgente para un aumento de potencia comercial. Kerling auditó la instalación, solucionó los fallos de protección y emitió el certificado oficial en 24 horas.',
+      autor: 'Elena R. V.',
+      ubicacion: 'Local Comercial • Madrid Centro',
     },
     {
-      stars: '★★★★★',
-      text: 'Buscaba un instalador fotovoltaico que supiera integrar la carga del coche eléctrico con el excedente solar sin fallos. El trabajo de DEN en Guadarrama superó todas nuestras expectativas.',
-      author: 'Javier G. B.',
-      loc: 'Residencial Guadarrama',
+      estrellas: '★★★★★',
+      texto: 'Buscábamos un profesional que integrara la recarga del coche eléctrico con la producción de las placas solares de forma eficiente. El trabajo de DEN en Guadarrama superó nuestras expectativas.',
+      autor: 'Javier G. B.',
+      ubicacion: 'Residencia Unifamiliar • Guadarrama',
     },
   ];
 
   return (
-    <section className="testimonials-section container full-screen-section">
-      <div className="section-header gsap-fade-up">
-        <span className="section-badge">
-          <span className="code-tag">09 //</span> GARANTÍA & OPINIONES REALES
+    <section className="seccion-testimonios contenedor seccion-pantalla-completa">
+      <div className="encabezado-seccion">
+        <span className="insignia-seccion">
+          <span className="codigo-indice">09 //</span> EXPERIENCIAS Y VALORACIONES REALES
         </span>
-        <h2 className="section-title">
-          VALORACIONES DE <span className="accent-text">NUESTROS CLIENTES</span>
+        <h2 className="titulo-seccion">
+          OPINIONES DE <span className="texto-gradiente-dorado">NUESTROS CLIENTES</span>
         </h2>
       </div>
 
-      <div className="testimonials-grid gsap-fade-up">
-        {reviews.map((r, idx) => (
-          <div key={idx} className="t-card">
-            <div className="t-stars">{r.stars}</div>
-            <p className="t-text">"{r.text}"</p>
-            <div className="t-author">
-              <strong>{r.author}</strong>
-              <span>{r.loc}</span>
+      <div className="rejilla-testimonios">
+        {opiniones.map((item, idx) => (
+          <div key={idx} className="tarjeta-testimonio">
+            <div className="estrellas-testimonio">{item.estrellas}</div>
+            <p className="texto-testimonio">"{item.texto}"</p>
+            <div className="autor-testimonio">
+              <strong>{item.autor}</strong>
+              <span>{item.ubicacion}</span>
             </div>
           </div>
         ))}

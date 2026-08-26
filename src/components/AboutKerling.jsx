@@ -2,69 +2,66 @@ import React from 'react';
 
 export default function AboutKerling({ onOpenQuote }) {
   return (
-    <section id="sobre-mi" className="about-modern container section-nav full-screen-section">
-      <div className="about-grid-main gsap-fade-up">
-        <div className="about-image-side">
+    <section id="sobre-mi" className="seccion-perfil-ingeniero contenedor seccion-pantalla-completa">
+      <div className="estrucutra-perfil-principal">
+        <div className="lado-imagen-perfil">
           <img
             src="/images/kerling_portrait.png"
-            alt="Ingeniero Kerling Abraham Natale Hidalgo — Especialista Loxone Partner Madrid"
+            alt="Ingeniero Kerling Abraham Natale Hidalgo — Especialista en Ingeniería Eléctrica en Madrid"
           />
-          <div className="about-img-badge">
-            <span className="badge-title">ING. KERLING NATALE</span>
-            <span className="badge-sub">Fundador & Principal Engineer</span>
+          <div className="tarjeta-identidad-fotografia">
+            <span className="nombre-ingeniero-foto">ING. KERLING NATALE</span>
+            <span className="cargo-ingeniero-foto">INGENIERO ELECTRICISTA AUTORIZADO</span>
           </div>
         </div>
 
-        <div className="about-text-side">
-          <span className="section-badge">
-            <span className="code-tag">06 //</span> INGENIERO ELÉCTRICO AUTORIZADO
+        <div className="lado-texto-perfil">
+          <span className="insignia-seccion">
+            <span className="codigo-indice">06 //</span> DIRECCIÓN TÉCNICA PROFESIONAL
           </span>
-          <h2 className="about-title">
+          <h2 className="titulo-perfil">
             Kerling Abraham <br />
-            <span className="accent-text">Natale Hidalgo</span>
+            <span className="texto-gradiente-dorado">Natale Hidalgo</span>
           </h2>
 
-          <p className="about-bio">
-            Como ingeniero electricista especializado en baja tensión y automatización domótica, entiendo que una instalación eléctrica es el{' '}
-            <strong>corazón energético y de seguridad de tu patrimonio</strong>.
+          <p className="biografia-destacada">
+            Como ingeniero electricista especializado en baja tensión y automatización, concibo la instalación eléctrica como la columna vertebral de la seguridad y la eficiencia energética de cualquier espacio.
           </p>
 
-          <p className="about-bio-secondary">
-            Desde la sede en <strong>Guadarrama, Madrid</strong>, ejecuto personalmente y superviso proyectos de alta exigencia técnica en toda la región. Cada cuadro de protección, nodo Loxone y sistema solar fotovoltaico es verificado bajo estrictos protocolos de ingeniería para garantizar 100% de cumplimiento del REBT y fiabilidad absoluta.
+          <p className="biografia-secundaria">
+            Desde nuestra sede en <strong>Guadarrama</strong>, presto servicio directo en toda la Comunidad de Madrid. Superviso y ejecuto personalmente cada reforma de cuadro, proyecto domótico e instalación fotovoltaica, garantizando el estricto cumplimiento del Reglamento Electrotécnico para Baja Tensión (REBT) y una comunicación transparente en todo momento.
           </p>
 
-          {/* GRID DE CERTIFICACIONES TÉCNICAS */}
-          <div className="cert-grid">
-            <div className="cert-item">
-              <span className="cert-icon">📜</span>
-              <h4>ELECTRICISTA AUTORIZADO</h4>
-              <p>Categoría Especialista Comunidad de Madrid</p>
+          {/* REJILLA DE CERTIFICACIONES TÉCNICAS */}
+          <div className="rejilla-certificaciones">
+            <div className="item-certificacion">
+              <span className="icono-certificacion">📜</span>
+              <h4>INSTALADOR AUTORIZADO</h4>
+              <p>Categoría Especialista en la Comunidad de Madrid</p>
             </div>
 
-            <div className="cert-item loxone-border">
-              <span className="cert-icon">💜</span>
-              <h4 style={{ color: '#8B5CF6' }}>LOXONE PARTNER</h4>
-              <p>Certificación en Smart Home & Automation</p>
+            <div className="item-certificacion">
+              <span className="icono-certificacion">⚡</span>
+              <h4>AUTOMATIZACIÓN LOXONE</h4>
+              <p>Socio Certificado en Sistemas Inteligentes</p>
             </div>
 
-            <div className="cert-item">
-              <span className="cert-icon">☀️</span>
-              <h4>FOTOVOLTAICA & BATERÍAS</h4>
-              <p>Instalador Acreditado SolarEdge / Huawei</p>
+            <div className="item-certificacion">
+              <span className="icono-certificacion">☀️</span>
+              <h4>ENERGÍA FOTOVOLTAICA</h4>
+              <p>Instalador Acreditado de Paneles y Baterías</p>
             </div>
 
-            <div className="cert-item">
-              <span className="cert-icon">🔍</span>
-              <h4>INSPECCIÓN TERMOGRÁFICA</h4>
-              <p>Diagnóstico Infrarrojo Preventivo FLIR</p>
+            <div className="item-certificacion">
+              <span className="icono-certificacion">🔍</span>
+              <h4>TERMOGRAFÍA INFRARROJA</h4>
+              <p>Diagnóstico Preventivo de Cuadros con FLIR</p>
             </div>
           </div>
 
-          <div className="about-cta-row">
-            <button onClick={onOpenQuote} className="btn-cta primary-glow">
-              <span>Agendar Llamada Técnica con Kerling</span>
-            </button>
-          </div>
+          <button onClick={onOpenQuote} className="boton-accion dorado-principal">
+            <span>Agendar Consulta Técnica con Kerling</span>
+          </button>
         </div>
       </div>
     </section>

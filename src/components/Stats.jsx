@@ -5,84 +5,79 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Stats() {
-  const yearsRef = useRef(null);
-  const projectsRef = useRef(null);
+  const statsRef = useRef(null);
 
   useEffect(() => {
-    if (yearsRef.current) {
-      gsap.to(yearsRef.current, {
-        innerText: 5,
-        duration: 2.5,
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: yearsRef.current,
-          start: 'top 85%',
-        },
-      });
-    }
+    const ctx = gsap.context(() => {
+      const targets = statsRef.current.querySelectorAll('.valor-contador-numero');
 
-    if (projectsRef.current) {
-      gsap.to(projectsRef.current, {
-        innerText: 200,
-        duration: 2.5,
-        snap: { innerText: 1 },
-        scrollTrigger: {
-          trigger: projectsRef.current,
-          start: 'top 85%',
-        },
+      targets.forEach((target) => {
+        const endVal = parseInt(target.getAttribute('data-valor-final'), 10);
+        gsap.fromTo(
+          target,
+          { innerText: 0 },
+          {
+            innerText: endVal,
+            duration: 2.2,
+            ease: 'power2.out',
+            snap: { innerText: 1 },
+            scrollTrigger: {
+              trigger: target,
+              start: 'top 85%',
+            },
+          }
+        );
       });
-    }
+    }, statsRef);
 
-    gsap.utils.toArray('.stats-section .gsap-reveal-card').forEach((card) => {
-      gsap.from(card, {
-        y: 40,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'power3.out',
-        scrollTrigger: {
-          trigger: card,
-          start: 'top 88%',
-          toggleActions: 'play none none none',
-        },
-      });
-    });
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section className="stats-section container full-screen-section">
-      <div className="stats-grid">
-        <div className="stat-card gsap-reveal-card">
-          <div className="stat-number-wrapper">
-            <span className="counter" ref={yearsRef}>0</span>
-            <span className="stat-plus">+</span>
+    <section className="seccion-estadisticas contenedor seccion-pantalla-completa" ref={statsRef}>
+      <div className="rejilla-estadisticas">
+        <div className="tarjeta-estadistica">
+          <span className="etiqueta-contador">PROYECTOS Y REFORMAS</span>
+          <div className="contenedor-numero-contador">
+            <span className="valor-contador-numero" data-valor-final="250">
+              0
+            </span>
+            <span className="signo-mas-contador">+</span>
           </div>
-          <p className="stat-label">AÑOS DE INGENIERÍA</p>
-          <span className="stat-sub">Trayectoria de alta especialización en la Comunidad de Madrid</span>
+          <p className="subtitulo-contador">Instalaciones eléctricas residenciales y comerciales legalizadas en Madrid.</p>
         </div>
 
-        <div className="stat-card gsap-reveal-card">
-          <div className="stat-number-wrapper">
-            <span className="counter" ref={projectsRef}>0</span>
-            <span className="stat-plus">+</span>
+        <div className="tarjeta-estadistica">
+          <span className="etiqueta-contador">EFICIENCIA SOLAR</span>
+          <div className="contenedor-numero-contador">
+            <span className="valor-contador-numero" data-valor-final="95">
+              0
+            </span>
+            <span className="signo-mas-contador">%</span>
           </div>
-          <p className="stat-label">PROYECTOS EJECUTADOS</p>
-          <span className="stat-sub">Villas residenciales, solar y cuadros industriales</span>
+          <p className="subtitulo-contador">Autoconsumo alcanzado con integración de placas fotovoltaicas y baterías.</p>
         </div>
 
-        <div className="stat-card gsap-reveal-card">
-          <div className="stat-number-wrapper">
-            <span className="stat-highlight">A+++</span>
+        <div className="tarjeta-estadistica">
+          <span className="etiqueta-contador">SEGURIDAD TÉCNICA</span>
+          <div className="contenedor-numero-contador">
+            <span className="valor-contador-numero" data-valor-final="100">
+              0
+            </span>
+            <span className="signo-mas-contador">%</span>
           </div>
-          <p className="stat-label">EFICIENCIA ENERGÉTICA</p>
-          <span className="stat-sub">Optimización de consumo y huella de carbono</span>
+          <p className="subtitulo-contador">Cumplimiento estricto del Reglamento Electrotécnico para Baja Tensión (REBT).</p>
         </div>
 
-        <div className="stat-card gsap-reveal-card">
-          <div className="stat-number-wrapper">
-            <span className="stat-highlight purple">100%</span>
+        <div className="tarjeta-estadistica">
+          <span className="etiqueta-contador">TRAYECTORIA PROFESIONAL</span>
+          <div className="contenedor-numero-contador">
+            <span className="valor-contador-numero" data-valor-final="15">
+              0
+            </span>
+            <span className="signo-mas-contador">+</span>
           </div>
-          <p className="stat-label">LEGALIZACIÓN Y CIE</p>
-          <span className="stat-sub">Boletines oficiales firmados por Kerling Natale</span>
+          <p className="subtitulo-contador">Años de experiencia directa en ingeniería de potencia y automatización.</p>
         </div>
       </div>
     </section>

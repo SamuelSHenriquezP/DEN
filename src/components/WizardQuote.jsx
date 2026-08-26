@@ -1,143 +1,141 @@
 import React, { useState } from 'react';
 
 export default function WizardQuote() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [pasoActual, setPasoActual] = useState(1);
 
-  const [type, setType] = useState('Villa / Chalet Unifamiliar');
-  const [services, setServices] = useState([
-    'Domótica Loxone Smart Home',
-    'Energía Solar Fotovoltaica',
+  const [tipoInmueble, setTipoInmueble] = useState('Vivienda Unifamiliar / Chalet');
+  const [serviciosSeleccionados, setServiciosSeleccionados] = useState([
+    'Iluminación Inteligente y Control Domótico',
+    'Energía Solar Fotovoltaica y Baterías',
   ]);
-  const [location, setLocation] = useState('Madrid');
-  const [sqm, setSqm] = useState('180');
-  const [urgency, setUrgency] = useState('Próximo mes');
+  const [ubicacion, setUbicacion] = useState('Madrid');
+  const [superficieM2, setSuperficieM2] = useState('180');
+  const [plazo, setPlazo] = useState('En el próximo mes');
 
-  const optionCards = [
+  const opcionesInmueble = [
     {
-      key: 'Villa / Chalet Unifamiliar',
-      icon: '🏡',
-      title: 'Chalet / Villa Unifamiliar',
-      desc: 'Instalaciones residenciales de alta gama, domótica y solar.',
+      clave: 'Vivienda Unifamiliar / Chalet',
+      icono: '🏡',
+      titulo: 'Vivienda Unifamiliar / Chalet',
+      descripcion: 'Instalaciones completas en chalets, domótica e iluminación.',
     },
     {
-      key: 'Piso / Residencia Urbanización',
-      icon: '🏢',
-      title: 'Piso / Residencia',
-      desc: 'Reforma eléctrica, boletines y adecuación REBT.',
+      clave: 'Piso / Residencia en Urbanización',
+      icono: '🏢',
+      titulo: 'Piso / Residencia',
+      descripcion: 'Reformas eléctricas de cuadro, mecanismos y adecuación REBT.',
     },
     {
-      key: 'Local Comercial / Oficina',
-      icon: '🏬',
-      title: 'Local Comercial / Oficina',
-      desc: 'Iluminación DALI, telecomunicaciones y potencia.',
+      clave: 'Local Comercial / Oficina',
+      icono: '🏬',
+      titulo: 'Local Comercial / Oficina',
+      descripcion: 'Iluminación DALI, telecomunicaciones y aumento de potencia.',
     },
     {
-      key: 'Nave Industrial / Datacenter',
-      icon: '🏭',
-      title: 'Nave Industrial / Sede',
-      desc: 'Cuadros de distribución trifásica y termografía.',
+      clave: 'Nave Industrial / Sede',
+      icono: '🏭',
+      titulo: 'Nave Industrial / Sede',
+      descripcion: 'Cuadros de distribución trifásica y termografía preventiva.',
     },
   ];
 
-  const availableServices = [
+  const serviciosDisponibles = [
     {
-      value: 'Domótica Loxone Smart Home',
-      icon: '💜',
-      title: 'Domótica Loxone / KNX',
-      desc: 'Control de luces, clima, persianas y seguridad.',
+      valor: 'Iluminación Inteligente y Control Domótico',
+      icono: '⚡',
+      titulo: 'Iluminación Inteligente y Domótica',
+      descripcion: 'Regulación DALI, escenas de luz, clima y persianas.',
     },
     {
-      value: 'Energía Solar Fotovoltaica',
-      icon: '☀️',
-      title: 'Energía Solar & Baterías',
-      desc: 'Autoconsumo, excedentes y baterías LFP.',
+      valor: 'Energía Solar Fotovoltaica y Baterías',
+      icono: '☀️',
+      titulo: 'Energía Solar & Baterías LFP',
+      descripcion: 'Autoconsumo, acumulación nocturna e inyección a red.',
     },
     {
-      value: 'Reforma de Cuadro y Cableado REBT',
-      icon: '⚡',
-      title: 'Cuadro Eléctrico & REBT',
-      desc: 'Renovación de cuadro, diferencial e IGA.',
+      valor: 'Reforma de Cuadro Eléctrico y Protección REBT',
+      icono: '🛡️',
+      titulo: 'Cuadro Eléctrico & REBT',
+      descripcion: 'Sustitución de cuadro, IGA y diferencial superinmunizado.',
     },
     {
-      value: 'Cargador Vehículo Eléctrico Wallbox',
-      icon: '🚘',
-      title: 'Punto de Carga EV Wallbox',
-      desc: 'Balanceo dinámico y carga solar.',
+      valor: 'Punto de Recarga para Vehículo Eléctrico',
+      icono: '🚘',
+      titulo: 'Carga para Vehículo Eléctrico',
+      descripcion: 'Línea dedicada ITC-BT-52 con balanceo de potencia.',
     },
     {
-      value: 'Boletín Eléctrico CIE Oficial',
-      icon: '📋',
-      title: 'Boletín Eléctrico (CIE)',
-      desc: 'Certificado oficial urgente en Madrid.',
+      valor: 'Boletín Eléctrico Oficial (CIE)',
+      icono: '📋',
+      titulo: 'Boletín Eléctrico Oficial (CIE)',
+      descripcion: 'Certificación oficial registrada en la Comunidad de Madrid.',
     },
   ];
 
-  const toggleService = (serviceVal) => {
-    if (services.includes(serviceVal)) {
-      setServices(services.filter((s) => s !== serviceVal));
+  const toggleServicio = (val) => {
+    if (serviciosSeleccionados.includes(val)) {
+      setServiciosSeleccionados(serviciosSeleccionados.filter((s) => s !== val));
     } else {
-      setServices([...services, serviceVal]);
+      setServiciosSeleccionados([...serviciosSeleccionados, val]);
     }
   };
 
-  const handleNext = (nextStep) => {
-    setCurrentStep(nextStep);
-  };
+  const handleEnviarWhatsApp = () => {
+    const mensaje =
+      `⚡ *SOLICITUD DE PRESUPUESTO EN DEN*\n\n` +
+      `• *Tipo de Inmueble:* ${tipoInmueble}\n` +
+      `• *Servicios Requeridos:* ${serviciosSeleccionados.join(', ') || 'Consulta General'}\n` +
+      `• *Ubicación:* ${ubicacion || 'Madrid'} (${superficieM2 || '180'} m²)\n` +
+      `• *Plazo Estimado:* ${plazo}\n\n` +
+      `Hola Kerling, me gustaría recibir orientación formal sobre este proyecto.`;
 
-  const handleSendWhatsApp = () => {
-    const msg =
-      `⚡ *NUEVO PRESUPUESTO SOLICITADO (WEB DEN)*\n\n` +
-      `• *Inmueble:* ${type}\n` +
-      `• *Servicios:* ${services.join(', ') || 'Consulta General'}\n` +
-      `• *Ubicación:* ${location || 'Madrid'} (${sqm || '180'} m²)\n` +
-      `• *Plazo Estimado:* ${urgency}\n\n` +
-      `Por favor, me gustaría recibir propuesta formal o agendar llamada con Kerling Natale.`;
-
-    window.open(`https://wa.me/34682178499?text=${encodeURIComponent(msg)}`, '_blank');
+    window.open(`https://wa.me/34682178499?text=${encodeURIComponent(mensaje)}`, '_blank');
   };
 
   return (
-    <section id="cotizador" className="wizard-section container full-screen-section">
-      <div className="wizard-box gsap-fade-up">
-        <div className="wizard-header">
-          <span className="section-badge">
-            <span className="code-tag">07 //</span> CONFIGURADOR EN TIEMPO REAL
+    <section id="cotizador" className="seccion-asistente contenedor seccion-pantalla-completa">
+      <div className="caja-asistente">
+        <div className="encabezado-asistente">
+          <span className="insignia-seccion">
+            <span className="codigo-indice">07 //</span> ORIENTACIÓN TÉCNICA DE PROYECTO
           </span>
           <h2>
-            CONSTRUYE TU <span className="accent-text">PRESUPUESTO EXPRÉS</span>
+            SOLICITUD DE <span className="texto-gradiente-dorado">PRESUPUESTO ORIENTATIVO</span>
           </h2>
-          <p>Obtén un desglose preliminar en menos de 60 segundos y conéctalo directamente con Kerling Natale por WhatsApp.</p>
+          <p className="descripcion-seccion" style={{ margin: '0 auto' }}>
+            Completa los detalles de tu proyecto para enviar una consulta clara y estructurada directamente al Ingeniero Kerling Natale.
+          </p>
         </div>
 
-        {/* PASOS DEL WIZARD */}
-        <div className="wizard-steps-bar">
-          <div className={`step-indicator ${currentStep === 1 ? 'active' : ''}`}>1. Tipo Proyecto</div>
-          <div className={`step-indicator ${currentStep === 2 ? 'active' : ''}`}>2. Servicios</div>
-          <div className={`step-indicator ${currentStep === 3 ? 'active' : ''}`}>3. Detalles</div>
-          <div className={`step-indicator ${currentStep === 4 ? 'active' : ''}`}>4. Confirmación</div>
+        {/* PASOS DEL ASISTENTE */}
+        <div className="barra-pasos-asistente">
+          <div className={`indicador-paso ${pasoActual === 1 ? 'activo' : ''}`}>1. Tipo de Inmueble</div>
+          <div className={`indicador-paso ${pasoActual === 2 ? 'activo' : ''}`}>2. Servicios</div>
+          <div className={`indicador-paso ${pasoActual === 3 ? 'activo' : ''}`}>3. Ubicación</div>
+          <div className={`indicador-paso ${pasoActual === 4 ? 'activo' : ''}`}>4. Resumen</div>
         </div>
 
-        <div className="wizard-content">
+        <div>
           {/* PASO 1 */}
-          {currentStep === 1 && (
-            <div className="wizard-step active">
-              <h4>¿Para qué tipo de inmueble es el proyecto?</h4>
-              <div className="wizard-options-grid">
-                {optionCards.map((card) => (
+          {pasoActual === 1 && (
+            <div className="paso-asistente activo">
+              <h4>¿En qué tipo de espacio se realizará la instalación?</h4>
+              <div className="rejilla-opciones-inmueble">
+                {opcionesInmueble.map((opt) => (
                   <div
-                    key={card.key}
-                    className={`w-option-card ${type === card.key ? 'selected' : ''}`}
-                    onClick={() => setType(card.key)}
+                    key={opt.clave}
+                    className={`tarjeta-opcion ${tipoInmueble === opt.clave ? 'seleccionada' : ''}`}
+                    onClick={() => setTipoInmueble(opt.clave)}
                   >
-                    <span className="opt-icon">{card.icon}</span>
-                    <h5>{card.title}</h5>
-                    <p>{card.desc}</p>
+                    <span className="icono-opcion">{opt.icono}</span>
+                    <h5>{opt.titulo}</h5>
+                    <p>{opt.descripcion}</p>
                   </div>
                 ))}
               </div>
-              <div className="wizard-nav-btns">
+              <div className="botones-navegacion-asistente">
                 <span></span>
-                <button className="btn-cta" onClick={() => handleNext(2)}>
+                <button className="boton-accion dorado-principal" onClick={() => setPasoActual(2)}>
                   Siguiente Paso →
                 </button>
               </div>
@@ -145,30 +143,34 @@ export default function WizardQuote() {
           )}
 
           {/* PASO 2 */}
-          {currentStep === 2 && (
-            <div className="wizard-step active">
-              <h4>Selecciona los servicios requeridos (puedes marcar varios)</h4>
-              <div className="wizard-checkbox-grid">
-                {availableServices.map((srv) => {
-                  const isChecked = services.includes(srv.value);
+          {pasoActual === 2 && (
+            <div className="paso-asistente activo">
+              <h4>Selecciona los servicios que deseas incluir</h4>
+              <div className="rejilla-casillas-servicios">
+                {serviciosDisponibles.map((srv) => {
+                  const seleccionado = serviciosSeleccionados.includes(srv.valor);
                   return (
-                    <label key={srv.value} className="w-check-card" onClick={() => toggleService(srv.value)}>
-                      <div className={`w-check-inner ${isChecked ? 'selected-check' : ''}`} style={{ borderColor: isChecked ? '#8B5CF6' : undefined, background: isChecked ? 'rgba(109, 40, 217, 0.1)' : undefined }}>
-                        <span className="chk-icon">{srv.icon}</span>
+                    <div
+                      key={srv.valor}
+                      className={`tarjeta-casilla-servicio ${seleccionado ? 'seleccionada' : ''}`}
+                      onClick={() => toggleServicio(srv.valor)}
+                    >
+                      <div className="interior-casilla-servicio">
+                        <span className="icono-servicio-casilla">{srv.icono}</span>
                         <div>
-                          <strong>{srv.title}</strong>
-                          <p>{srv.desc}</p>
+                          <strong>{srv.titulo}</strong>
+                          <p>{srv.descripcion}</p>
                         </div>
                       </div>
-                    </label>
+                    </div>
                   );
                 })}
               </div>
-              <div className="wizard-nav-btns">
-                <button className="btn-cta outline" onClick={() => handleNext(1)}>
+              <div className="botones-navegacion-asistente">
+                <button className="boton-accion contorno-elegante" onClick={() => setPasoActual(1)}>
                   ← Anterior
                 </button>
-                <button className="btn-cta" onClick={() => handleNext(3)}>
+                <button className="boton-accion dorado-principal" onClick={() => setPasoActual(3)}>
                   Siguiente Paso →
                 </button>
               </div>
@@ -176,89 +178,88 @@ export default function WizardQuote() {
           )}
 
           {/* PASO 3 */}
-          {currentStep === 3 && (
-            <div className="wizard-step active">
-              <h4>Detalles de ubicación y superficie</h4>
-              <div className="w-inputs-group">
-                <div className="w-input-field">
-                  <label htmlFor="w-location">Ubicación del Inmueble (Municipio / Zona de Madrid)</label>
+          {pasoActual === 3 && (
+            <div className="paso-asistente activo">
+              <h4>Indica la ubicación y los datos aproximados</h4>
+              <div className="grupo-campos-entradas">
+                <div className="campo-entrada">
+                  <label htmlFor="campo-ubicacion">Ubicación (Municipio / Zona de Madrid)</label>
                   <input
                     type="text"
-                    id="w-location"
-                    placeholder="Ej: Guadarrama, Pozuelo, Las Rozas, Madrid capital..."
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    id="campo-ubicacion"
+                    placeholder="Ej: Guadarrama, Pozuelo, Las Rozas, Madrid..."
+                    value={ubicacion}
+                    onChange={(e) => setUbicacion(e.target.value)}
                   />
                 </div>
-                <div className="w-input-field">
-                  <label htmlFor="w-sqm">Superficie Aproximada Inmueble (m²)</label>
+                <div className="campo-entrada">
+                  <label htmlFor="campo-superficie">Superficie Aproximada (m²)</label>
                   <input
                     type="number"
-                    id="w-sqm"
+                    id="campo-superficie"
                     placeholder="Ej: 180"
-                    value={sqm}
-                    onChange={(e) => setSqm(e.target.value)}
+                    value={superficieM2}
+                    onChange={(e) => setSuperficieM2(e.target.value)}
                   />
                 </div>
-                <div className="w-input-field">
-                  <label htmlFor="w-urgency">Plazo Estimado de Ejecución</label>
+                <div className="campo-entrada">
+                  <label htmlFor="campo-plazo">Plazo Estimado de Ejecución</label>
                   <select
-                    id="w-urgency"
-                    value={urgency}
-                    onChange={(e) => setUrgency(e.target.value)}
+                    id="campo-plazo"
+                    value={plazo}
+                    onChange={(e) => setPlazo(e.target.value)}
                   >
-                    <option value="Lo antes posible (Urgente 24-48h)">Lo antes posible (Urgente)</option>
-                    <option value="Próximo mes">En el próximo mes</option>
+                    <option value="Lo antes posible (Prioritario)">Lo antes posible</option>
+                    <option value="En el próximo mes">En el próximo mes</option>
                     <option value="En los próximos 3 meses">En los próximos 3 meses</option>
-                    <option value="Solo presupuestando / Planificación">Solo comparando presupuestos</option>
+                    <option value="Solo comparando presupuestos">Solo comparando opciones</option>
                   </select>
                 </div>
               </div>
-              <div className="wizard-nav-btns">
-                <button className="btn-cta outline" onClick={() => handleNext(2)}>
+              <div className="botones-navegacion-asistente">
+                <button className="boton-accion contorno-elegante" onClick={() => setPasoActual(2)}>
                   ← Anterior
                 </button>
-                <button className="btn-cta" onClick={() => handleNext(4)}>
-                  Ver Resumen & Enviar →
+                <button className="boton-accion dorado-principal" onClick={() => setPasoActual(4)}>
+                  Ver Resumen →
                 </button>
               </div>
             </div>
           )}
 
-          {/* PASO 4: RESUMEN Y ENVÍO */}
-          {currentStep === 4 && (
-            <div className="wizard-step active">
-              <h4>Resumen de tu Configuración de Proyecto</h4>
+          {/* PASO 4 */}
+          {pasoActual === 4 && (
+            <div className="paso-asistente activo">
+              <h4>Resumen de tu Consulta</h4>
 
-              <div className="w-summary-box">
-                <div className="w-sum-item">
-                  <span className="lbl">Inmueble:</span>
-                  <span className="val">{type}</span>
+              <div className="caja-resumen-asistente">
+                <div className="item-resumen">
+                  <span className="etiqueta">Tipo de Inmueble:</span>
+                  <span className="valor">{tipoInmueble}</span>
                 </div>
-                <div className="w-sum-item">
-                  <span className="lbl">Servicios:</span>
-                  <span className="val">{services.join(', ') || 'Consulta General'}</span>
+                <div className="item-resumen">
+                  <span className="etiqueta">Servicios Requeridos:</span>
+                  <span className="valor">{serviciosSeleccionados.join(', ') || 'Consulta General'}</span>
                 </div>
-                <div className="w-sum-item">
-                  <span className="lbl">Ubicación & M²:</span>
-                  <span className="val">
-                    {location} ({sqm} m²)
+                <div className="item-resumen">
+                  <span className="etiqueta">Ubicación y Superficie:</span>
+                  <span className="valor">
+                    {ubicacion} ({superficieM2} m²)
                   </span>
                 </div>
-                <div className="w-sum-item">
-                  <span className="lbl">Plazo:</span>
-                  <span className="val purple">{urgency}</span>
+                <div className="item-resumen">
+                  <span className="etiqueta">Plazo Estimado:</span>
+                  <span className="valor" style={{ color: 'var(--dorado-real)' }}>
+                    {plazo}
+                  </span>
                 </div>
               </div>
 
-              <div className="w-send-actions">
-                <button onClick={handleSendWhatsApp} className="btn-cta primary-glow w-100">
-                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
-                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-1.157 4.229 4.229-1.157z" />
-                  </svg>
-                  <span>Enviar este Presupuesto Directo a Kerling por WhatsApp</span>
+              <div className="acciones-envio-asistente">
+                <button onClick={handleEnviarWhatsApp} className="boton-accion dorado-principal ancho-completo">
+                  <span>Enviar Presupuesto a Kerling Natale por WhatsApp</span>
                 </button>
-                <button className="btn-cta outline" onClick={() => handleNext(3)}>
+                <button className="boton-accion contorno-elegante" onClick={() => setPasoActual(3)}>
                   Modificar Datos
                 </button>
               </div>

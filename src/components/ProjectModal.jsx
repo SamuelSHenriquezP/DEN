@@ -1,108 +1,108 @@
 import React from 'react';
 
-const projectDetails = {
+const detallesProyectos = {
   'villa-loxone': {
-    title: 'VILLA LOXONE MADRID LUXURY',
-    sub: 'Proyecto Integral Domótico & Fotovoltaico en Pozuelo de Alarcón',
+    titulo: 'RESIDENCIA UNIFAMILIAR EN POZUELO',
+    subtitulo: 'Proyecto de Ingeniería Eléctrica, Domótica y Autoconsumo Solar en Pozuelo de Alarcón',
     img: '/images/villa_loxone.png',
-    challenge:
-      'Automatización total de una propiedad de 600m² con integración de climatización por suelo radiante, 45 canales DALI de iluminación, control de piscina y sistema solar con baterías sin perder estética visual.',
-    specs: {
-      'Miniserver Loxone': 'V2 Gen II (Tree/Air)',
-      'Canales DALI': '45 Zonas Regulables',
-      'Fotovoltaica': '15 kWp (Paneles 500W)',
-      'Batería LFP': '15 kWh Litio-Ferrofosfato',
-      'Plazo Ejecución': '3 Semanas',
+    desafío:
+      'Automatización completa de una vivienda unifamiliar de 600m² mediante la integración de climatización por suelo radiante, 45 canales DALI de iluminación regulable y un sistema fotovoltaico de 15 kWp con baterías de litio, manteniendo una estética cuidada y sin cables a la vista.',
+    especificaciones: {
+      'Sistema de Control': 'Procesamiento Local de Baja Latencia',
+      'Iluminación Regula': '45 Canales DALI Independientes',
+      'Generación Solar': '15 kWp (Paneles de Alta Eficiencia)',
+      'Acumulación Batería': '15 kWh Litio-Ferrofosfato (LFP)',
+      'Plazo de Ejecución': '3 Semanas de Obra Técnica',
     },
   },
   'solar-park': {
-    title: 'PARQUE SOLAR COMMERCIAL X',
-    sub: 'Instalación de Autoconsumo Industrial con Vertido Cero',
+    titulo: 'SEDE INDUSTRIAL EN GUADARRAMA',
+    subtitulo: 'Instalación de Autoconsumo Industrial con Inyección Cero a Red',
     img: '/images/solar_industrial.png',
-    challenge:
-      'Optimización de la factura eléctrica para una sede empresarial en Guadarrama mediante 120 kWp en cubierta industrial y sistema de inyección cero con regulación Modbus.',
-    specs: {
-      'Potencia Solar': '120 kWp',
-      'Inversor Industrial': 'Huawei SUN2000 Trifásico',
-      'Capacidad Batería': '80 kWh Almacenamiento',
-      'Ahorro Anual': '18.400 € / Año',
-      'Amortización': '3,8 Años',
+    desafío:
+      'Reducción drástica de la factura eléctrica en horario comercial para una empresa en Guadarrama mediante 120 kWp en cubierta industrial y control Modbus de vertido cero.',
+    especificaciones: {
+      'Potencia Solar': '120 kWp Instalados',
+      'Inversor Industrial': 'Trifásico de Alta Capacidad',
+      'Capacidad Baterías': '80 kWh de Acumulación',
+      'Ahorro Anual Estimado': '18.400 € / Año',
+      'Amortización': '3,8 Años de Retorno',
     },
   },
   'data-panel': {
-    title: 'HEADQUARTERS DATA PANEL REBT',
-    sub: 'Reestructuración & Termografía de Cuadro General de Mando',
+    titulo: 'INFRAESTRUCTURA DE CUADROS EN MADRID',
+    subtitulo: 'Reestructuración y Diagnóstico por Termografía Infrarroja',
     img: '/images/smart_panel.png',
-    challenge:
-      'Sustitución en caliente de un cuadro trifásico obsoleto de 250A por una arquitectura modular blindada con diferencial superinmunizado y monitoreo de temperatura en tiempo real.',
-    specs: {
-      'Capacidad Cuadro': '250A Trifásico',
-      'Protecciones': 'IGA + PST + ID-SI Clase F',
-      'Diagnóstico': 'Cámara Térmica FLIR 24/7',
-      'Certificación': 'CIE Oficial Registrado',
-      'Normativa': 'UNE-HD 60364 / REBT',
+    desafío:
+      'Sustitución de un cuadro trifásico antiguo de 250A por un armario de distribución con protección contra sobretensiones transitorias y permanentes, diferenciales superinmunizados y monitoreo térmico preventivo.',
+    especificaciones: {
+      'Capacidad Cuadro': '250 Amperios Trifásico',
+      'Protecciones REBT': 'IGA + PST + ID-SI Clase F',
+      'Diagnóstico Preventivo': 'Cámara Térmica FLIR 24/7',
+      'Certificación': 'Boletín Oficial CIE Registrado',
+      'Normativa Aplicada': 'REBT / UNE-HD 60364',
     },
   },
   'ev-charging': {
-    title: 'CARGA EV HIGH-POWER WALLBOX',
-    sub: 'Infraestructura de Recarga Rápida en La Moraleja',
+    titulo: 'PUNTOS DE RECARGA EN LA MORALEJA',
+    subtitulo: 'Infraestructura de Recarga Rápida para Vehículo Eléctrico',
     img: '/images/ev_charging.png',
-    challenge:
-      'Instalación de dos cargadores Wallbox Commander 2 de 22kW con reparto inteligente de carga en función del consumo simultáneo de la vivienda y la producción fotovoltaica instantánea.',
-    specs: {
-      'Potencia Carga': '22 kW Trifásica',
-      'Balanceo Dinámico': 'Medidor Schneider PowerTag',
-      'Línea Exclusiva': 'ITC-BT-52 Dedicada',
-      'Protección Fuga': '6mA CC Integrada',
-      'Subvención': 'Plan MOVES III Gestionado',
+    desafío:
+      'Instalación de dos cargadores trifásicos de 22 kW con balanceo dinámico de carga respecto al consumo de la residencia y sincronización directa con los excedentes solares.',
+    especificaciones: {
+      'Potencia de Carga': '22 kW Trifásica Dedicada',
+      'Balanceo Dinámico': 'Medidor de Potencia en Cuadro',
+      'Línea Independiente': 'Normativa ITC-BT-52',
+      'Protección Fugas': 'Diferencial Clase A + 6mA CC',
+      'Gestión de Carga': 'Carga Automática Solar Directa',
     },
   },
 };
 
 export default function ProjectModal({ activeModalKey, onClose }) {
   if (!activeModalKey) return null;
-  const project = projectDetails[activeModalKey];
-  if (!project) return null;
+  const proyecto = detallesProyectos[activeModalKey];
+  if (!proyecto) return null;
 
-  const handleRequestSimilar = () => {
-    const text = `Hola Kerling, he visto en tu portafolio el proyecto "${project.title}" y me gustaría consultar un presupuesto para un proyecto similar.`;
-    window.open(`https://wa.me/34682178499?text=${encodeURIComponent(text)}`, '_blank');
+  const handleConsultarSimilar = () => {
+    const texto = `Hola Kerling, he visto el proyecto "${proyecto.titulo}" en tu web y me gustaría solicitar una consulta para una instalación similar.`;
+    window.open(`https://wa.me/34682178499?text=${encodeURIComponent(texto)}`, '_blank');
   };
 
   return (
-    <div className={`modal-backdrop ${activeModalKey ? 'active' : ''}`} onClick={onClose}>
-      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-        <button className="modal-close" onClick={onClose} aria-label="Cerrar modal">
+    <div className={`fondo-modal-backdrop ${activeModalKey ? 'activo' : ''}`} onClick={onClose}>
+      <div className="contenido-modal-proyecto" onClick={(e) => e.stopPropagation()}>
+        <button className="boton-cerrar-modal" onClick={onClose} aria-label="Cerrar ventana">
           ✕
         </button>
 
-        <span className="section-badge" style={{ marginBottom: '4px' }}>
-          DESGLOSE TÉCNICO COMPLETO DE FIRMA
+        <span className="insignia-seccion" style={{ marginBottom: '6px' }}>
+          CASO DE ESTUDIO TÉCNICO COMPLETO
         </span>
-        <h2 className="section-title" style={{ fontSize: '2.2rem', marginBottom: '4px' }}>
-          {project.title}
+        <h2 className="titulo-seccion" style={{ fontSize: '2.2rem', marginBottom: '4px' }}>
+          {proyecto.titulo}
         </h2>
-        <p className="proj-category" style={{ color: 'var(--accent-purple-light)', marginBottom: '20px' }}>
-          {project.sub}
+        <p className="categoria-proyecto" style={{ marginBottom: '22px' }}>
+          {proyecto.subtitulo}
         </p>
 
-        <div className="modal-challenge-box">
-          <h4>DESAFÍO TÉCNICO Y SOLUCIÓN DE INGENIERÍA:</h4>
-          <p>{project.challenge}</p>
+        <div className="caja-desafio-tecnico-modal">
+          <h4>RETOS TÉCNICOS Y EJECUCIÓN EN OBRA:</h4>
+          <p>{proyecto.desafío}</p>
         </div>
 
-        <div className="modal-specs-table">
-          {Object.entries(project.specs).map(([key, val]) => (
-            <div key={key} className="spec-cell">
-              <span className="k">{key.toUpperCase()}</span>
-              <span className="v">{val}</span>
+        <div className="tabla-especificaciones-modal">
+          {Object.entries(proyecto.especificaciones).map(([clave, valor]) => (
+            <div key={clave} className="celda-especificacion-modal">
+              <span className="k">{clave.toUpperCase()}</span>
+              <span className="v">{valor}</span>
             </div>
           ))}
         </div>
 
-        <div style={{ display: 'flex', gap: '12px', marginTop: '20px' }}>
-          <button onClick={handleRequestSimilar} className="btn-cta primary-glow w-100">
-            <span>Solicitar Proyecto Similar a Kerling</span>
+        <div style={{ display: 'flex', gap: '14px', marginTop: '24px' }}>
+          <button onClick={handleConsultarSimilar} className="boton-accion dorado-principal ancho-completo">
+            <span>Consultar Proyecto Similar con Kerling Natale</span>
           </button>
         </div>
       </div>

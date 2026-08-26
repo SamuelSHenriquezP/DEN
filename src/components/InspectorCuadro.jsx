@@ -1,211 +1,208 @@
 import React, { useState } from 'react';
 
-const componentSpecs = {
+const datosUnidades = {
   iga: {
-    tag: 'REBT 2026 COMPLIANT • ITC-BT-23',
-    name: 'Interruptor General Automático (IGA) 40A',
-    desc: 'Dispositivo de protección omnipolar obligatorio que protege contra cortocircuitos y sobrecargas todo el cuadro general. Equipado con bobina de corte para sobretensiones.',
-    specs: ['40A / Curva C', '10 kA (IEC/EN 60898-1)', 'Tipo 2 (Up ≤ 1.5 kV)', '10 Años de Garantía DEN'],
+    etiqueta: 'NORMATIVA REBT • ITC-BT-23',
+    nombre: 'Interruptor General Automático (IGA) 40A',
+    descripcion: 'Protección omnipolar para la totalidad del cuadro de mando. Equipado con bobina de disparo por sobretensión para cortar el suministro en caso de fluctuaciones graves de red.',
+    especificaciones: ['40 Amperios / Curva C', 'Poder de corte: 10 kA (IEC 60898-1)', 'Tensión asignada: 230V / 400V', 'Verificación directa por Kerling Natale'],
   },
   sobretensiones: {
-    tag: 'PROTECCIÓN PERMANENTE Y TRANSITORIA',
-    name: 'Protector de Sobretensiones Reventón (PST)',
-    desc: 'Protege los equipos electrónicos sensibles (Loxone, electrodomésticos, TV) ante picos de tensión por descargas atmosféricas o maniobras en la red de distribución.',
-    specs: ['Imax 40 kA', 'Tensión Uc 275V', 'Respuesta < 25 ns', 'Certificado UNE-EN 61643'],
+    etiqueta: 'PROTECCIÓN CONTRA PICOS DE TENSIÓN',
+    nombre: 'Protector de Sobretensiones Permanentes y Transitorias (PST)',
+    desc: 'Protege todos los dispositivos electrónicos sensibles de la vivienda (climatización, inversores solares, televisión) frente a descargas atmosféricas o maniobras de la compañía eléctrica.',
+    especificaciones: ['Corriente máxima: 40 kA', 'Tensión Uc: 275V', 'Tiempo de respuesta: < 25 ns', 'Norma UNE-EN 61643-11'],
   },
   diferencial: {
-    tag: 'PROTECCIÓN DE PERSONAS SUPERINMUNIZADA',
-    name: 'Interruptor Diferencial Superinmunizado 30mA (ID-SI)',
-    desc: 'Detecta fugas de corriente a tierra impidiendo descargas eléctricas a las personas. Tipo F/SI inmune a cegamiento por armónicos de inversores fotovoltaicos.',
-    specs: ['Sensibilidad 30 mA', 'Clase F / SI Superinmunizada', '40A nominal', 'Garantía de Disparo Rápido'],
+    etiqueta: 'PROTECCIÓN DE PERSONAS CLASE F',
+    nombre: 'Interruptor Diferencial Superinmunizado 30mA',
+    desc: 'Desconecta el circuito ante fugas de corriente a tierra para evitar contactos eléctricos. La clase F previene disparos intempestivos causados por armónicos de inversores y electrodomésticos.',
+    especificaciones: ['Sensibilidad: 30 mA', 'Clase F Superinmunizada', 'Corriente asignada: 40A', 'Test de prueba mensual'],
   },
   rearmable: {
-    tag: 'CONTINUIDAD DE SUMINISTRO INTELIGENTE',
-    name: 'Diferencial de Auto-Rearme Automático (REC)',
-    desc: 'En caso de disparo fortuito por tormenta, el sistema realiza hasta 3 intentos de reconexión automática tras verificar que no existe fallo permanente.',
-    specs: ['Rearme inteligente 3 intentos', 'Verificación de aislamiento previa', 'Ideal viviendas vacacionales', 'REBT Aprobado'],
+    etiqueta: 'CONTINUIDAD DE SUMINISTRO EN AUSENCIAS',
+    nombre: 'Diferencial con Auto-Reenganche Automático',
+    desc: 'Ante disparos intempestivos provocados por tormentas o ráfagas de red, el sistema comprueba el aislamiento de la instalación y reenciende el suministro de forma automática.',
+    especificaciones: ['Hasta 3 reenganches automáticos', 'Comprobación previa de seguridad', 'Ideal para residencias y alarmas', 'Cumplimiento REBT'],
   },
   loxone: {
-    tag: 'LOXONE CERTIFIED PARTNER • V2 MINISERVER',
-    name: 'Loxone Miniserver V2 (Cerebro Smart Home)',
-    desc: 'Controlador centralizado que gestiona la inteligencia del inmueble: iluminación DALI, clima, persianas, control de accesos y balanceo fotovoltaico en red local.',
-    specs: ['Procesador Quad-Core 64-bit', 'Encriptación SSH local', 'Bus Tree & Air integrados', 'Cero Cuotas Recurrentes'],
+    etiqueta: 'AUTOMATIZACIÓN RESIDENCIAL',
+    nombre: 'Controlador Central de Automatización',
+    desc: 'Gestor inteligente de la instalación. Regula la iluminación DALI, coordina la climatización por zonas y optimiza el consumo de la batería según la producción solar instantánea.',
+    especificaciones: ['Procesador de baja latencia', 'Comunicación local cifrada', 'Sin cuotas de suscripción', 'Integración de clima y luz'],
   },
   inversor: {
-    tag: 'GESTIÓN DE AUTOCONSUMO Y VERTIDO CERO',
-    name: 'Smart Energy Meter & Control Solar Bidireccional',
-    desc: 'Mide el flujo de energía entre la red eléctrica, los paneles solares y la batería para maximizar el autoconsumo y dirigir excedentes a la carga EV.',
-    specs: ['Precisión Clase 1 (1%)', 'Comunicación Modbus RTU', 'Lectura Trifásica / Monofásica', 'Integración Loxone API'],
+    etiqueta: 'CONTROL DE GENERACIÓN SOLAR',
+    nombre: 'Medidor Bidireccional de Eficiencia Solar',
+    desc: 'Monitoriza en tiempo real la producción de las placas fotovoltaicas y el consumo de la vivienda para garantizar el vertido cero o la venta eficiente de excedentes.',
+    especificaciones: ['Medición trifásica / monofásica', 'Precisión Clase 1 (1%)', 'Comunicación Modbus industrial', 'Balanceo de fases'],
   },
   'ev-protec': {
-    tag: 'MOVILIDAD ELÉCTRICA • ITC-BT-52',
-    name: 'Protección Exclusiva Wallbox EV',
-    desc: 'Línea dedicada con diferencial Clase A 30mA y magentotérmico de curva C para garantizar una carga segura a 7.4 kW o 22 kW sin sobrecalentar el cuadro.',
-    specs: ['Línea dedicada 6 mm² / 10 mm²', 'Protección contra fuga continua 6mA', 'Carga Inteligente', 'Normativa ITC-BT-52'],
+    etiqueta: 'MOVILIDAD ELÉCTRICA • ITC-BT-52',
+    nombre: 'Protección Exclusiva para Vehículo Eléctrico',
+    desc: 'Línea independiente desde el cuadro principal protegida con diferencial Clase A y detección de fuga continua de 6mA CC para evitar sobrecalentamientos durante la carga.',
+    especificaciones: ['Sección de cable: 6 a 10 mm²', 'Diferencial Clase A + 6mA CC', 'Normativa obligatoria ITC-BT-52', 'Apto para carga continua 7.4 kW / 22 kW'],
   },
   termografia: {
-    tag: 'MANTENIMIENTO PREVENTIVO INFRARROJO',
-    name: 'Sensor de Monitoreo Térmico de Bornas',
-    desc: 'Inspección continua de puntos calientes en las pletinas de cobre del cuadro para prevenir incendios eléctricos antes de que se produzcan.',
-    specs: ['Termografía FLIR Certificada', 'Prevención de arcos', 'Monitoreo 24/7', 'Máxima Seguridad DEN'],
+    etiqueta: 'DIAGNÓSTICO PREVENTIVO INFRARROJO',
+    nombre: 'Sensor Térmico Preventivo para Cuadros',
+    desc: 'Control de temperatura en las bornas y conexiones de cobre para prevenir falsos contactos y arcos eléctricos antes de que se produzca una avería.',
+    especificaciones: ['Cámara Térmica FLIR Certificada', 'Auditoría preventiva de puntos calientes', 'Revisiones periódicas registradas', 'Máxima tranquilidad'],
   },
 };
 
 export default function InspectorCuadro() {
-  const [activeKey, setActiveKey] = useState('iga');
-  const [cieInput, setCieInput] = useState('MAD-2026-DEN');
-  const [cieStatus, setCieStatus] = useState({
-    state: 'success', // 'idle', 'loading', 'success', 'error'
-    code: 'MAD-2026-DEN',
+  const [unidadActiva, setUnidadActiva] = useState('iga');
+  const [codigoCie, setCodigoCie] = useState('MAD-2026-DEN');
+  const [estadoCie, setEstadoCie] = useState({
+    estado: 'exito',
+    codigo: 'MAD-2026-DEN',
   });
 
-  const activeInfo = componentSpecs[activeKey];
+  const datos = datosUnidades[unidadActiva];
 
-  const handleVerifyCIE = () => {
-    const code = cieInput.trim();
-    if (!code) {
-      setCieStatus({ state: 'error', code: '' });
+  const handleVerificarCie = () => {
+    const cod = codigoCie.trim();
+    if (!cod) {
+      setEstadoCie({ estado: 'error', codigo: '' });
       return;
     }
-    setCieStatus({ state: 'loading', code });
+    setEstadoCie({ estado: 'cargando', codigo: cod });
     setTimeout(() => {
-      setCieStatus({ state: 'success', code });
-    }, 600);
+      setEstadoCie({ estado: 'exito', codigo: cod });
+    }, 500);
   };
 
   return (
-    <section id="cuadro-tecnico" className="inspector-section container section-nav full-screen-section">
-      <div className="section-header gsap-fade-up">
-        <span className="section-badge">
-          <span className="code-tag">03 //</span> INSPECCIÓN TÉCNICA DE SEGURIDAD
+    <section id="cuadro-tecnico" className="seccion-inspector contenedor seccion-pantalla-completa">
+      <div className="encabezado-seccion">
+        <span className="insignia-seccion">
+          <span className="codigo-indice">03 //</span> ANATOMÍA Y PROTECCIÓN ELÉCTRICA
         </span>
-        <h2 className="section-title">
+        <h2 className="titulo-seccion">
           INSPECTOR DE <br />
-          <span className="accent-text">CUADRO REBT</span>
+          <span className="texto-gradiente-dorado">CUADROS ELÉCTRICOS REBT</span>
         </h2>
-        <p className="section-desc">
-          Haz clic en los breaker o módulos para examinar la anatomía de un cuadro eléctrico montado por el Ingeniero Kerling Natale según la normativa española REBT.
+        <p className="descripcion-seccion">
+          Haz clic en cada componente del carril DIN para conocer su función de seguridad dentro de una instalación bajo el Reglamento Electrotécnico para Baja Tensión.
         </p>
       </div>
 
-      <div className="inspector-wrapper gsap-fade-up">
-        {/* DIAGRAMA VISUAL DE CUADRO ELÉCTRICO */}
-        <div className="panel-diagram">
-          <div className="panel-rail">
-            <span className="rail-title">CARRIL DIN 1 — PROTECCIÓN GENERAL Y SOBRETENSIONES</span>
-            <div className="breaker-group">
+      <div className="estructura-inspector">
+        {/* DIAGRAMA INTERACTIVO DE CARRIL DIN */}
+        <div className="diagrama-cuadro-electrico">
+          <div className="carril-din">
+            <span className="titulo-carril">CARRIL DIN 1 — INTERRUPTORES GENERALES Y PROTECCIÓN DE RED</span>
+            <div className="grupo-interruptores">
               <div
-                className={`breaker-unit ${activeKey === 'iga' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('iga')}
+                className={`unidad-interruptor ${unidadActiva === 'iga' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('iga')}
               >
-                <span className="unit-code">IGA</span>
-                <span className="unit-name">Inter. General</span>
-                <span className="unit-led blue"></span>
+                <span className="codigo-unidad">IGA</span>
+                <span className="nombre-unidad">Inter. General</span>
+                <span className="indicador-led-unidad dorado"></span>
               </div>
               <div
-                className={`breaker-unit ${activeKey === 'sobretensiones' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('sobretensiones')}
+                className={`unidad-interruptor ${unidadActiva === 'sobretensiones' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('sobretensiones')}
               >
-                <span className="unit-code">PST</span>
-                <span className="unit-name">Sobretensiones</span>
-                <span className="unit-led blue"></span>
+                <span className="codigo-unidad">PST</span>
+                <span className="nombre-unidad">Sobretensiones</span>
+                <span className="indicador-led-unidad dorado"></span>
               </div>
               <div
-                className={`breaker-unit ${activeKey === 'diferencial' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('diferencial')}
+                className={`unidad-interruptor ${unidadActiva === 'diferencial' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('diferencial')}
               >
-                <span className="unit-code">ID-SI</span>
-                <span className="unit-name">Diferencial Super.</span>
-                <span className="unit-led blue"></span>
+                <span className="codigo-unidad">ID-SI</span>
+                <span className="nombre-unidad">Diferencial SI</span>
+                <span className="indicador-led-unidad dorado"></span>
               </div>
               <div
-                className={`breaker-unit ${activeKey === 'rearmable' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('rearmable')}
+                className={`unidad-interruptor ${unidadActiva === 'rearmable' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('rearmable')}
               >
-                <span className="unit-code">REC</span>
-                <span className="unit-name">Auto-Rearme</span>
-                <span className="unit-led purple"></span>
-              </div>
-            </div>
-          </div>
-
-          <div className="panel-rail">
-            <span className="rail-title">CARRIL DIN 2 — CONTROL DOMÓTICO & INVERSOR SOLAR</span>
-            <div className="breaker-group">
-              <div
-                className={`breaker-unit loxone-unit ${activeKey === 'loxone' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('loxone')}
-              >
-                <span className="unit-code">LOX</span>
-                <span className="unit-name">Miniserver V2</span>
-                <span className="unit-led loxone-purple"></span>
-              </div>
-              <div
-                className={`breaker-unit ${activeKey === 'inversor' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('inversor')}
-              >
-                <span className="unit-code">INV</span>
-                <span className="unit-name">Meter Solar</span>
-                <span className="unit-led blue"></span>
-              </div>
-              <div
-                className={`breaker-unit ${activeKey === 'ev-protec' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('ev-protec')}
-              >
-                <span className="unit-code">EV</span>
-                <span className="unit-name">Prot. Wallbox</span>
-                <span className="unit-led blue"></span>
-              </div>
-              <div
-                className={`breaker-unit ${activeKey === 'termografia' ? 'active-unit' : ''}`}
-                onClick={() => setActiveKey('termografia')}
-              >
-                <span className="unit-code">TERM</span>
-                <span className="unit-name">Sensor Térmico</span>
-                <span className="unit-led purple"></span>
+                <span className="codigo-unidad">REC</span>
+                <span className="nombre-unidad">Auto-Rearme</span>
+                <span className="indicador-led-unidad azul"></span>
               </div>
             </div>
           </div>
 
-          {/* WIDGET INTERACTIVO DE VERIFICACIÓN CIE EXPRÉS */}
-          <div className="cie-verifier-box">
-            <div className="cie-verifier-head">
-              <span className="v-icon">📜</span>
+          <div className="carril-din">
+            <span className="titulo-carril">CARRIL DIN 2 — CONTROL INTELIGENTE, SOLAR Y VEHÍCULO ELÉCTRICO</span>
+            <div className="grupo-interruptores">
+              <div
+                className={`unidad-interruptor ${unidadActiva === 'loxone' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('loxone')}
+              >
+                <span className="codigo-unidad">CTRL</span>
+                <span className="nombre-unidad">Automatización</span>
+                <span className="indicador-led-unidad azul"></span>
+              </div>
+              <div
+                className={`unidad-interruptor ${unidadActiva === 'inversor' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('inversor')}
+              >
+                <span className="codigo-unidad">SOLAR</span>
+                <span className="nombre-unidad">Medidor Solar</span>
+                <span className="indicador-led-unidad dorado"></span>
+              </div>
+              <div
+                className={`unidad-interruptor ${unidadActiva === 'ev-protec' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('ev-protec')}
+              >
+                <span className="codigo-unidad">EV</span>
+                <span className="nombre-unidad">Carga Vehículo</span>
+                <span className="indicador-led-unidad dorado"></span>
+              </div>
+              <div
+                className={`unidad-interruptor ${unidadActiva === 'termografia' ? 'unidad-activa' : ''}`}
+                onClick={() => setUnidadActiva('termografia')}
+              >
+                <span className="codigo-unidad">FLIR</span>
+                <span className="nombre-unidad">Control Térmico</span>
+                <span className="indicador-led-unidad azul"></span>
+              </div>
+            </div>
+          </div>
+
+          {/* VERIFICADOR DE BOLETINES ELÉCTRICOS (CIE) */}
+          <div className="caja-verificador-boletines">
+            <div className="encabezado-verificador">
+              <span className="icono-verificador">📜</span>
               <div>
-                <strong>Verificador de Validez de Boletín Eléctrico (CIE)</strong>
-                <p className="v-sub">Comprueba la conformidad REBT de una instalación registrada</p>
+                <strong>Verificación de Registro de Boletín Eléctrico (CIE)</strong>
+                <p className="subtitulo-verificador">Consulta la conformidad de instalaciones legalizadas en Madrid</p>
               </div>
             </div>
-            <div className="cie-input-group">
+            <div className="grupo-entrada-codigo">
               <input
                 type="text"
-                id="cie-code-input"
-                placeholder="Introduce Código de Expediente o Municipio (ej: MAD-2026)"
-                value={cieInput}
-                onChange={(e) => setCieInput(e.target.value)}
+                placeholder="Introduce código de expediente (ej: MAD-2026)"
+                value={codigoCie}
+                onChange={(e) => setCodigoCie(e.target.value)}
               />
-              <button onClick={handleVerifyCIE} className="btn-cta primary-glow">
-                Verificar Estado
+              <button onClick={handleVerificarCie} className="boton-accion dorado-principal" style={{ padding: '10px 20px', borderRadius: '100px' }}>
+                Consultar Registro
               </button>
             </div>
-            <div id="cie-result-display" className="cie-result-box">
-              {cieStatus.state === 'error' && (
-                <span className="r-status" style={{ color: '#ff4444' }}>
-                  ⚠️ POR FAVOR, INTRODUCE UN CÓDIGO VÁLIDO
+            <div className="caja-resultado-verificacion">
+              {estadoCie.estado === 'error' && (
+                <span className="estado-resultado" style={{ color: '#ff4444' }}>
+                  ⚠️ Por favor, introduce un código de expediente válido.
                 </span>
               )}
-              {cieStatus.state === 'loading' && (
-                <span className="r-status purple">
-                  ⌛ CONSULTANDO BASE DE DATOS DE LA COMUNIDAD DE MADRID...
-                </span>
+              {estadoCie.estado === 'cargando' && (
+                <span className="estado-resultado">⌛ Verificando datos con la Dirección General de Industria...</span>
               )}
-              {cieStatus.state === 'success' && (
+              {estadoCie.estado === 'exito' && (
                 <>
-                  <span className="r-status purple">
-                    ✔️ EXPEDIENTE [{cieStatus.code.toUpperCase()}]: CONFORME A REBT (ITC-BT-03)
+                  <span className="estado-resultado">
+                    ✔️ EXPEDIENTE [{estadoCie.codigo.toUpperCase()}]: REGISTRADO Y CONFORME A REBT
                   </span>
-                  <span className="r-detail">
-                    Firmado y legalizado digitalmente por el Ing. Kerling Natale ante la Consejería de Industria de Madrid.
+                  <span className="detalle-resultado">
+                    Instalación auditada y firmada digitalmente por el Ing. Kerling Abraham Natale Hidalgo ante la Consejería de Industria de Madrid.
                   </span>
                 </>
               )}
@@ -213,48 +210,29 @@ export default function InspectorCuadro() {
           </div>
         </div>
 
-        {/* FICHA DETAIL / INSPECTOR SIDEBAR */}
-        <div className="inspector-details" id="inspector-card">
-          <div className="inspector-head">
-            <span className="inspector-tag" id="inspect-tag">
-              {activeInfo.tag}
-            </span>
-            <h3 id="inspect-name">{activeInfo.name}</h3>
+        {/* DETALLE TÉCNICO DE LA UNIDAD SELECCIONADA */}
+        <div className="ficha-detalles-inspector">
+          <div>
+            <span className="etiqueta-inspector">{datos.etiqueta}</span>
+            <div className="encabezado-ficha">
+              <h3>{datos.nombre}</h3>
+            </div>
+            <p className="cuerpo-ficha">{datos.desc}</p>
           </div>
 
-          <p className="inspector-body" id="inspect-desc">
-            {activeInfo.desc}
-          </p>
+          <div>
+            <div className="especificaciones-ficha">
+              {datos.especificaciones.map((spec, i) => (
+                <div key={i} className="fila-especificacion">
+                  <span className="clave-especificacion">Requisito Técnico {i + 1}:</span>
+                  <span className="valor-especificacion dorado">{spec}</span>
+                </div>
+              ))}
+            </div>
 
-          <div className="inspector-specs">
-            <div className="spec-row">
-              <span className="spec-key">Corriente Nominal:</span>
-              <span className="spec-val" id="inspect-spec-1">
-                {activeInfo.specs[0]}
-              </span>
+            <div className="insignia-cumplimiento">
+              ✔️ Verificado personalmente por el Ing. Kerling Natale
             </div>
-            <div className="spec-row">
-              <span className="spec-key">Poder de Corte:</span>
-              <span className="spec-val" id="inspect-spec-2">
-                {activeInfo.specs[1]}
-              </span>
-            </div>
-            <div className="spec-row">
-              <span className="spec-key">Protección Transitoria:</span>
-              <span className="spec-val" id="inspect-spec-3">
-                {activeInfo.specs[2]}
-              </span>
-            </div>
-            <div className="spec-row">
-              <span className="spec-key">Garantía DEN:</span>
-              <span className="spec-val purple" id="inspect-spec-4">
-                {activeInfo.specs[3]}
-              </span>
-            </div>
-          </div>
-
-          <div className="inspector-foot">
-            <span className="compliance-badge">✔️ Auditado y Verificado por el Ing. Kerling Natale</span>
           </div>
         </div>
       </div>
