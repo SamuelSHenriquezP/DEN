@@ -27,7 +27,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
     }
   }, []);
 
-  // 2. SECUENCIA CON RECORRIDO CONTINUO DE LA LÍNEA ELÉCTRICA EN AZUL CIAN PURO (#00E5FF)
+  // 2. SECUENCIA SIMULTÁNEA: MIENTRAS LA LÍNEA VA BAJANDO, LA PANTALLA AZUL APARECE AL MISMO TIEMPO
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
@@ -57,29 +57,30 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         });
     }
 
-    // ETAPA 2: RECORRIDO DE ENTRADA DE LA LÍNEA ELÉCTRICA EN CIAN (2000 -> 0)
-    if (line) {
-      mainTl.to(line, {
-        strokeDashoffset: 0,
-        duration: 0.85,
-        ease: 'power2.inOut',
-      });
-    }
-
-    // ETAPA 3: BARRIDO DE PANTALLA AZUL CIAN (LÍNEA PERMANECE EN AZUL CIAN PURO)
-    if (curtain) {
+    // ETAPA 2: LA LÍNEA VA BAJANDO Y LA PANTALLA AZUL APARECE SIMULTÁNEAMENTE EN PARALELO
+    if (line && curtain) {
       mainTl
-        // BARRIDO FLUIDO DE CORTINA AZUL
-        .to(curtain, {
-          clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-          duration: 0.55,
-          ease: 'power4.inOut',
-        }, '-=0.35')
+        // 1. LA LÍNEA RECORRE EL CANVAS HACIA ABAJO (2000 -> 0)
+        .to(line, {
+          strokeDashoffset: 0,
+          duration: 0.95,
+          ease: 'power2.inOut',
+        })
+        // 2. AL MISMO TIEMPO QUE LA LÍNEA VA BAJANDO, LA PANTALLA AZUL APARECE Y DESPLIEGA
+        .to(
+          curtain,
+          {
+            clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+            duration: 0.95,
+            ease: 'power2.inOut',
+          },
+          '<' // '<' SIGNIFICA QUE INICIA EXACTAMENTE AL MISMO TIEMPO QUE EL PASO ANTERIOR (LA LÍNEA BAJANDO)
+        )
         .call(() => {
           setIsSystemOnline(true);
           if (onPowerOn) onPowerOn();
 
-          // REVELADO DE TÍTULOS Y RECORRIDO CONTINUO DE LA LÍNEA SALIENDO HACIA LA DERECHA (0 -> -2000)
+          // REVELADO DE TÍTULOS Y DESAPARICIÓN DE LÍNEA SIGUIENDO SU TRAZADO HACIA LA DERECHA
           setTimeout(() => {
             if (onlineContentRef.current) {
               const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
@@ -118,13 +119,17 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                   },
                   '-=0.6'
                 )
-                // LA LÍNEA AZUL CONTINÚA SU CURVA Y FLUYE HACIA LA DERECHA HASTA DESAPARECER (0 -> -2000)
-                .to(line, {
-                  strokeDashoffset: -2000,
-                  opacity: 0.2,
-                  duration: 1.1,
-                  ease: 'power2.inOut',
-                }, '-=0.7')
+                // LA LÍNEA AZUL CONTINÚA SU TRAZADO Y FLUYE HACIA LA DERECHA (0 -> -2000)
+                .to(
+                  line,
+                  {
+                    strokeDashoffset: -2000,
+                    opacity: 0.2,
+                    duration: 1.1,
+                    ease: 'power2.inOut',
+                  },
+                  '-=0.7'
+                )
                 .to(line, {
                   opacity: 0,
                   duration: 0.3,
