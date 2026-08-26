@@ -4,27 +4,28 @@
    ========================================================================== */
 
 :root {
-    /* Paleta Oficial Extraída del Logo DEN (Fondo Negro, Amarillo Eléctrico, Cian y Azul Real) */
+    /* Paleta Oficial del Logo DEN (Cian Eléctrico como Principal, Azul Real y Amarillo Eléctrico) */
     --fondo-base: #030508;
-    --fondo-superficie: #090E18;
-    --tarjeta-base: #0F1626;
-    --tarjeta-cristal: rgba(15, 22, 38, 0.85);
+    --fondo-superficie: #070B14;
+    --tarjeta-base: #0B111F;
+    --tarjeta-cristal: rgba(11, 17, 31, 0.88);
     
-    /* Acentos Directos del Logo */
-    --amarillo-electrico: #FFEE00;
-    --dorado-real: #FFEE00;
-    --dorado-calido: #FFEE00;
-    --dorado-resplandor: rgba(255, 230, 0, 0.35);
+    /* Acento Principal: Cian Eléctrico #00E5FF */
+    --dorado-real: #00E5FF;
+    --dorado-calido: #00E5FF;
+    --dorado-resplandor: rgba(0, 229, 255, 0.35);
     
     --azul-tecnico: #00E5FF;
-    --azul-resplandor: rgba(0, 229, 255, 0.3);
+    --azul-resplandor: rgba(0, 229, 255, 0.35);
     
+    /* Acentos de Apoyo: Amarillo Eléctrico #FFEE00 y Azul Real #0052FF */
+    --amarillo-electrico: #FFEE00;
     --azul-real-den: #0052FF;
     --azul-real-resplandor: rgba(0, 82, 255, 0.35);
     
-    /* Gradientes Oficiales de Marca */
-    --gradiente-dorado: linear-gradient(135deg, #FFEE00 0%, #FFEE00 100%);
-    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #0052FF 100%);
+    /* Gradientes de Marca (Cian Dominante) */
+    --gradiente-dorado: linear-gradient(135deg, #00E5FF 0%, #0052FF 100%);
+    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #FFEE00 100%);
     --gradiente-den-logo: linear-gradient(90deg, #00E5FF 0%, #0052FF 50%, #FFEE00 100%);
     
     /* Tipografía y Colores de Texto */
@@ -33,8 +34,8 @@
     --texto-atenuado: #64748B;
     
     /* Bordes y Cristalería */
-    --borde-sutil: rgba(255, 230, 0, 0.18);
-    --borde-destacado: rgba(255, 230, 0, 0.55);
+    --borde-sutil: rgba(0, 229, 255, 0.2);
+    --borde-destacado: rgba(0, 229, 255, 0.6);
     --borde-cristal: rgba(255, 255, 255, 0.08);
     
     /* Fuentes Oficiales con Jerarquía Inteligente */
@@ -84,6 +85,7 @@ body {
     align-items: center;
     position: relative;
     padding: clamp(50px, 7vh, 85px) 0;
+    scroll-margin-top: 100px;
 }
 
 /* --- CANVAS DE AMBIENTE ELÉCTRICO --- */
@@ -730,17 +732,20 @@ a, button, input, select, textarea, .boton-accion, .boton-escena, .unidad-interr
 }
 
 .insignia-tarjeta {
-    position: absolute;
-    top: 22px;
-    left: 26px;
-    background: rgba(255, 238, 0, 0.08);
+    position: relative;
+    top: auto;
+    left: auto;
+    align-self: flex-start;
+    margin-bottom: 12px;
+    display: inline-block;
+    background: rgba(0, 229, 255, 0.1);
     border: 1px solid var(--borde-sutil);
     padding: 6px 16px;
     border-radius: 100px;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: var(--dorado-real);
+    color: var(--azul-tecnico);
     z-index: 2;
 }
 
