@@ -4,51 +4,51 @@
    ========================================================================== */
 
 :root {
-    /* Paleta Oficial del Logo DEN (Cian Eléctrico como Principal, Azul Real y Amarillo Eléctrico) */
+    /* Paleta Oficial Awwwards - "POWER ON / FOLLOW THE CURRENT" */
     --fondo-base: #030508;
-    --fondo-superficie: #070B14;
-    --tarjeta-base: #0B111F;
-    --tarjeta-cristal: rgba(11, 17, 31, 0.88);
+    --fondo-obsidiana: #030508;
+    --fondo-superficie: #070B12;
+    --tarjeta-base: #0B111D;
+    --tarjeta-cristal: rgba(11, 17, 29, 0.9);
     
-    /* Acento Principal: Cian Eléctrico #00E5FF */
-    --dorado-real: #00E5FF;
-    --dorado-calido: #00E5FF;
-    --dorado-resplandor: rgba(0, 229, 255, 0.35);
+    /* Amarillo Eléctrico: Descarga Escasa, Intensa y Estratégica */
+    --amarillo-electrico: #FFEE00;
+    --amarillo-glow: rgba(255, 238, 0, 0.45);
+    --dorado-real: #FFEE00;
+    --dorado-resplandor: rgba(255, 238, 0, 0.45);
     
+    /* Cian Eléctrico Técnico */
+    --cian-tecnico: #00E5FF;
+    --cian-glow: rgba(0, 229, 255, 0.35);
     --azul-tecnico: #00E5FF;
     --azul-resplandor: rgba(0, 229, 255, 0.35);
     
-    /* Acentos de Apoyo: Amarillo Eléctrico #FFEE00 y Azul Real #0052FF */
-    --amarillo-electrico: #FFEE00;
-    --azul-real-den: #0052FF;
-    --azul-real-resplandor: rgba(0, 82, 255, 0.35);
-    
-    /* Gradientes de Marca (Cian Dominante) */
-    --gradiente-dorado: linear-gradient(135deg, #00E5FF 0%, #0052FF 100%);
-    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #FFEE00 100%);
-    --gradiente-den-logo: linear-gradient(90deg, #00E5FF 0%, #0052FF 50%, #FFEE00 100%);
-    
-    /* Tipografía y Colores de Texto */
+    /* Texto & Jerarquía Editorial */
     --texto-principal: #FFFFFF;
-    --texto-secundario: #CBD5E1;
-    --texto-atenuado: #64748B;
+    --texto-blanco: #FFFFFF;
+    --texto-secundario: #94A3B8;
+    --texto-atenuado: #475569;
     
-    /* Bordes y Cristalería */
-    --borde-sutil: rgba(0, 229, 255, 0.2);
-    --borde-destacado: rgba(0, 229, 255, 0.6);
+    /* Bordes e Hilos de Corriente */
+    --borde-sutil: rgba(255, 255, 255, 0.08);
+    --borde-destacado: rgba(255, 238, 0, 0.45);
     --borde-cristal: rgba(255, 255, 255, 0.08);
     
-    /* Fuentes Oficiales con Jerarquía Inteligente */
+    /* Tipografías Editoriales Awwwards */
     --fuente-titulos: 'Syne', 'Outfit', sans-serif;
-    --fuente-subtitulos: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+    --fuente-subtitulos: 'Outfit', sans-serif;
     --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
     --fuente-tecnica: 'JetBrains Mono', monospace;
+    
+    /* Gradientes */
+    --gradiente-dorado: linear-gradient(135deg, #FFEE00 0%, #00E5FF 100%);
+    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #FFEE00 100%);
+    --gradiente-den-logo: linear-gradient(90deg, #00E5FF 0%, #0052FF 50%, #FFEE00 100%);
     
     /* Transiciones */
     --transicion-rapida: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
     --transicion-suave: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     
-    /* Verde Mensajería Directa */
     --verde-whatsapp: #25D366;
 }
 

@@ -1,77 +1,146 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-export default function DockNav({ onOpenQuote }) {
-  const [activeSection, setActiveSection] = useState('inicio');
-
-  useEffect(() => {
-    const sections = document.querySelectorAll('.seccion-pantalla-completa');
-    const handleScroll = () => {
-      let current = 'inicio';
-      sections.forEach((sec) => {
-        const top = sec.offsetTop - 200;
-        if (window.scrollY >= top) {
-          current = sec.getAttribute('id');
-        }
-      });
-      setActiveSection(current);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
+export default function DockNav({ activeSection, onOpenQuote }) {
   const scrollToSection = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <nav className="barra-navegacion-flotante">
-      <a
-        href="#inicio"
-        onClick={(e) => scrollToSection(e, 'inicio')}
-        className={`elemento-navegacion ${activeSection === 'inicio' ? 'activo' : ''}`}
+    <header
+      style={{
+        position: 'fixed',
+        top: '24px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 1000,
+        width: 'auto',
+        maxWidth: '92vw',
+      }}
+    >
+      <nav
+        style={{
+          background: 'rgba(3, 5, 8, 0.85)',
+          border: '1px solid rgba(255, 255, 255, 0.12)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: '100px',
+          padding: '8px 16px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '24px',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6)',
+        }}
       >
-        Inicio
-      </a>
-      <a
-        href="#proyectos"
-        onClick={(e) => scrollToSection(e, 'proyectos')}
-        className={`elemento-navegacion ${activeSection === 'proyectos' ? 'activo' : ''}`}
-      >
-        Proyectos
-      </a>
-      <a
-        href="#servicios"
-        onClick={(e) => scrollToSection(e, 'servicios')}
-        className={`elemento-navegacion ${activeSection === 'servicios' ? 'activo' : ''}`}
-      >
-        Servicios
-      </a>
-      <a
-        href="#calculadora"
-        onClick={(e) => scrollToSection(e, 'calculadora')}
-        className={`elemento-navegacion ${activeSection === 'calculadora' ? 'activo' : ''}`}
-      >
-        Ahorro Solar
-      </a>
-      <a
-        href="#sobre-mi"
-        onClick={(e) => scrollToSection(e, 'sobre-mi')}
-        className={`elemento-navegacion ${activeSection === 'sobre-mi' ? 'activo' : ''}`}
-      >
-        Kerling Natale
-      </a>
-      <button
-        onClick={onOpenQuote}
-        className="elemento-navegacion elemento-navegacion-destacado"
-        style={{ border: 'none', cursor: 'pointer' }}
-      >
-        Cotizar Proyecto
-      </button>
-    </nav>
+        {/* LOGO SIMBÓLICO DEN */}
+        <a
+          href="#inicio"
+          onClick={(e) => scrollToSection(e, 'inicio')}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            textDecoration: 'none',
+          }}
+        >
+          <span
+            style={{
+              width: '8px',
+              height: '8px',
+              borderRadius: '50%',
+              backgroundColor: '#FFEE00',
+              boxShadow: '0 0 10px #FFEE00',
+            }}
+          ></span>
+          <span
+            style={{
+              fontFamily: 'var(--fuente-titulos)',
+              fontSize: '13px',
+              fontWeight: 800,
+              color: '#FFFFFF',
+              letterSpacing: '1px',
+            }}
+          >
+            DEN
+          </span>
+        </a>
+
+        {/* SECCIONES */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
+          <a
+            href="#proyectos"
+            onClick={(e) => scrollToSection(e, 'proyectos')}
+            style={{
+              fontFamily: 'var(--fuente-tecnica)',
+              fontSize: '10px',
+              fontWeight: 700,
+              color: '#CBD5E1',
+              textDecoration: 'none',
+              letterSpacing: '1.5px',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+          >
+            WORK
+          </a>
+
+          <a
+            href="#servicios"
+            onClick={(e) => scrollToSection(e, 'servicios')}
+            style={{
+              fontFamily: 'var(--fuente-tecnica)',
+              fontSize: '10px',
+              fontWeight: 700,
+              color: '#CBD5E1',
+              textDecoration: 'none',
+              letterSpacing: '1.5px',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+          >
+            SERVICES
+          </a>
+
+          <a
+            href="#contacto"
+            onClick={(e) => scrollToSection(e, 'contacto')}
+            style={{
+              fontFamily: 'var(--fuente-tecnica)',
+              fontSize: '10px',
+              fontWeight: 700,
+              color: '#CBD5E1',
+              textDecoration: 'none',
+              letterSpacing: '1.5px',
+              transition: 'color 0.3s ease',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
+          >
+            CONTACT
+          </a>
+        </div>
+
+        {/* CTA RAPIDO */}
+        <button
+          onClick={onOpenQuote}
+          style={{
+            background: '#FFEE00',
+            color: '#030508',
+            border: 'none',
+            padding: '6px 14px',
+            borderRadius: '100px',
+            fontFamily: 'var(--fuente-tecnica)',
+            fontSize: '9px',
+            fontWeight: 800,
+            letterSpacing: '1px',
+            cursor: 'pointer',
+          }}
+        >
+          POWER ON →
+        </button>
+      </nav>
+    </header>
   );
 }

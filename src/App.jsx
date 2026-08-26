@@ -1,131 +1,95 @@
-import React, { useState, useEffect } from 'react';
-import Lenis from 'lenis';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-import EnergyCanvas from './components/EnergyCanvas';
-import FloatingWhatsApp from './components/FloatingWhatsApp';
-import Header from './components/Header';
+import React, { useState } from 'react';
+import FollowTheCurrentCursor from './components/FollowTheCurrentCursor';
 import DockNav from './components/DockNav';
-import Hero from './components/Hero';
-import Stats from './components/Stats';
-import BentoServices from './components/BentoServices';
-import PortfolioHorizontal from './components/PortfolioHorizontal';
-import SolarCalculator from './components/SolarCalculator';
-import AboutKerling from './components/AboutKerling';
-import WizardQuote from './components/WizardQuote';
-import FaqSection from './components/FaqSection';
-import Testimonials from './components/Testimonials';
-import Footer from './components/Footer';
-import ProjectModal from './components/ProjectModal';
-
-gsap.registerPlugin(ScrollTrigger);
+import SystemActivationHero from './components/SystemActivationHero';
+import CinematicProjectsShowcase from './components/CinematicProjectsShowcase';
+import BeforeAfterSlider from './components/BeforeAfterSlider';
+import InteractiveServicesList from './components/InteractiveServicesList';
+import EditorialGallery from './components/EditorialGallery';
+import MinimalStats from './components/MinimalStats';
+import FinalCircuitContact from './components/FinalCircuitContact';
+import VisualCaseStudyModal from './components/VisualCaseStudyModal';
+import QuoteModal from './components/WizardQuote';
 
 export default function App() {
-  const [activeModalKey, setActiveModalKey] = useState(null);
-
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    const updateLenis = (time) => {
-      lenis.raf(time * 1000);
-    };
-
-    gsap.ticker.add(updateLenis);
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      gsap.ticker.remove(updateLenis);
-      lenis.destroy();
-    };
-  }, []);
-
-  const handleOpenQuote = () => {
-    const el = document.getElementById('cotizador');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleOpenModal = (key) => {
-    setActiveModalKey(key);
-  };
-
-  const handleCloseModal = () => {
-    setActiveModalKey(null);
-  };
+  const [activeModalProject, setActiveModalProject] = useState(null);
+  const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
   return (
-    <div className="den-app">
-      {/* CANVAS ELÉCTRICO DE AMBIENTE */}
-      <EnergyCanvas />
+    <div
+      style={{
+        backgroundColor: '#030508',
+        color: '#FFFFFF',
+        minHeight: '100vh',
+        width: '100%',
+        position: 'relative',
+        overflowX: 'hidden',
+      }}
+    >
+      {/* CURSOR ELÉCTRICO DESKTOP "FOLLOW THE CURRENT" */}
+      <FollowTheCurrentCursor />
 
-      {/* BOTÓN FLOTANTE DE CONTACTO DIRECTO */}
-      <FloatingWhatsApp />
+      {/* DOCK NAV FLOTANTE MINIMALISTA */}
+      <DockNav onOpenQuote={() => setIsQuoteOpen(true)} />
 
-      {/* ENCABEZADO PRINCIPAL DE FIRMA */}
-      <Header onOpenQuote={handleOpenQuote} />
+      {/* HERO SYSTEM ACTIVATION ("POWER ON") */}
+      <SystemActivationHero
+        onOpenQuote={() => setIsQuoteOpen(true)}
+      />
 
-      {/* NAVEGACIÓN FLOTANTE DOCK */}
-      <DockNav onOpenQuote={handleOpenQuote} />
+      {/* PROYECTOS CINEMATOGRÁFICOS FULL-BLEED (80VH) */}
+      <CinematicProjectsShowcase
+        onOpenModal={(clave) => setActiveModalProject(clave)}
+      />
 
-      {/* CONTENIDO PRINCIPAL DEL PORTAFOLIO */}
-      <main>
-        {/* PORTADA Y BIENVENIDA */}
-        <Hero onOpenQuote={handleOpenQuote} />
-        
-        <div className="linea-separadora-tecnica"></div>
+      {/* SLIDER INTERACTIVO ANTES vs DESPUÉS */}
+      <BeforeAfterSlider />
 
-        {/* PROYECTOS DESTACADOS - NÚCLEO DEL PORTAFOLIO */}
-        <PortfolioHorizontal onOpenModal={handleOpenModal} />
+      {/* LISTADO INTERACTIVO DE SERVICIOS CON REVELADO DE FOTO */}
+      <InteractiveServicesList />
 
-        <div className="linea-separadora-tecnica"></div>
+      {/* GALERÍA EDITORIAL ASIMÉTRICA */}
+      <EditorialGallery />
 
-        {/* SERVICIOS Y ESPECIALIDADES */}
-        <BentoServices />
-        
-        <div className="linea-separadora-tecnica"></div>
+      {/* ESTADÍSTICAS REALES DEN */}
+      <MinimalStats />
 
-        {/* MÉTRICAS Y TRAYECTORIA */}
-        <Stats />
+      {/* CONTACTO FINAL DEL CIRCUITO */}
+      <FinalCircuitContact onOpenQuote={() => setIsQuoteOpen(true)} />
 
-        <div className="linea-separadora-tecnica"></div>
+      {/* FOOTER TÉCNICO MINIMALISTA */}
+      <footer
+        style={{
+          borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+          padding: '32px 4vw',
+          backgroundColor: '#030508',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+          gap: '16px',
+          fontFamily: 'var(--fuente-tecnica)',
+          fontSize: '11px',
+          color: '#64748B',
+        }}
+      >
+        <span>DYNAMIC ELECTRIC NATALE (DEN) © 2026</span>
+        <span>ING. KERLING ABRAHAM NATALE HIDALGO • MADRID</span>
+        <span>REBT & LOXONE CERTIFIED PARTNER</span>
+      </footer>
 
-        {/* CALCULADORA DE AHORRO SOLAR */}
-        <SolarCalculator />
-        
-        <div className="linea-separadora-tecnica"></div>
+      {/* MODAL DE CASO DE ESTUDIO NARRATIVO */}
+      <VisualCaseStudyModal
+        projectKey={activeModalProject}
+        onClose={() => setActiveModalProject(null)}
+        onOpenQuote={() => setIsQuoteOpen(true)}
+      />
 
-        {/* PERFIL DEL INGENIERO KERLING NATALE */}
-        <AboutKerling onOpenQuote={handleOpenQuote} />
-        
-        <div className="linea-separadora-tecnica"></div>
-
-        {/* SOLICITUD DE PRESUPUESTO */}
-        <WizardQuote />
-        
-        <div className="linea-separadora-tecnica"></div>
-
-        {/* RESEÑAS Y VALORACIONES */}
-        <Testimonials />
-
-        <div className="linea-separadora-tecnica"></div>
-
-        {/* PREGUNTAS FRECUENTES */}
-        <FaqSection />
-      </main>
-
-      {/* PIE DE PÁGINA */}
-      <Footer onOpenQuote={handleOpenQuote} />
-
-      {/* MODAL DETALLADO DE PROYECTOS */}
-      <ProjectModal activeModalKey={activeModalKey} onClose={handleCloseModal} />
+      {/* MODAL DE COTIZACIÓN TÉCNICA */}
+      <QuoteModal
+        isOpen={isQuoteOpen}
+        onClose={() => setIsQuoteOpen(false)}
+      />
     </div>
   );
 }
