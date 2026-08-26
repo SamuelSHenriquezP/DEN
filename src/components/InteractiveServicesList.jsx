@@ -11,6 +11,7 @@ export default function InteractiveServicesList() {
       desc: 'Gestión unificada de iluminación DALI, persianas automáticas, climatización por zonas y control de accesos con servidores Loxone de procesamiento local sin cuotas mensuales ni dependencia de la nube.',
       img: '/images/villa_loxone.png',
       tags: ['Loxone Certified Partner', 'Control DALI 45 Zonas', 'Procesamiento Local'],
+      specs: { procesador: 'Miniserver V2', protocolo: 'DALI 2 / Tree', respuesta: '< 10 ms' },
     },
     {
       num: '02',
@@ -19,6 +20,7 @@ export default function InteractiveServicesList() {
       desc: 'Diseño e integración de paneles solares de alta eficiencia con inversores trifásicos y acumulación en baterías LFP para maximizar el autoconsumo directo y reducir la factura hasta un 95%.',
       img: '/images/solar_industrial.png',
       tags: ['Autoconsumo 95%', 'Inyección Cero a Red', 'Baterías LFP Litio'],
+      specs: { eficiencia: '98.4%', acumulacion: 'Ferrofosfato Litio', rendimiento: '95% Autoconsumo' },
     },
     {
       num: '03',
@@ -27,6 +29,7 @@ export default function InteractiveServicesList() {
       desc: 'Montaje y renovación integral de cuadros generales de mando con protección contra sobretensiones permanentes y transitorias, IGA automatizado y diferenciales superinmunizados.',
       img: '/images/smart_panel.png',
       tags: ['Normativa REBT', 'Diferenciales SI', 'Protección Sobretensiones'],
+      specs: { potencia: 'Hasta 400A', respuesta: 'Superinmunizada Class A', certificacion: 'Comunidad de Madrid' },
     },
     {
       num: '04',
@@ -35,6 +38,7 @@ export default function InteractiveServicesList() {
       desc: 'Instalación de cargadores monofásicos y trifásicos de hasta 22 kW con balanceo dinámico de potencia para proteger la instalación y canalizar excedentes solares.',
       img: '/images/ev_charging.png',
       tags: ['Instalación ITC-BT-52', 'Balanceo Dinámico', 'Carga Solar Directa'],
+      specs: { velocidad: '22 kW Trifásico', protocolo: 'OCPP 1.6J', proteccion: 'ITC-BT-52 Dedicada' },
     },
     {
       num: '05',
@@ -43,8 +47,11 @@ export default function InteractiveServicesList() {
       desc: 'Inspección de puntos calientes mediante cámara térmica de infrarrojos FLIR y tramitación oficial de Boletines Eléctricos de la Comunidad de Madrid en 24-48 horas.',
       img: '/images/gallery_1.png',
       tags: ['Boletín Oficial CIE', 'Cámara Térmica FLIR', 'Auditoría de Potencia'],
+      specs: { entrega: '24 - 48 Horas', resolucion: 'Infrarroja FLIR HD', cobertura: 'Madrid & Sierra' },
     },
   ];
+
+  const current = servicios[activeIdx];
 
   return (
     <section
@@ -88,7 +95,7 @@ export default function InteractiveServicesList() {
           </h2>
         </div>
 
-        {/* LISTADO INTERACTIVO CON IMAGEN PREVISUALIZACIÓN DINÁMICA */}
+        {/* LISTADO INTERACTIVO CON IMAGEN Y PARÁMETROS TÉCNICOS EN 3D */}
         <div
           style={{
             display: 'grid',
@@ -98,7 +105,7 @@ export default function InteractiveServicesList() {
           }}
         >
           {/* COLUMNA IZQUIERDA: LISTA INTERACTIVA */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {servicios.map((srv, idx) => {
               const isActive = activeIdx === idx;
               return (
@@ -109,9 +116,10 @@ export default function InteractiveServicesList() {
                     padding: '24px',
                     borderRadius: '20px',
                     backgroundColor: isActive ? '#0B111D' : 'transparent',
-                    border: isActive ? '1px solid #FFEE00' : '1px solid transparent',
+                    border: isActive ? '1px solid #FFEE00' : '1px solid rgba(255, 255, 255, 0.06)',
+                    boxShadow: isActive ? '0 0 30px rgba(255, 238, 0, 0.15)' : 'none',
                     cursor: 'pointer',
-                    transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
                   }}
                 >
                   <div
@@ -185,28 +193,38 @@ export default function InteractiveServicesList() {
             })}
           </div>
 
-          {/* COLUMNA DERECHA: PREVISUALIZACIÓN DE FOTO GRANDE */}
+          {/* COLUMNA DERECHA: PREVISUALIZACIÓN Y PARÁMETROS TÉCNICOS EN 3D */}
           <div
             style={{
               position: 'relative',
               width: '100%',
-              height: '520px',
+              minHeight: '520px',
               borderRadius: '28px',
               overflow: 'hidden',
-              border: '1px solid rgba(255, 255, 255, 0.1)',
-              boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
+              border: '1px solid rgba(255, 238, 0, 0.25)',
+              boxShadow: '0 25px 60px rgba(0, 0, 0, 0.9)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              padding: '32px',
+              boxSizing: 'border-box',
             }}
           >
             <img
-              src={servicios[activeIdx].img}
-              alt={servicios[activeIdx].titulo}
+              src={current.img}
+              alt={current.titulo}
               style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                transition: 'opacity 0.5s ease',
+                opacity: 0.7,
+                transition: 'all 0.5s ease',
               }}
             />
+
             <div
               style={{
                 position: 'absolute',
@@ -214,38 +232,78 @@ export default function InteractiveServicesList() {
                 left: 0,
                 width: '100%',
                 height: '100%',
-                background: 'linear-gradient(180deg, transparent 50%, rgba(3, 5, 8, 0.9) 100%)',
+                background: 'linear-gradient(180deg, rgba(3, 5, 8, 0.6) 0%, rgba(3, 5, 8, 0.92) 100%)',
               }}
             ></div>
-            <div
-              style={{
-                position: 'absolute',
-                bottom: '28px',
-                left: '28px',
-                right: '28px',
-              }}
-            >
+
+            {/* TAG SUPERIOR */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
+              <span
+                style={{
+                  background: '#FFEE00',
+                  color: '#030508',
+                  fontFamily: 'var(--fuente-tecnica)',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  padding: '6px 14px',
+                  borderRadius: '100px',
+                  letterSpacing: '1.5px',
+                }}
+              >
+                ESPECIALIDAD // {current.num}
+              </span>
+            </div>
+
+            {/* PARÁMETROS TÉCNICOS DENTRO DE LA FOTO */}
+            <div style={{ position: 'relative', zIndex: 2 }}>
               <span
                 style={{
                   fontFamily: 'var(--fuente-tecnica)',
                   fontSize: '10px',
                   color: '#FFEE00',
                   letterSpacing: '2px',
+                  display: 'block',
+                  marginBottom: '6px',
                 }}
               >
-                {servicios[activeIdx].subtitulo}
+                {current.subtitulo}
               </span>
+
               <h4
                 style={{
                   fontFamily: 'var(--fuente-titulos)',
-                  fontSize: '1.4rem',
+                  fontSize: '1.6rem',
                   color: '#FFFFFF',
-                  marginTop: '4px',
-                  margin: 0,
+                  margin: '0 0 20px 0',
                 }}
               >
-                {servicios[activeIdx].titulo}
+                {current.titulo}
               </h4>
+
+              {/* SPECIFICATION GRID */}
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(3, 1fr)',
+                  gap: '12px',
+                  background: 'rgba(3, 5, 8, 0.85)',
+                  border: '1px solid rgba(255, 255, 255, 0.15)',
+                  padding: '16px',
+                  borderRadius: '16px',
+                  backdropFilter: 'blur(10px)',
+                }}
+              >
+                {Object.entries(current.specs).map(([k, v], i) => (
+                  <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
+                    <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '8px', color: '#64748B', textTransform: 'uppercase' }}>
+                      {k}
+                    </span>
+                    <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '11px', color: '#FFEE00', fontWeight: 700, marginTop: '2px' }}>
+                      {v}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
