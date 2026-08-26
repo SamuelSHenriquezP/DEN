@@ -107,6 +107,26 @@ export default function SolarCalculator() {
             </p>
           </div>
 
+          {/* BARRA INDICADORA DE AUTOCONSUMO */}
+          <div style={{ margin: '18px 0' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', fontWeight: '700', marginBottom: '6px', color: 'var(--texto-secundario)' }}>
+              <span>GRADO DE INDEPENDENCIA ENERGÉTICA</span>
+              <span style={{ color: '#FFE600' }}>{porcentajeIndependencia}%</span>
+            </div>
+            <div style={{ height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '100px', overflow: 'hidden' }}>
+              <div
+                style={{
+                  height: '100%',
+                  width: `${porcentajeIndependencia}%`,
+                  background: 'linear-gradient(90deg, #00E5FF 0%, #FFE600 100%)',
+                  borderRadius: '100px',
+                  transition: 'width 0.4s ease',
+                  boxShadow: '0 0 12px rgba(255, 230, 0, 0.4)',
+                }}
+              />
+            </div>
+          </div>
+
           <div className="rejilla-metricas-resultado">
             <div className="caja-metrica-mini">
               <span className="titulo-metrica-mini">Plazo Amortización</span>

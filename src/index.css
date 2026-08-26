@@ -6,9 +6,9 @@
 :root {
     /* Paleta Oficial Extraída del Logo DEN (Fondo Negro, Amarillo Eléctrico, Cian y Azul Real) */
     --fondo-base: #030508;
-    --fondo-superficie: #0A0E17;
-    --tarjeta-base: #0F1524;
-    --tarjeta-cristal: rgba(15, 21, 36, 0.85);
+    --fondo-superficie: #090E18;
+    --tarjeta-base: #0F1626;
+    --tarjeta-cristal: rgba(15, 22, 38, 0.85);
     
     /* Acentos Directos del Logo */
     --amarillo-electrico: #FFE600;
@@ -37,8 +37,9 @@
     --borde-destacado: rgba(255, 230, 0, 0.55);
     --borde-cristal: rgba(255, 255, 255, 0.08);
     
-    /* Fuentes Oficiales */
-    --fuente-titulos: 'Syne', sans-serif;
+    /* Fuentes Oficiales con Jerarquía Inteligente */
+    --fuente-titulos: 'Syne', 'Outfit', sans-serif;
+    --fuente-subtitulos: 'Outfit', 'Plus Jakarta Sans', sans-serif;
     --fuente-cuerpo: 'Plus Jakarta Sans', sans-serif;
     --fuente-tecnica: 'JetBrains Mono', monospace;
     

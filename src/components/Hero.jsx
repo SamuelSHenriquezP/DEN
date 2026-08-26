@@ -7,11 +7,11 @@ export default function Hero({ onOpenQuote }) {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.animacion-entrada', {
-        y: 35,
+        y: 40,
         opacity: 0,
-        duration: 1.1,
-        stagger: 0.14,
-        ease: 'power3.out',
+        duration: 1.25,
+        stagger: 0.12,
+        ease: 'power4.out',
       });
     }, containerRef);
 
@@ -26,7 +26,7 @@ export default function Hero({ onOpenQuote }) {
 
   return (
     <section id="inicio" className="seccion-inicio contenedor seccion-pantalla-completa" ref={containerRef}>
-      {/* INVENTARIO DE PRESENTACIÓN */}
+      {/* INVENTARIO DE PRESENTACIÓN DE MARCA */}
       <div className="insignia-encabezado-inicio animacion-entrada">
         <span className="icono-rayo">⚡</span>
         <span>"ENERGÍA SEGURA, SOLUCIONES CONFIABLES" • GUADARRAMA • MADRID</span>
@@ -42,7 +42,7 @@ export default function Hero({ onOpenQuote }) {
         Diseñamos, reformamos y certificamos instalaciones eléctricas complejas en viviendas residenciales y negocios. Especialistas en cuadros de protección REBT, integración de iluminación inteligente y energía solar fotovoltaica bajo la dirección directa del <strong className="destacado-dorado">Ingeniero Kerling Abraham Natale Hidalgo</strong>.
       </p>
 
-      {/* BOTONES DE INTERACCIÓN */}
+      {/* BOTONES DE INTERACCIÓN PRINCIPALES */}
       <div className="grupo-botones-accion animacion-entrada">
         <button onClick={onOpenQuote} className="boton-accion dorado-principal">
           <span>Solicitar Estudio o Presupuesto</span>
@@ -84,7 +84,7 @@ export default function Hero({ onOpenQuote }) {
         </div>
 
         <div className="item-indicador">
-          <span className="etiqueta-indicador">COBERURA DE SERVICIO</span>
+          <span className="etiqueta-indicador">COBERTURA DE SERVICIO</span>
           <span className="valor-indicador dorado">Comunidad de Madrid & Sierra</span>
         </div>
 

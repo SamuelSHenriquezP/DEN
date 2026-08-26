@@ -59,9 +59,19 @@ export default function AboutKerling({ onOpenQuote }) {
             </div>
           </div>
 
-          <button onClick={onOpenQuote} className="boton-accion dorado-principal">
-            <span>Agendar Consulta Técnica con Kerling</span>
-          </button>
+          <div style={{ marginTop: '28px', display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <button onClick={onOpenQuote} className="boton-accion dorado-principal">
+              <span>Agendar Consulta Técnica con Kerling</span>
+            </button>
+            <a
+              href="https://wa.me/34682178499"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="boton-accion estilo-whatsapp"
+            >
+              <span>Atención Directa por WhatsApp</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
