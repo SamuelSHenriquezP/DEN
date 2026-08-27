@@ -118,7 +118,7 @@ export default function SolarCalculator() {
                 style={{
                   height: '100%',
                   width: `${porcentajeIndependencia}%`,
-                  background: 'linear-gradient(90deg, #00E5FF 0%, #FFE600 100%)',
+                  background: 'linear-gradient(90deg, #0066FF 0%, #FFE600 100%)',
                   borderRadius: '100px',
                   transition: 'width 0.4s ease',
                   boxShadow: '0 0 12px rgba(255, 230, 0, 0.4)',

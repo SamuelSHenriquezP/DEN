@@ -189,7 +189,7 @@ export default function VisualCaseStudyModal({ projectKey, onClose, onOpenQuote 
               style={{
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '11px',
-                color: '#00E5FF',
+                color: 'var(--color-electrico)',
                 letterSpacing: '2px',
                 display: 'block',
                 marginBottom: '6px',

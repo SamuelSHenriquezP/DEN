@@ -10,9 +10,9 @@ export default function AboutKerling({ onOpenQuote }) {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from('.lado-imagen-perfil', {
-        x: -50,
+        x: -40,
         opacity: 0,
-        duration: 1,
+        duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -21,25 +21,13 @@ export default function AboutKerling({ onOpenQuote }) {
       });
 
       gsap.from('.lado-texto-perfil', {
-        x: 50,
+        x: 40,
         opacity: 0,
-        duration: 1,
+        duration: 0.9,
         ease: 'power3.out',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
-        },
-      });
-
-      gsap.from('.item-certificacion', {
-        scale: 0.9,
-        opacity: 0,
-        duration: 0.7,
-        stagger: 0.1,
-        ease: 'back.out(1.7)',
-        scrollTrigger: {
-          trigger: '.rejilla-certificaciones',
-          start: 'top 85%',
         },
       });
     }, sectionRef);
@@ -48,74 +36,240 @@ export default function AboutKerling({ onOpenQuote }) {
   }, []);
 
   return (
-    <section id="sobre-mi" className="seccion-perfil-ingeniero contenedor seccion-pantalla-completa" ref={sectionRef}>
-      <div className="estrucutra-perfil-principal">
-        <div className="lado-imagen-perfil">
+    <section
+      id="nosotros"
+      ref={sectionRef}
+      style={{
+        width: '100%',
+        height: '100vh',
+        maxHeight: '100vh',
+        backgroundColor: '#050A14',
+        paddingTop: 'clamp(85px, 12vh, 115px)',
+        paddingBottom: 'clamp(30px, 4vh, 50px)',
+        paddingLeft: '4vw',
+        paddingRight: '4vw',
+        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        boxSizing: 'border-box',
+        position: 'relative',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+      }}
+    >
+      {/* GLOW AMBIENTAL EN ESQUINA */}
+      <div
+        style={{
+          position: 'absolute',
+          top: '-100px',
+          left: '-100px',
+          width: '500px',
+          height: '500px',
+          borderRadius: '50%',
+          background: 'radial-gradient(circle, var(--color-electrico-glow) 0%, transparent 70%)',
+          pointerEvents: 'none',
+          opacity: 0.6,
+        }}
+      ></div>
+
+      <div
+        style={{
+          maxWidth: '1280px',
+          margin: '0 auto',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+          gap: '60px',
+          alignItems: 'center',
+          position: 'relative',
+          zIndex: 2,
+        }}
+      >
+        {/* FOTO E IDENTIDAD DEL INGENIERO */}
+        <div
+          className="lado-imagen-perfil"
+          style={{
+            position: 'relative',
+            borderRadius: '28px',
+            overflow: 'hidden',
+            border: '1px solid var(--color-electrico-borde)',
+            boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px var(--color-electrico-glow)',
+          }}
+        >
           <img
             src="/images/kerling_portrait.png"
-            alt="Ingeniero Kerling Abraham Natale Hidalgo — Especialista en Ingeniería Eléctrica en Madrid"
+            alt="Ingeniero Kerling Abraham Natale Hidalgo — Dirección Técnica DEN"
+            style={{
+              width: '100%',
+              height: 'auto',
+              maxHeight: '340px',
+              objectFit: 'cover',
+              display: 'block',
+            }}
           />
-          <div className="tarjeta-identidad-fotografia">
-            <span className="nombre-ingeniero-foto">ING. KERLING NATALE</span>
-            <span className="cargo-ingeniero-foto">INGENIERO ELECTRICISTA AUTORIZADO</span>
+
+          <div
+            style={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              right: 0,
+              padding: '16px',
+              background: 'linear-gradient(180deg, transparent 0%, rgba(3, 5, 8, 0.95) 100%)',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <span
+              style={{
+                fontFamily: 'var(--fuente-titulos)',
+                fontSize: '1rem',
+                fontWeight: 800,
+                color: '#FFFFFF',
+                letterSpacing: '1px',
+              }}
+            >
+              ING. KERLING ABRAHAM NATALE HIDALGO
+            </span>
+            <span
+              style={{
+                fontFamily: 'var(--fuente-tecnica)',
+                fontSize: '10px',
+                color: 'var(--color-electrico)',
+                letterSpacing: '1.5px',
+                marginTop: '2px',
+                fontWeight: 700,
+              }}
+            >
+              DIRECTOR TÉCNICO & INGENIERO ELECTRICISTA COLEGIADO
+            </span>
           </div>
         </div>
 
-        <div className="lado-texto-perfil">
-          <span className="insignia-seccion">
-            <span className="codigo-indice">05 //</span> DIRECCIÓN TÉCNICA PROFESIONAL
+        {/* TEXTO EDITORIAL NOSOTROS SOMOS */}
+        <div className="lado-texto-perfil" style={{ display: 'flex', flexDirection: 'column' }}>
+          <span
+            style={{
+              fontFamily: 'var(--fuente-tecnica)',
+              fontSize: '10px',
+              color: 'var(--color-electrico)',
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              marginBottom: '8px',
+              display: 'block',
+            }}
+          >
+            01 // NOSOTROS SOMOS • DIRECCIÓN TÉCNICA
           </span>
-          <h2 className="titulo-perfil">
-            Kerling Abraham <br />
-            <span className="texto-gradiente-dorado">Natale Hidalgo</span>
+
+          <h2
+            style={{
+              fontFamily: 'var(--fuente-titulos)',
+              fontSize: 'clamp(1.6rem, 2.8vw, 2.5rem)',
+              fontWeight: 800,
+              color: '#FFFFFF',
+              lineHeight: 1.0,
+              letterSpacing: '-0.02em',
+              textTransform: 'uppercase',
+              marginBottom: '12px',
+            }}
+          >
+            KERLING ABRAHAM <br />
+            <span style={{ color: 'var(--color-electrico)' }}>NATALE HIDALGO</span>
           </h2>
 
-          <p className="biografia-destacada">
-            Como ingeniero electricista especializado en baja tensión y automatización, concibo la instalación eléctrica como la columna vertebral de la seguridad y la eficiencia energética de cualquier espacio.
+          <p
+            style={{
+              fontFamily: 'var(--fuente-cuerpo)',
+              fontSize: '13px',
+              color: '#CBD5E1',
+              lineHeight: 1.5,
+              marginBottom: '10px',
+            }}
+          >
+            Como <strong>electricista especialista en Guadarrama, Madrid</strong>, no solo realizo el trabajo: garantizo su legalidad, seguridad y correcto funcionamiento. Cada proyecto viene respaldado por certificaciones oficiales.
           </p>
 
-          <p className="biografia-secundaria">
-            Desde nuestra sede en <strong>Guadarrama</strong>, presto servicio directo en toda la Comunidad de Madrid. Superviso y ejecuto personalmente cada reforma de cuadro, proyecto domótico e instalación fotovoltaica, garantizando el estricto cumplimiento del Reglamento Electrotécnico para Baja Tensión (REBT) y una comunicación transparente en todo momento.
-          </p>
-
-          {/* REJILLA DE CERTIFICACIONES TÉCNICAS */}
-          <div className="rejilla-certificaciones">
-            <div className="item-certificacion">
-              <span className="icono-certificacion">📜</span>
-              <h4>INSTALADOR AUTORIZADO</h4>
-              <p>Categoría Especialista en la Comunidad de Madrid</p>
-            </div>
-
-            <div className="item-certificacion">
-              <span className="icono-certificacion">⚡</span>
-              <h4>AUTOMATIZACIÓN LOXONE</h4>
-              <p>Socio Certificado en Sistemas Inteligentes</p>
-            </div>
-
-            <div className="item-certificacion">
-              <span className="icono-certificacion">☀️</span>
-              <h4>ENERGÍA FOTOVOLTAICA</h4>
-              <p>Instalador Acreditado de Paneles y Baterías</p>
-            </div>
-
-            <div className="item-certificacion">
-              <span className="icono-certificacion">🔍</span>
-              <h4>TERMOGRAFÍA INFRARROJA</h4>
-              <p>Diagnóstico Preventivo de Cuadros con FLIR</p>
-            </div>
+          {/* CUADRÍCULA DE QUALIFICACIONES TÉCNICAS AUTÉNTICAS */}
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '10px',
+              marginBottom: '20px',
+            }}
+          >
+            {[
+              { title: 'ELECTRICISTA CATEGORÍA ESPECIALISTA', sub: 'Comunidad de Madrid', icon: '⚡' },
+              { title: 'CERTIFICACIÓN DE INSTALACIONES', sub: 'Legalización y Seguridad REBT', icon: '📜' },
+              { title: 'CERTIFICACIÓN FOTOVOLTAICA', sub: 'Sistemas Solares y Baterías', icon: '☀️' },
+              { title: 'PARTNER LOXONE DOMÓTICA', sub: 'Instalación y Programación Smart', icon: '🤖' },
+            ].map((cert, idx) => (
+              <div
+                key={idx}
+                style={{
+                  background: '#0E1B2E',
+                  border: '1px solid var(--color-electrico-borde)',
+                  borderRadius: '12px',
+                  padding: '10px 12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                }}
+              >
+                <span style={{ fontSize: '16px' }}>{cert.icon}</span>
+                <div>
+                  <h4 style={{ fontFamily: 'var(--fuente-titulos)', fontSize: '10px', color: '#FFFFFF', margin: 0, fontWeight: 800 }}>
+                    {cert.title}
+                  </h4>
+                  <p style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '8.5px', color: '#94A3B8', margin: '2px 0 0 0' }}>
+                    {cert.sub}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
 
-          <div style={{ marginTop: '28px', display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <button onClick={onOpenQuote} className="boton-accion dorado-principal">
-              <span>Agendar Consulta Técnica con Kerling</span>
+          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+            <button
+              onClick={onOpenQuote}
+              style={{
+                background: 'var(--color-electrico)',
+                color: '#FFFFFF',
+                border: 'none',
+                padding: '16px 36px',
+                borderRadius: '100px',
+                fontFamily: 'var(--fuente-tecnica)',
+                fontSize: '12px',
+                fontWeight: 800,
+                letterSpacing: '1.5px',
+                cursor: 'pointer',
+                boxShadow: '0 0 25px var(--color-electrico-glow)',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.04)')}
+              onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
+            >
+              AGENDAR CONSULTA TÉCNICA →
             </button>
             <a
               href="https://wa.me/34682178499"
               target="_blank"
               rel="noopener noreferrer"
-              className="boton-accion estilo-whatsapp"
+              style={{
+                background: 'rgba(37, 211, 102, 0.1)',
+                border: '1px solid #25D366',
+                color: '#25D366',
+                padding: '16px 28px',
+                borderRadius: '100px',
+                fontFamily: 'var(--fuente-tecnica)',
+                fontSize: '12px',
+                fontWeight: 700,
+                letterSpacing: '1.5px',
+                textDecoration: 'none',
+              }}
             >
-              <span>Atención Directa por WhatsApp</span>
+              WHATSAPP DIRECTO →
             </a>
           </div>
         </div>

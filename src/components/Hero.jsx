@@ -117,7 +117,7 @@ export default function Hero({ onOpenQuote }) {
         <div
           style={{
             background: 'rgba(11, 17, 31, 0.85)',
-            border: '1px solid rgba(0, 229, 255, 0.2)',
+            border: '1px solid var(--color-electrico-borde)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',
@@ -125,7 +125,7 @@ export default function Hero({ onOpenQuote }) {
           }}
         >
           <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>📜</span>
-          <h4 style={{ fontSize: '13px', color: '#00E5FF', fontWeight: '700', marginBottom: '4px' }}>
+          <h4 style={{ fontSize: '13px', color: 'var(--color-electrico)', fontWeight: '700', marginBottom: '4px' }}>
             Boletines Eléctricos CIE
           </h4>
           <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
@@ -136,7 +136,7 @@ export default function Hero({ onOpenQuote }) {
         <div
           style={{
             background: 'rgba(11, 17, 31, 0.85)',
-            border: '1px solid rgba(0, 229, 255, 0.2)',
+            border: '1px solid var(--color-electrico-borde)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',
@@ -144,7 +144,7 @@ export default function Hero({ onOpenQuote }) {
           }}
         >
           <span style={{ fontSize: '1.2rem', marginBottom: '8px', display: 'block' }}>🏠</span>
-          <h4 style={{ fontSize: '13px', color: '#00E5FF', fontWeight: '700', marginBottom: '4px' }}>
+          <h4 style={{ fontSize: '13px', color: 'var(--color-electrico)', fontWeight: '700', marginBottom: '4px' }}>
             Automatización Loxone
           </h4>
           <p style={{ fontSize: '11px', color: '#CBD5E1', lineHeight: '1.5' }}>
@@ -155,7 +155,7 @@ export default function Hero({ onOpenQuote }) {
         <div
           style={{
             background: 'rgba(11, 17, 31, 0.85)',
-            border: '1px solid rgba(0, 229, 255, 0.2)',
+            border: '1px solid var(--color-electrico-borde)',
             padding: '20px',
             borderRadius: '20px',
             backdropFilter: 'blur(12px)',

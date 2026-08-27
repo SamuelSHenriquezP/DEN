@@ -82,15 +82,9 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
 
   const handleCardMouseMove = (e) => {
     const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) / (rect.width / 2);
-    const y = (e.clientY - rect.top - rect.height / 2) / (rect.height / 2);
-
     gsap.to(card, {
-      rotateY: x * 8,
-      rotateX: -y * 8,
-      transformPerspective: 1200,
-      duration: 0.6,
+      y: -6,
+      duration: 0.4,
       ease: 'power2.out',
     });
   };
@@ -98,10 +92,11 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
   const handleCardMouseLeave = (e) => {
     const card = e.currentTarget;
     gsap.to(card, {
+      y: 0,
       rotateY: 0,
       rotateX: 0,
-      duration: 1,
-      ease: 'power3.out',
+      duration: 0.4,
+      ease: 'power2.out',
     });
   };
 
@@ -143,7 +138,7 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
           }}
         >
           PROYECTOS Y <br />
-          <span style={{ color: '#FFEE00' }}>CASOS DE INGENIERÍA</span>
+          <span style={{ color: 'var(--color-electrico)' }}>CASOS DE INGENIERÍA</span>
         </h2>
 
         {/* BARRA DE FILTRADO DINÁMICA DE PROYECTOS */}
@@ -166,9 +161,10 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
               style={{
-                background: activeCategory === cat.id ? '#FFEE00' : 'rgba(11, 17, 29, 0.8)',
-                color: activeCategory === cat.id ? '#030508' : '#94A3B8',
-                border: activeCategory === cat.id ? '1px solid #FFEE00' : '1px solid rgba(255, 255, 255, 0.1)',
+                background: activeCategory === cat.id ? 'var(--color-electrico)' : 'rgba(11, 17, 29, 0.8)',
+                color: activeCategory === cat.id ? '#FFFFFF' : '#94A3B8',
+                border: activeCategory === cat.id ? '1px solid var(--color-electrico)' : '1px solid rgba(255, 255, 255, 0.1)',
+                boxShadow: activeCategory === cat.id ? '0 0 20px var(--color-electrico-glow)' : 'none',
                 padding: '10px 22px',
                 borderRadius: '100px',
                 fontFamily: 'var(--fuente-tecnica)',
@@ -194,7 +190,6 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
           width: '100%',
           maxWidth: '1280px',
           margin: '0 auto',
-          perspective: '1400px',
         }}
       >
         {proyectosFiltrados.map((proj) => {
@@ -214,16 +209,15 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
                 borderRadius: '28px',
                 overflow: 'hidden',
                 cursor: 'pointer',
-                border: isBlueprint ? '1px solid #00E5FF' : '1px solid rgba(255, 255, 255, 0.12)',
+                border: isBlueprint ? '1px solid var(--color-electrico)' : '1px solid rgba(255, 255, 255, 0.12)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 padding: '40px',
                 boxSizing: 'border-box',
                 background: '#0B111D',
-                transformStyle: 'preserve-3d',
-                transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
-                boxShadow: isBlueprint ? '0 0 40px rgba(0, 229, 255, 0.25)' : '0 20px 50px rgba(0,0,0,0.8)',
+                transition: 'border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease',
+                boxShadow: isBlueprint ? '0 0 40px var(--color-electrico-glow)' : '0 20px 50px rgba(0,0,0,0.8)',
               }}
             >
               {/* IMAGEN DE FONDO O VISTA BLUEPRINT ESQUEMA CAD 3D */}
@@ -254,7 +248,7 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
                     width: '100%',
                     height: '100%',
                     backgroundColor: '#050B14',
-                    backgroundImage: 'radial-gradient(#00E5FF 1px, transparent 1px)',
+                    backgroundImage: 'radial-gradient(var(--color-electrico) 1px, transparent 1px)',
                     backgroundSize: '24px 24px',
                     opacity: 0.9,
                     zIndex: 1,
@@ -272,7 +266,7 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
                     style={{
                       fontFamily: 'var(--fuente-tecnica)',
                       fontSize: '14px',
-                      color: '#00E5FF',
+                      color: 'var(--color-electrico)',
                       fontWeight: 800,
                       letterSpacing: '3px',
                       marginBottom: '8px',
@@ -339,9 +333,9 @@ export default function CinematicProjectsShowcase({ onOpenModal }) {
                   <button
                     onClick={(e) => toggleViewMode(e, proj.clave)}
                     style={{
-                      background: isBlueprint ? '#00E5FF' : 'rgba(3, 5, 8, 0.85)',
-                      color: isBlueprint ? '#030508' : '#00E5FF',
-                      border: '1px solid #00E5FF',
+                      background: isBlueprint ? 'var(--color-electrico)' : 'rgba(3, 5, 8, 0.85)',
+                      color: isBlueprint ? '#FFFFFF' : 'var(--color-electrico)',
+                      border: '1px solid var(--color-electrico)',
                       padding: '8px 18px',
                       borderRadius: '100px',
                       fontFamily: 'var(--fuente-tecnica)',

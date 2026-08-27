@@ -1,11 +1,14 @@
 import React from 'react';
 
-export default function DockNav({ activeSection, onOpenQuote }) {
-  const scrollToSection = (e, id) => {
-    e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+export default function DockNav({ activeIndex, onNavigate, onOpenQuote }) {
+  const sections = [
+    { id: 'inicio', label: 'INICIO' },
+    { id: 'servicios', label: 'SERVICIOS' },
+    { id: 'domotica-loxone', label: 'LOXONE' },
+    { id: 'nosotros', label: 'SOBRE MÍ' },
+    { id: 'certificaciones', label: 'CERTIFICACIONES' },
+    { id: 'contacto', label: 'CONTACTO' },
+  ];
 
   return (
     <header
@@ -21,26 +24,27 @@ export default function DockNav({ activeSection, onOpenQuote }) {
     >
       <nav
         style={{
-          background: 'rgba(3, 5, 8, 0.85)',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
+          background: 'rgba(3, 5, 8, 0.88)',
+          border: '1px solid rgba(255, 255, 255, 0.14)',
           backdropFilter: 'blur(16px)',
           borderRadius: '100px',
-          padding: '8px 16px',
+          padding: '8px 18px',
           display: 'flex',
           alignItems: 'center',
-          gap: '24px',
-          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6)',
+          gap: '20px',
+          boxShadow: '0 10px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 163, 255, 0.1)',
         }}
       >
         {/* LOGO SIMBÓLICO DEN */}
-        <a
-          href="#inicio"
-          onClick={(e) => scrollToSection(e, 'inicio')}
+        <button
+          onClick={() => onNavigate(0)}
           style={{
             display: 'flex',
             alignItems: 'center',
             gap: '8px',
-            textDecoration: 'none',
+            background: 'none',
+            border: 'none',
+            cursor: 'pointer',
           }}
         >
           <span
@@ -48,8 +52,8 @@ export default function DockNav({ activeSection, onOpenQuote }) {
               width: '8px',
               height: '8px',
               borderRadius: '50%',
-              backgroundColor: '#00E5FF',
-              boxShadow: '0 0 10px #00E5FF',
+              backgroundColor: 'var(--color-electrico)',
+              boxShadow: '0 0 10px var(--color-electrico)',
             }}
           ></span>
           <span
@@ -63,82 +67,58 @@ export default function DockNav({ activeSection, onOpenQuote }) {
           >
             DEN
           </span>
-        </a>
+        </button>
 
-        {/* SECCIONES */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '18px' }}>
-          <a
-            href="#proyectos"
-            onClick={(e) => scrollToSection(e, 'proyectos')}
-            style={{
-              fontFamily: 'var(--fuente-tecnica)',
-              fontSize: '10px',
-              fontWeight: 700,
-              color: '#CBD5E1',
-              textDecoration: 'none',
-              letterSpacing: '1.5px',
-              transition: 'color 0.3s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
-          >
-            WORK
-          </a>
-
-          <a
-            href="#servicios"
-            onClick={(e) => scrollToSection(e, 'servicios')}
-            style={{
-              fontFamily: 'var(--fuente-tecnica)',
-              fontSize: '10px',
-              fontWeight: 700,
-              color: '#CBD5E1',
-              textDecoration: 'none',
-              letterSpacing: '1.5px',
-              transition: 'color 0.3s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
-          >
-            SERVICES
-          </a>
-
-          <a
-            href="#contacto"
-            onClick={(e) => scrollToSection(e, 'contacto')}
-            style={{
-              fontFamily: 'var(--fuente-tecnica)',
-              fontSize: '10px',
-              fontWeight: 700,
-              color: '#CBD5E1',
-              textDecoration: 'none',
-              letterSpacing: '1.5px',
-              transition: 'color 0.3s ease',
-            }}
-            onMouseEnter={(e) => (e.currentTarget.style.color = '#FFEE00')}
-            onMouseLeave={(e) => (e.currentTarget.style.color = '#CBD5E1')}
-          >
-            CONTACT
-          </a>
+        {/* SECCIONES DE LA WEB CON INDICADOR ACTIVO */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          {sections.map((sec, idx) => {
+            const isActive = activeIndex === idx;
+            return (
+              <button
+                key={sec.id}
+                onClick={() => onNavigate(idx)}
+                style={{
+                  fontFamily: 'var(--fuente-tecnica)',
+                  fontSize: '10px',
+                  fontWeight: 800,
+                  color: isActive ? 'var(--color-electrico)' : '#94A3B8',
+                  background: 'none',
+                  border: 'none',
+                  cursor: 'pointer',
+                  letterSpacing: '1.2px',
+                  padding: '4px 8px',
+                  borderRadius: '100px',
+                  transition: 'all 0.3s ease',
+                  borderBottom: isActive ? '2px solid var(--color-electrico)' : '2px solid transparent',
+                }}
+              >
+                {sec.label}
+              </button>
+            );
+          })}
         </div>
 
-        {/* CTA RAPIDO */}
+        {/* BOTÓN PRESUPUESTO */}
         <button
           onClick={onOpenQuote}
           style={{
-            background: '#00E5FF',
-            color: '#030508',
+            backgroundColor: 'var(--color-electrico)',
+            color: '#FFFFFF',
             border: 'none',
-            padding: '6px 16px',
             borderRadius: '100px',
+            padding: '8px 18px',
             fontFamily: 'var(--fuente-tecnica)',
-            fontSize: '9px',
+            fontSize: '10px',
             fontWeight: 800,
             letterSpacing: '1px',
             cursor: 'pointer',
+            boxShadow: '0 0 15px var(--color-electrico-glow)',
+            transition: 'transform 0.3s ease',
           }}
+          onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+          onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
         >
-          POWER ON →
+          PRESUPUESTO ⚡
         </button>
       </nav>
     </header>

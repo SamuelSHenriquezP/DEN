@@ -39,7 +39,7 @@ export default function BeforeAfterSlider() {
             style={{
               fontFamily: 'var(--fuente-tecnica)',
               fontSize: '11px',
-              color: '#FFEE00',
+              color: 'var(--color-electrico)',
               letterSpacing: '3px',
               textTransform: 'uppercase',
               display: 'block',
@@ -60,7 +60,7 @@ export default function BeforeAfterSlider() {
             }}
           >
             TRANSFORMACIÓN DE CUADROS: <br />
-            <span style={{ color: '#FFEE00' }}>ANTES vs DESPUÉS</span>
+            <span style={{ color: 'var(--color-electrico)' }}>ANTES vs DESPUÉS</span>
           </h2>
           <p
             style={{
@@ -70,7 +70,7 @@ export default function BeforeAfterSlider() {
               marginTop: '12px',
             }}
           >
-            Arrastra la barra vertical para comparar una instalación anticuada frente a la reforma de potencia bajo normativa REBT con termografía preventivas.
+            Arrastra la barra vertical para comparar una instalación anticuada frente a la reforma de potencia bajo normativa REBT con termografía preventiva.
           </p>
         </div>
 
@@ -89,8 +89,8 @@ export default function BeforeAfterSlider() {
             overflow: 'hidden',
             cursor: 'ew-resize',
             userSelect: 'none',
-            border: '1px solid rgba(255, 238, 0, 0.3)',
-            boxShadow: '0 0 40px rgba(0, 0, 0, 0.8)',
+            border: '1px solid var(--color-electrico-borde)',
+            boxShadow: '0 0 40px var(--color-electrico-glow), 0 20px 50px rgba(0, 0, 0, 0.8)',
           }}
         >
           {/* FOTO DESPUÉS (FONDO BASE FULL) */}
@@ -111,8 +111,8 @@ export default function BeforeAfterSlider() {
               position: 'absolute',
               top: '24px',
               right: '24px',
-              background: 'rgba(0, 229, 255, 0.9)',
-              color: '#030508',
+              background: 'var(--color-electrico)',
+              color: '#FFFFFF',
               fontFamily: 'var(--fuente-tecnica)',
               fontSize: '11px',
               fontWeight: 800,
@@ -173,8 +173,8 @@ export default function BeforeAfterSlider() {
               bottom: 0,
               left: `${sliderPos}%`,
               width: '3px',
-              backgroundColor: '#FFEE00',
-              boxShadow: '0 0 15px #FFEE00, 0 0 30px #FFEE00',
+              backgroundColor: 'var(--color-electrico)',
+              boxShadow: '0 0 15px var(--color-electrico), 0 0 30px var(--color-electrico-glow)',
               transform: 'translateX(-50%)',
               zIndex: 4,
             }}
@@ -190,14 +190,14 @@ export default function BeforeAfterSlider() {
                 height: '40px',
                 borderRadius: '50%',
                 backgroundColor: '#030508',
-                border: '2px solid #FFEE00',
+                border: '2px solid var(--color-electrico)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#FFEE00',
+                color: 'var(--color-electrico)',
                 fontSize: '14px',
                 fontWeight: 'bold',
-                boxShadow: '0 0 20px rgba(255, 238, 0, 0.6)',
+                boxShadow: '0 0 20px var(--color-electrico-glow)',
               }}
             >
               ↔

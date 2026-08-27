@@ -10,7 +10,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
   const onlineContentRef = useRef(null);
   const electricCurtainRef = useRef(null);
 
-  // 1. ANIMACIÓN DE CARGA AL ABRIR LA PÁGINA
+  // 1. ANIMACIÓN DE CARGA Y MOVIMIENTO MÁS LENTO Y SUAVE DE LA LÍNEA ELÉCTRICA
   useEffect(() => {
     if (standbyContainerRef.current) {
       gsap.fromTo(
@@ -19,15 +19,39 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
         {
           y: 0,
           opacity: 1,
-          duration: 1.2,
+          duration: 1.4,
           stagger: 0.18,
           ease: 'power3.out',
         }
       );
     }
+
+    if (nataleRef.current) {
+      gsap.fromTo(
+        nataleRef.current,
+        { opacity: 0.3, textShadow: '0 0 5px rgba(0, 163, 255, 0.2)' },
+        {
+          opacity: 0.8,
+          textShadow: '0 0 25px var(--color-electrico-glow)',
+          duration: 2.2,
+          repeat: -1,
+          yoyo: true,
+          ease: 'power1.inOut',
+        }
+      );
+    }
+
+    if (lineRef.current) {
+      gsap.to(lineRef.current, {
+        strokeDashoffset: -2400,
+        duration: 7.5, // MÁS LENTO Y FLUIDO
+        repeat: -1,
+        ease: 'none',
+      });
+    }
   }, []);
 
-  // 2. SECUENCIA SIMULTÁNEA: MIENTRAS LA LÍNEA VA BAJANDO, LA PANTALLA AZUL APARECE AL MISMO TIEMPO
+  // 2. SECUENCIA DE ACTIVACIÓN CON IGNICIÓN MEJORADA Y LÍNEA MÁS LENTA
   const handleActivatePower = () => {
     const line = lineRef.current;
     const nataleText = nataleRef.current;
@@ -35,112 +59,102 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
 
     const mainTl = gsap.timeline();
 
-    // ETAPA 1: PARPADEO LENTO DE NATALE EN CIAN
+    // ETAPA 1: PARPADEO NORMAL DEL NOMBRE NATALE (IGUAL QUE AL PRINCIPIO)
     if (nataleText) {
+      gsap.killTweensOf(nataleText);
       mainTl
         .to(nataleText, {
-          color: '#00E5FF',
-          textShadow: '0 0 30px #00E5FF, 0 0 60px #00E5FF',
-          duration: 0.35,
-          ease: 'power2.in',
+          opacity: 0.2,
+          color: 'var(--color-electrico)',
+          duration: 0.1,
         })
         .to(nataleText, {
-          opacity: 0.3,
+          opacity: 1,
+          textShadow: '0 0 35px var(--color-electrico-glow)',
           duration: 0.15,
         })
         .to(nataleText, {
-          color: '#00E5FF',
+          opacity: 0.3,
+          duration: 0.08,
+        })
+        .to(nataleText, {
           opacity: 1,
-          textShadow: '0 0 50px #00E5FF',
-          duration: 0.4,
-          ease: 'power2.out',
+          color: 'var(--color-electrico)',
+          textShadow: '0 0 55px var(--color-electrico), 0 0 95px var(--color-electrico-glow)',
+          duration: 0.2,
         });
     }
 
-    // ETAPA 2: LA LÍNEA VA BAJANDO Y LA PANTALLA AZUL APARECE SIMULTÁNEAMENTE EN PARALELO
+    // ETAPA 2: MOVIMIENTO MÁS LENTO DE LA LÍNEA Y DESPLIEGUE DE PANTALLA AZUL (1.6s)
     if (line && curtain) {
       mainTl
-        // 1. LA LÍNEA RECORRE EL CANVAS HACIA ABAJO (2000 -> 0)
-        .to(line, {
-          strokeDashoffset: 0,
-          duration: 0.95,
-          ease: 'power2.inOut',
-        })
-        // 2. AL MISMO TIEMPO QUE LA LÍNEA VA BAJANDO, LA PANTALLA AZUL APARECE Y DESPLIEGA
+        // 1. LA LÍNEA RECORRE EL CANVAS DE FORMA SUAVE Y LENTA
+        .to(
+          line,
+          {
+            strokeDashoffset: 0,
+            duration: 1.6, // MÁS LENTO Y ELEGANTE
+            ease: 'power2.inOut',
+          },
+          '+=0.1'
+        )
+        // 2. SIMULTÁNEAMENTE LA PANTALLA AZUL SE EXPANDE
         .to(
           curtain,
           {
             clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
-            duration: 0.95,
+            duration: 1.6,
             ease: 'power2.inOut',
           },
-          '<' // '<' SIGNIFICA QUE INICIA EXACTAMENTE AL MISMO TIEMPO QUE EL PASO ANTERIOR (LA LÍNEA BAJANDO)
+          '<'
         )
         .call(() => {
           setIsSystemOnline(true);
           if (onPowerOn) onPowerOn();
 
-          // REVELADO DE TÍTULOS Y DESAPARICIÓN DE LÍNEA SIGUIENDO SU TRAZADO HACIA LA DERECHA
+          if (line) {
+            gsap.set(line, { opacity: 0 });
+          }
+
           setTimeout(() => {
             if (onlineContentRef.current) {
               const words = onlineContentRef.current.querySelectorAll('.foco-palabra-dramatica');
               const sub = onlineContentRef.current.querySelectorAll('.revelar-sub-dramatico');
 
-              const titleTl = gsap.timeline();
-
-              titleTl
-                .fromTo(
-                  words,
-                  {
-                    y: 60,
-                    opacity: 0,
-                    scale: 0.88,
-                    filter: 'drop-shadow(0 0 50px #00E5FF)',
-                  },
-                  {
-                    y: 0,
-                    opacity: 1,
-                    scale: 1,
-                    filter: 'drop-shadow(0 0 15px rgba(0, 229, 255, 0.4))',
-                    duration: 1.2,
-                    stagger: 0.22,
-                    ease: 'power4.out',
-                  }
-                )
-                .fromTo(
-                  sub,
-                  { y: 30, opacity: 0 },
-                  {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.9,
-                    stagger: 0.12,
-                    ease: 'power3.out',
-                  },
-                  '-=0.6'
-                )
-                // LA LÍNEA AZUL CONTINÚA SU TRAZADO Y FLUYE HACIA LA DERECHA (0 -> -2000)
-                .to(
-                  line,
-                  {
-                    strokeDashoffset: -2000,
-                    opacity: 0.2,
-                    duration: 1.1,
-                    ease: 'power2.inOut',
-                  },
-                  '-=0.7'
-                )
-                .to(line, {
+              gsap.fromTo(
+                words,
+                {
+                  y: 40,
                   opacity: 0,
-                  duration: 0.3,
-                });
+                },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 1.2,
+                  stagger: 0.18,
+                  ease: 'power3.out',
+                }
+              );
+
+              gsap.fromTo(
+                sub,
+                { y: 25, opacity: 0 },
+                {
+                  y: 0,
+                  opacity: 1,
+                  duration: 1.0,
+                  stagger: 0.12,
+                  ease: 'power3.out',
+                  delay: 0.2,
+                }
+              );
             }
           }, 30);
         })
-        // DISOLUCIÓN DE LA CORTINA ELÉCTRICA
+        // 3. DISOLUCIÓN SUAVE DE LA PANTALLA
         .to(curtain, {
           clipPath: 'polygon(0 100%, 100% 100%, 100% 100%, 0 100%)',
-          duration: 0.65,
+          duration: 0.9,
           ease: 'power3.out',
         });
     } else {
@@ -182,16 +196,16 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           left: 0,
           width: '100%',
           height: '100%',
-          backgroundColor: '#00E5FF',
+          backgroundColor: 'var(--color-electrico)',
           backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.4) 0%, transparent 70%)',
           clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 0)',
           pointerEvents: 'none',
           zIndex: 90,
-          boxShadow: 'inset 0 0 100px #00E5FF, 0 0 150px #00E5FF',
+          boxShadow: 'inset 0 0 100px var(--color-electrico), 0 0 150px var(--color-electrico)',
         }}
       ></div>
 
-      {/* SVG DE LÍNEA ELÉCTRICA PERMANENTE EN CIAN ELÉCTRICO (#00E5FF) */}
+      {/* SVG DE LÍNEA ELÉCTRICA PERMANENTE EN MOVIMIENTO CONTINUO (VAR(--COLOR-ELECTRICO)) */}
       <svg
         style={{
           position: 'absolute',
@@ -207,11 +221,11 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
           ref={lineRef}
           d="M 0,120 L 320,120 L 480,320 L 920,320 L 1150,620 L 1920,620"
           fill="none"
-          stroke="#00E5FF"
+          stroke="var(--color-electrico)"
           strokeWidth="3.5"
-          strokeDasharray="2000"
-          strokeDashoffset="2000"
-          filter="drop-shadow(0 0 20px #00E5FF)"
+          strokeDasharray="400 800"
+          strokeDashoffset="0"
+          filter="drop-shadow(0 0 20px var(--color-electrico))"
         />
       </svg>
 
@@ -227,7 +241,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             zIndex: 10,
           }}
         >
-          {/* NODO STANDBY EN CIAN ELÉCTRICO */}
+          {/* NODO STANDBY EN AZUL ELÉCTRICO */}
           <div
             style={{
               display: 'flex',
@@ -246,8 +260,8 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: '#00E5FF',
-                boxShadow: '0 0 16px #00E5FF',
+                backgroundColor: 'var(--color-electrico)',
+                boxShadow: '0 0 16px var(--color-electrico)',
               }}
             ></span>
             <span>SYSTEM // OFF</span>
@@ -266,7 +280,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             DYNAMIC ELECTRIC <br />
-            {/* TEXTO NATALE QUE SE ENCIENDE LENTAMENTE EN CIAN */}
+            {/* TEXTO NATALE QUE SE ENCIENDE LENTAMENTE EN AZUL */}
             <span
               ref={nataleRef}
               style={{
@@ -283,8 +297,8 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             onClick={handleActivatePower}
             style={{
               background: 'transparent',
-              border: '2px solid #00E5FF',
-              color: '#00E5FF',
+              border: '2px solid var(--color-electrico)',
+              color: 'var(--color-electrico)',
               padding: '20px 52px',
               borderRadius: '100px',
               fontFamily: 'var(--fuente-tecnica)',
@@ -295,18 +309,18 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               display: 'inline-flex',
               alignItems: 'center',
               gap: '18px',
-              boxShadow: '0 0 35px rgba(0, 229, 255, 0.35)',
+              boxShadow: '0 0 35px var(--color-electrico-borde)',
               transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.background = '#00E5FF';
-              e.currentTarget.style.color = '#030508';
-              e.currentTarget.style.boxShadow = '0 0 65px rgba(0, 229, 255, 0.85)';
+              e.currentTarget.style.background = 'var(--color-electrico)';
+              e.currentTarget.style.color = '#FFFFFF';
+              e.currentTarget.style.boxShadow = '0 0 65px var(--color-electrico-glow)';
             }}
             onMouseLeave={(e) => {
               e.currentTarget.style.background = 'transparent';
-              e.currentTarget.style.color = '#00E5FF';
-              e.currentTarget.style.boxShadow = '0 0 35px rgba(0, 229, 255, 0.35)';
+              e.currentTarget.style.color = 'var(--color-electrico)';
+              e.currentTarget.style.boxShadow = '0 0 35px var(--color-electrico-borde)';
             }}
           >
             <span>POWER ON</span>
@@ -327,20 +341,20 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             zIndex: 10,
           }}
         >
-          {/* BADGE SYSTEM ONLINE EN CIAN */}
+          {/* BADGE SYSTEM ONLINE EN AZUL */}
           <div
             className="revelar-sub-dramatico"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: '10px',
-              background: 'rgba(0, 229, 255, 0.08)',
-              border: '1px solid rgba(0, 229, 255, 0.4)',
+              background: 'rgba(0, 136, 255, 0.08)',
+              border: '1px solid var(--color-electrico-borde)',
               padding: '8px 22px',
               borderRadius: '100px',
               fontFamily: 'var(--fuente-tecnica)',
               fontSize: '11px',
-              color: '#00E5FF',
+              color: 'var(--color-electrico)',
               letterSpacing: '2px',
               marginBottom: '40px',
             }}
@@ -350,54 +364,58 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                backgroundColor: '#00E5FF',
-                boxShadow: '0 0 16px #00E5FF',
+                backgroundColor: 'var(--color-electrico)',
+                boxShadow: '0 0 16px var(--color-electrico)',
               }}
             ></span>
-            <span>SYSTEM // ONLINE • MADRID & SIERRA</span>
+            <span>ENERGÍA SEGURA, SOLUCIONES CONFIABLES • GUADARRAMA, MADRID</span>
           </div>
 
-          {/* EDITORIAL HUGE TYPOGRAPHY - CIAN ELÉCTRICO DRAMÁTICO */}
+          {/* TITULAR PROPORCIONADO Y ELEGANTE */}
           <h1
             style={{
               fontFamily: 'var(--fuente-titulos)',
-              fontSize: 'clamp(3.2rem, 8.5vw, 8rem)',
+              fontSize: 'clamp(2.2rem, 4.5vw, 4.2rem)',
               fontWeight: 800,
-              lineHeight: 0.92,
-              letterSpacing: '-0.04em',
-              marginBottom: '32px',
-              textTransform: 'uppercase',
+              lineHeight: 1.05,
+              letterSpacing: '-0.03em',
+              marginBottom: '28px',
+              maxWidth: '920px',
             }}
           >
-            <div className="foco-palabra-dramatica" style={{ color: '#FFFFFF' }}>
-              ENERGÍA.
-            </div>
-            <div
+            <span className="foco-palabra-dramatica" style={{ color: '#FFFFFF', display: 'inline-block', marginRight: '16px' }}>
+              SOLUCIONES
+            </span>
+            <span
               className="foco-palabra-dramatica"
               style={{
                 color: 'transparent',
-                WebkitTextStroke: '1.8px #00E5FF',
-                filter: 'drop-shadow(0 0 25px rgba(0, 229, 255, 0.5))',
+                WebkitTextStroke: '1.5px var(--color-electrico)',
+                filter: 'drop-shadow(0 0 20px var(--color-electrico-glow))',
+                display: 'inline-block',
+                marginRight: '16px',
               }}
             >
-              PRECISIÓN.
-            </div>
-            <div
+              ELÉCTRICAS
+            </span>
+            <br />
+            <span
               className="foco-palabra-dramatica"
               style={{
-                color: '#00E5FF',
-                textShadow: '0 0 35px rgba(0, 229, 255, 0.6), 0 0 70px rgba(0, 229, 255, 0.3)',
+                color: 'var(--color-electrico)',
+                textShadow: '0 0 30px var(--color-electrico-glow)',
+                display: 'inline-block',
               }}
             >
-              CONFIANZA.
-            </div>
+              PROFESIONALES Y CERTIFICADAS
+            </span>
           </h1>
 
           {/* ETIQUETA INGENIERO KERLING NATALE */}
           <div
             className="revelar-sub-dramatico"
             style={{
-              maxWidth: '680px',
+              maxWidth: '720px',
               fontSize: 'clamp(1rem, 1.3vw, 1.25rem)',
               color: '#94A3B8',
               lineHeight: '1.65',
@@ -405,13 +423,13 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               marginBottom: '48px',
             }}
           >
-            Ingeniería eléctrica de alta fidelidad, automatización Loxone Certified Partner, instalaciones fotovoltaicas con acumulación LFP y certificados oficiales en la Comunidad de Madrid por el{' '}
-            <strong style={{ color: '#00E5FF', fontWeight: 700 }}>
+            Instalaciones eléctricas, fotovoltaica, domótica avanzada Loxone, telecomunicaciones, certificaciones e inspecciones por el{' '}
+            <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>
               Ingeniero Kerling Abraham Natale Hidalgo
-            </strong>.
+            </strong> (Electricista Categoría Especialista · Guadarrama, Madrid). Garantizando máxima seguridad y legalidad.
           </div>
 
-          {/* BOTONES DE ACCIÓN EN CIAN ELÉCTRICO */}
+          {/* BOTONES DE ACCIÓN EN AZUL REAL */}
           <div
             className="revelar-sub-dramatico"
             style={{
@@ -419,13 +437,14 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               gap: '20px',
               flexWrap: 'wrap',
               alignItems: 'center',
+              marginBottom: '36px',
             }}
           >
             <button
               onClick={onOpenQuote}
               style={{
-                background: '#00E5FF',
-                color: '#030508',
+                background: 'var(--color-electrico)',
+                color: '#FFFFFF',
                 border: 'none',
                 padding: '20px 44px',
                 borderRadius: '100px',
@@ -434,21 +453,30 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 fontWeight: 800,
                 letterSpacing: '2px',
                 cursor: 'pointer',
-                boxShadow: '0 0 35px rgba(0, 229, 255, 0.6)',
+                boxShadow: '0 0 35px var(--color-electrico-glow)',
                 transition: 'all 0.3s ease',
               }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'scale(1.05)';
+                e.currentTarget.style.boxShadow = '0 0 50px var(--color-electrico-glow)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'scale(1)';
+                e.currentTarget.style.boxShadow = '0 0 35px var(--color-electrico-glow)';
+              }}
             >
-              INICIAR PROYECTO →
+              SOLICITAR PRESUPUESTO CERRADO →
             </button>
 
             <a
-              href="#proyectos"
-              onClick={(e) => scrollToSection(e, 'proyectos')}
+              href="https://wa.me/34682178499"
+              target="_blank"
+              rel="noopener noreferrer"
               style={{
-                background: 'transparent',
-                border: '1px solid rgba(0, 229, 255, 0.4)',
-                color: '#FFFFFF',
-                padding: '20px 44px',
+                background: 'rgba(37, 211, 102, 0.1)',
+                border: '1px solid #25D366',
+                color: '#25D366',
+                padding: '20px 36px',
                 borderRadius: '100px',
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '12px',
@@ -458,8 +486,47 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 transition: 'all 0.3s ease',
               }}
             >
-              EXPLORAR CASOS →
+              WHATSAPP DIRECTO →
             </a>
+          </div>
+
+          {/* BARRA DESTACADA DE BENEFICIOS Y CONFIANZA PARA EL COMPRADOR */}
+          <div
+            className="revelar-sub-dramatico"
+            style={{
+              display: 'flex',
+              gap: '16px',
+              flexWrap: 'wrap',
+              paddingTop: '20px',
+              borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            }}
+          >
+            {[
+              { text: 'Ahorro Fotovoltaico hasta 95%', icon: '☀️' },
+              { text: 'Boletines Oficiales CIE 24-48h', icon: '📋' },
+              { text: 'Domótica Loxone Sin Cuotas', icon: '⚡' },
+              { text: 'Revisión Termográfica FLIR', icon: '🔍' },
+            ].map((b, i) => (
+              <div
+                key={i}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  fontFamily: 'var(--fuente-tecnica)',
+                  fontSize: '10px',
+                  color: '#CBD5E1',
+                  letterSpacing: '1px',
+                  background: 'rgba(11, 17, 29, 0.6)',
+                  border: '1px solid var(--color-electrico-borde)',
+                  padding: '6px 14px',
+                  borderRadius: '100px',
+                }}
+              >
+                <span>{b.icon}</span>
+                <span style={{ fontWeight: 700, color: '#FFFFFF' }}>{b.text}</span>
+              </div>
+            ))}
           </div>
         </div>
       )}

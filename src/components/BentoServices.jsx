@@ -33,26 +33,21 @@ export default function BentoServices() {
 
   const handleMouseMove = (e) => {
     const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
     gsap.to(card, {
-      rotateY: (x / rect.width) * 5,
-      rotateX: (-y / rect.height) * 5,
-      transformPerspective: 1200,
-      duration: 0.7,
-      ease: 'power3.out',
+      y: -5,
+      duration: 0.4,
+      ease: 'power2.out',
     });
   };
 
   const handleMouseLeave = (e) => {
     const card = e.currentTarget;
     gsap.to(card, {
+      y: 0,
       rotateY: 0,
       rotateX: 0,
-      duration: 1,
-      ease: 'power4.out',
+      duration: 0.4,
+      ease: 'power2.out',
     });
   };
 
@@ -134,7 +129,7 @@ export default function BentoServices() {
             <img src="/images/villa_loxone.png" alt="Domótica Loxone Villa" className="imagen-fondo-tarjeta" style={{ opacity: 0.65 }} />
             <div className="capa-sombra-tarjeta"></div>
             <div style={{ position: 'absolute', bottom: '24px', left: '24px', right: '24px', zIndex: 2 }}>
-              <span style={{ fontSize: '10px', color: '#00E5FF', fontWeight: '700', fontFamily: 'var(--fuente-tecnica)', letterSpacing: '1px' }}>
+              <span style={{ fontSize: '10px', color: '#0066FF', fontWeight: '700', fontFamily: 'var(--fuente-tecnica)', letterSpacing: '1px' }}>
                 ⚡ INTEGRACIÓN ARQUITECTÓNICA
               </span>
               <h4 style={{ fontSize: '1.1rem', color: '#fff', fontWeight: '700', marginTop: '4px', fontFamily: 'var(--fuente-titulos)' }}>

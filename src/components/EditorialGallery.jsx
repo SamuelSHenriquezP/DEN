@@ -44,7 +44,7 @@ export default function EditorialGallery() {
             style={{
               fontFamily: 'var(--fuente-tecnica)',
               fontSize: '11px',
-              color: '#FFEE00',
+              color: 'var(--color-electrico)',
               letterSpacing: '3px',
               textTransform: 'uppercase',
               display: 'block',
@@ -65,7 +65,7 @@ export default function EditorialGallery() {
             }}
           >
             GALERÍA EDITORIAL <br />
-            <span style={{ color: '#FFEE00' }}>DE REGISTROS EN OBRA</span>
+            <span style={{ color: 'var(--color-electrico)' }}>DE REGISTROS EN OBRA</span>
           </h2>
         </div>
 
@@ -86,8 +86,17 @@ export default function EditorialGallery() {
                 height: '360px',
                 borderRadius: '24px',
                 overflow: 'hidden',
-                border: '1px solid rgba(255, 255, 255, 0.1)',
+                border: '1px solid var(--color-electrico-borde)',
                 cursor: 'pointer',
+                transition: 'border-color 0.4s ease, box-shadow 0.4s ease',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-electrico)';
+                e.currentTarget.style.boxShadow = '0 0 30px var(--color-electrico-glow)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'var(--color-electrico-borde)';
+                e.currentTarget.style.boxShadow = 'none';
               }}
             >
               <img
@@ -99,7 +108,7 @@ export default function EditorialGallery() {
                   objectFit: 'cover',
                   transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.08)')}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.06)')}
                 onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
               />
               <div
@@ -126,10 +135,11 @@ export default function EditorialGallery() {
                   style={{
                     fontFamily: 'var(--fuente-tecnica)',
                     fontSize: '10px',
-                    color: '#FFEE00',
+                    color: 'var(--color-electrico)',
                     letterSpacing: '2px',
                     display: 'block',
                     marginBottom: '4px',
+                    fontWeight: 700,
                   }}
                 >
                   {item.tag}

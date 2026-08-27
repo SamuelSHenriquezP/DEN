@@ -111,9 +111,9 @@ export default function InspectorCuadro() {
               style={{
                 padding: '8px 18px',
                 fontSize: '10px',
-                borderColor: vistaFlir ? '#00E5FF' : 'rgba(255,230,0,0.4)',
-                background: vistaFlir ? 'rgba(0,229,255,0.12)' : 'transparent',
-                color: vistaFlir ? '#00E5FF' : '#FFE600',
+                borderColor: vistaFlir ? '#0066FF' : 'rgba(255,230,0,0.4)',
+                background: vistaFlir ? 'rgba(0,102,255,0.12)' : 'transparent',
+                color: vistaFlir ? '#0066FF' : '#FFE600',
               }}
             >
               <span>{vistaFlir ? '🔥 Vista Termográfica Infrarroja FLIR Activa' : '⚡ Cambiar a Vista Termográfica FLIR'}</span>
@@ -247,7 +247,7 @@ export default function InspectorCuadro() {
               <h3>{datos.nombre}</h3>
             </div>
             {vistaFlir && (
-              <div style={{ background: 'rgba(0, 229, 255, 0.1)', border: '1px solid #00E5FF', padding: '8px 14px', borderRadius: '12px', marginBottom: '14px', color: '#00E5FF', fontSize: '11px', fontWeight: '700' }}>
+              <div style={{ background: 'rgba(0, 102, 255, 0.1)', border: '1px solid #0066FF', padding: '8px 14px', borderRadius: '12px', marginBottom: '14px', color: '#0066FF', fontSize: '11px', fontWeight: '700' }}>
                 🔍 Lectura Infrarroja FLIR: {datos.tempFlir}
               </div>
             )}

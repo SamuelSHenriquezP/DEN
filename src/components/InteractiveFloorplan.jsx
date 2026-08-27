@@ -92,7 +92,7 @@ export default function InteractiveFloorplan() {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-            <span style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '1.5px', color: '#00E5FF' }}>
+            <span style={{ fontSize: '10px', fontWeight: '700', letterSpacing: '1.5px', color: '#0066FF' }}>
               📐 PLANO TÉCNICO DE DISTRIBUCIÓN (VILLA MODELO)
             </span>
             <span style={{ fontSize: '10px', color: '#94A3B8', fontFamily: 'var(--fuente-tecnica)' }}>
@@ -108,7 +108,7 @@ export default function InteractiveFloorplan() {
               height: '320px',
               border: '1.5px dashed rgba(255, 255, 255, 0.12)',
               borderRadius: '16px',
-              background: 'radial-gradient(circle at 50% 50%, rgba(0, 229, 255, 0.03) 0%, transparent 80%)',
+              background: 'radial-gradient(circle at 50% 50%, rgba(0, 102, 255, 0.03) 0%, transparent 80%)',
             }}
           >
             {estancias.map((est) => {
@@ -199,7 +199,7 @@ export default function InteractiveFloorplan() {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '6px' }}>
                 <span style={{ color: '#94A3B8' }}>Nivel Iluminación DALI:</span>
-                <strong style={{ color: '#00E5FF' }}>{activa.potenciaLuz}</strong>
+                <strong style={{ color: '#0066FF' }}>{activa.potenciaLuz}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px', borderBottom: '1px solid rgba(255,255,255,0.06)', paddingBottom: '6px' }}>
                 <span style={{ color: '#94A3B8' }}>Temperatura Clima:</span>

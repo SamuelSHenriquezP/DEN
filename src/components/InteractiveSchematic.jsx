@@ -46,7 +46,7 @@ export default function InteractiveSchematic() {
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '18px' }}>
-            <span style={{ fontSize: '10px', color: '#00E5FF', fontWeight: '700', letterSpacing: '1px' }}>
+            <span style={{ fontSize: '10px', color: '#0066FF', fontWeight: '700', letterSpacing: '1px' }}>
               ⚡ ACOMETIDA MONOFÁSICA / TRIFÁSICA 230V / 400V
             </span>
             <span style={{ fontSize: '10px', color: '#FFEE00', fontWeight: '700' }}>
@@ -84,7 +84,7 @@ export default function InteractiveSchematic() {
                         fontFamily: 'var(--fuente-tecnica)',
                         fontSize: '11px',
                         fontWeight: '800',
-                        color: isSel ? '#FFEE00' : '#00E5FF',
+                        color: isSel ? '#FFEE00' : '#0066FF',
                         background: 'rgba(0,0,0,0.5)',
                         padding: '4px 10px',
                         borderRadius: '6px',
@@ -112,7 +112,7 @@ export default function InteractiveSchematic() {
         <div
           style={{
             background: 'var(--tarjeta-base)',
-            border: '1px solid rgba(0, 229, 255, 0.25)',
+            border: '1px solid rgba(0, 102, 255, 0.25)',
             borderRadius: '24px',
             padding: '28px',
             display: 'flex',
@@ -121,7 +121,7 @@ export default function InteractiveSchematic() {
           }}
         >
           <div>
-            <span style={{ fontSize: '10px', color: '#00E5FF', fontWeight: '700', letterSpacing: '1px' }}>
+            <span style={{ fontSize: '10px', color: '#0066FF', fontWeight: '700', letterSpacing: '1px' }}>
               ESPECIFICACIÓN DE CIRCUITO REBT
             </span>
             <h3 style={{ fontSize: '1.2rem', color: '#fff', fontWeight: '800', margin: '8px 0 16px' }}>
@@ -139,7 +139,7 @@ export default function InteractiveSchematic() {
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
                 <span style={{ color: '#94A3B8' }}>Calibre Magnetotérmico (PIA):</span>
-                <strong style={{ color: '#00E5FF', fontFamily: 'var(--fuente-tecnica)' }}>{circuitoActivo.pia} ({circuitoActivo.curva})</strong>
+                <strong style={{ color: '#0066FF', fontFamily: 'var(--fuente-tecnica)' }}>{circuitoActivo.pia} ({circuitoActivo.curva})</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '11px' }}>
                 <span style={{ color: '#94A3B8' }}>Potencia Máxima Admisible:</span>

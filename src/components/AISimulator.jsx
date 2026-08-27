@@ -29,7 +29,7 @@ const escenas = {
     titulo: 'AMBIENTE CINE Y ENTRETENIMIENTO (6.500 K)',
     potenciaBase: 0.82,
     kelvin: 6500,
-    colorGlow: 'rgba(0, 229, 255, 0.3)',
+    colorGlow: 'rgba(0, 102, 255, 0.35)',
     icono: '🌐',
     etiqueta: 'Modo Cine Nocturno (6.500 K)',
     descripcion: 'Luces de acento para experiencia audiovisual inmersiva.',

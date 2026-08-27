@@ -4,20 +4,24 @@
    ========================================================================== */
 
 :root {
-    /* Paleta Oficial Awwwards - "POWER ON / FOLLOW THE CURRENT" */
-    --fondo-base: #030508;
-    --fondo-obsidiana: #030508;
-    --fondo-superficie: #070B12;
-    --tarjeta-base: #0B111D;
-    --tarjeta-cristal: rgba(11, 17, 29, 0.9);
+    /* Paleta Oficial - "DEEP ELECTRIC NAVY" */
+    --fondo-base: #060B14;
+    --fondo-obsidiana: #040810;
+    --fondo-superficie: #0A1322;
+    --tarjeta-base: #0E1B2E;
+    --tarjeta-cristal: rgba(14, 27, 46, 0.9);
     
-    /* Color Principal Dominante: Cian Eléctrico #00E5FF */
-    --cian-tecnico: #00E5FF;
-    --cian-glow: rgba(0, 229, 255, 0.5);
-    --azul-tecnico: #00E5FF;
-    --azul-resplandor: rgba(0, 229, 255, 0.5);
-    --dorado-real: #00E5FF;
-    --dorado-resplandor: rgba(0, 229, 255, 0.5);
+    /* Color Principal Dominante (AZUL CELESTE / CELESTE ELÉCTRICO) */
+    --color-electrico: #00A3FF;
+    --color-electrico-glow: rgba(0, 163, 255, 0.45);
+    --color-electrico-borde: rgba(0, 163, 255, 0.25);
+
+    --cian-tecnico: var(--color-electrico);
+    --cian-glow: var(--color-electrico-glow);
+    --azul-tecnico: var(--color-electrico);
+    --azul-resplandor: var(--color-electrico-glow);
+    --dorado-real: #FFEE00;
+    --dorado-resplandor: rgba(255, 238, 0, 0.45);
     
     /* Acento Secundario: Amarillo Eléctrico #FFEE00 */
     --amarillo-electrico: #FFEE00;
@@ -30,8 +34,8 @@
     --texto-atenuado: #475569;
     
     /* Bordes e Hilos de Corriente */
-    --borde-sutil: rgba(0, 229, 255, 0.15);
-    --borde-destacado: rgba(0, 229, 255, 0.6);
+    --borde-sutil: rgba(0, 163, 255, 0.15);
+    --borde-destacado: rgba(0, 163, 255, 0.6);
     --borde-cristal: rgba(255, 255, 255, 0.08);
     
     /* Tipografías Editoriales Awwwards */
@@ -41,9 +45,9 @@
     --fuente-tecnica: 'JetBrains Mono', monospace;
     
     /* Gradientes */
-    --gradiente-dorado: linear-gradient(135deg, #FFEE00 0%, #00E5FF 100%);
-    --gradiente-tecnico: linear-gradient(135deg, #00E5FF 0%, #FFEE00 100%);
-    --gradiente-den-logo: linear-gradient(90deg, #00E5FF 0%, #0052FF 50%, #FFEE00 100%);
+    --gradiente-dorado: linear-gradient(135deg, var(--amarillo-electrico) 0%, var(--color-electrico) 100%);
+    --gradiente-tecnico: linear-gradient(135deg, var(--color-electrico) 0%, var(--amarillo-electrico) 100%);
+    --gradiente-den-logo: linear-gradient(90deg, var(--color-electrico) 0%, #0055CC 50%, var(--amarillo-electrico) 100%);
     
     /* Transiciones */
     --transicion-rapida: 0.32s cubic-bezier(0.16, 1, 0.3, 1);
@@ -104,8 +108,8 @@ body {
     position: fixed;
     inset: 0;
     background: radial-gradient(circle at 50% 15%, rgba(255, 230, 0, 0.05) 0%, transparent 65%),
-                radial-gradient(circle at 85% 75%, rgba(0, 229, 255, 0.05) 0%, transparent 65%),
-                radial-gradient(circle at 15% 85%, rgba(0, 82, 255, 0.06) 0%, transparent 65%);
+                radial-gradient(circle at 85% 75%, rgba(0, 102, 255, 0.05) 0%, transparent 65%),
+                radial-gradient(circle at 15% 85%, rgba(0, 64, 192, 0.06) 0%, transparent 65%);
     pointer-events: none;
     z-index: -1;
 }
@@ -422,14 +426,14 @@ a, button, input, select, textarea, .boton-accion, .boton-escena, .unidad-interr
 
 .titulo-portada .texto-silueta {
     color: transparent;
-    -webkit-text-stroke: 1.5px rgba(0, 229, 255, 0.6);
+    -webkit-text-stroke: 1.5px rgba(0, 102, 255, 0.6);
 }
 
 .titulo-portada .texto-dorado-resplandor {
     background: var(--gradiente-dorado);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 30px rgba(0, 229, 255, 0.45));
+    filter: drop-shadow(0 0 30px rgba(0, 102, 255, 0.45));
 }
 
 .titulo-portada span {
@@ -738,7 +742,7 @@ a, button, input, select, textarea, .boton-accion, .boton-escena, .unidad-interr
     align-self: flex-start;
     margin-bottom: 12px;
     display: inline-block;
-    background: rgba(0, 229, 255, 0.1);
+    background: rgba(0, 102, 255, 0.1);
     border: 1px solid var(--borde-sutil);
     padding: 6px 16px;
     border-radius: 100px;

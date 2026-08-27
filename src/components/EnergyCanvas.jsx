@@ -34,9 +34,25 @@ export default function EnergyCanvas() {
     window.addEventListener('mousemove', handleMouseMove);
     window.addEventListener('mouseleave', handleMouseLeave);
 
+    const computedStyle = getComputedStyle(document.documentElement);
+    const electricColor = computedStyle.getPropertyValue('--color-electrico').trim() || '#0088FF';
+    const goldColor = computedStyle.getPropertyValue('--amarillo-electrico').trim() || '#FFEE00';
+
+    const getRgb = (hexStr, defaultRgb) => {
+      const clean = hexStr.replace('#', '');
+      if (clean.length === 6) {
+        const num = parseInt(clean, 16);
+        return `${(num >> 16) & 255}, ${(num >> 8) & 255}, ${num & 255}`;
+      }
+      return defaultRgb;
+    };
+
+    const electricRgb = getRgb(electricColor, '0, 136, 255');
+    const goldRgb = getRgb(goldColor, '255, 238, 0');
+
     const particulas = [];
     const numParticulas = Math.min(45, Math.floor(width / 30));
-    const coloresLogo = ['#FFE600', '#00E5FF', '#0052FF', '#FFE600'];
+    const coloresLogo = [goldColor, electricColor, electricColor, goldColor];
 
     for (let i = 0; i < numParticulas; i++) {
       particulas.push({
@@ -77,8 +93,8 @@ export default function EnergyCanvas() {
               particulas[j].x,
               particulas[j].y
             );
-            grad.addColorStop(0, `rgba(255, 230, 0, ${0.15 * factorDistancia})`);
-            grad.addColorStop(1, `rgba(0, 229, 255, ${0.12 * factorDistancia})`);
+            grad.addColorStop(0, `rgba(${goldRgb}, ${0.15 * factorDistancia})`);
+            grad.addColorStop(1, `rgba(${electricRgb}, ${0.12 * factorDistancia})`);
 
             ctx.strokeStyle = grad;
             ctx.lineWidth = 0.7 * factorDistancia;

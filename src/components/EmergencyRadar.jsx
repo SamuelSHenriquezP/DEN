@@ -73,8 +73,8 @@ export default function EmergencyRadar() {
                 key={idx}
                 onClick={() => setZonaSeleccionada(z)}
                 style={{
-                  background: isSel ? 'rgba(0, 229, 255, 0.12)' : 'rgba(255, 255, 255, 0.02)',
-                  border: isSel ? '1.5px solid #00E5FF' : '1px solid rgba(255, 255, 255, 0.08)',
+                  background: isSel ? 'var(--color-electrico-borde)' : 'rgba(255, 255, 255, 0.02)',
+                  border: isSel ? '1.5px solid var(--color-electrico)' : '1px solid rgba(255, 255, 255, 0.08)',
                   padding: '16px',
                   borderRadius: '16px',
                   cursor: 'pointer',
@@ -82,7 +82,7 @@ export default function EmergencyRadar() {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                  <strong style={{ fontSize: '12px', color: isSel ? '#00E5FF' : '#fff' }}>{z.municipio}</strong>
+                  <strong style={{ fontSize: '12px', color: isSel ? 'var(--color-electrico)' : '#fff' }}>{z.municipio}</strong>
                   <span style={{ fontSize: '9px', color: '#25D366', fontWeight: '700' }}>{z.estado}</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', color: '#94A3B8' }}>
