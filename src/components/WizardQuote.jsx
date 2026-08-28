@@ -103,7 +103,7 @@ export default function WizardQuote() {
             SOLICITUD DE <span className="texto-gradiente-dorado">PRESUPUESTO ORIENTATIVO</span>
           </h2>
           <p className="descripcion-seccion" style={{ margin: '0 auto' }}>
-            Completa los detalles de tu proyecto para enviar una consulta clara y estructurada directamente al Ingeniero Kerling Natale.
+            Completa los detalles de tu proyecto para enviar una consulta clara y estructurada directamente a Kerling Natale.
           </p>
         </div>
 

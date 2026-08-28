@@ -2,14 +2,14 @@ import React from 'react';
 
 export default function PartnersTicker() {
   const partners = [
-    { name: 'LOXONE', badge: 'CERTIFIED PARTNER', icon: '⚡' },
-    { name: 'SCHNEIDER ELECTRIC', badge: 'REBT PROTECTION', icon: '🛡️' },
-    { name: 'FLIR SYSTEMS', badge: 'THERMAL FLIR HD', icon: '🔍' },
-    { name: 'WALLBOX', badge: 'ITC-BT-52 EV', icon: '🚘' },
-    { name: 'VICTRON ENERGY', badge: 'LFP LITHIUM', icon: '🔋' },
-    { name: 'HUAWEI SOLAR', badge: 'TRIFÁSICO 98%', icon: '☀️' },
-    { name: 'ABB', badge: 'POWER SWITCHING', icon: '⚙️' },
-    { name: 'SIEMENS', badge: 'INDUSTRIAL REBT', icon: '🎛️' },
+    { name: 'LOXONE', badge: 'CERTIFIED PARTNER' },
+    { name: 'SCHNEIDER ELECTRIC', badge: 'REBT PROTECTION' },
+    { name: 'FLIR SYSTEMS', badge: 'THERMAL FLIR HD' },
+    { name: 'WALLBOX', badge: 'ITC-BT-52 EV' },
+    { name: 'VICTRON ENERGY', badge: 'LFP LITHIUM' },
+    { name: 'HUAWEI SOLAR', badge: 'TRIFÁSICO 98%' },
+    { name: 'ABB', badge: 'POWER SWITCHING' },
+    { name: 'SIEMENS', badge: 'INDUSTRIAL REBT' },
   ];
 
   // Duplicamos el array para lograr un scroll infinito perfecto e imperceptible
@@ -108,7 +108,7 @@ export default function PartnersTicker() {
               e.currentTarget.style.transform = 'scale(1)';
             }}
           >
-            <span style={{ fontSize: '14px' }}>{p.icon}</span>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', backgroundColor: '#FFEE00', boxShadow: '0 0 8px #FFEE00', flexShrink: 0 }}></span>
             <span
               style={{
                 fontFamily: 'var(--fuente-titulos)',

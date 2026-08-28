@@ -52,8 +52,8 @@ export default function DockNav({ activeIndex, onNavigate, onOpenQuote }) {
               width: '8px',
               height: '8px',
               borderRadius: '50%',
-              backgroundColor: 'var(--color-electrico)',
-              boxShadow: '0 0 10px var(--color-electrico)',
+              backgroundColor: '#FFEE00',
+              boxShadow: '0 0 10px #FFEE00',
             }}
           ></span>
           <span

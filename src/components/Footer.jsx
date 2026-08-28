@@ -14,7 +14,7 @@ export default function Footer({ onOpenQuote }) {
           <div className="columna-pie footer-brand">
             <img src="/Logo DEN.png" alt="Dynamic Electric Natale Logo" className="logotipo-pie" />
             <p className="eslogan-pie">
-              Dynamic Electric Natale (DEN) — Firma de ingeniería eléctrica, automatización residencial e instalaciones solares en la Comunidad de Madrid. Liderado por el <strong>Ingeniero Kerling Abraham Natale Hidalgo</strong>.
+              Dynamic Electric Natale (DEN) — Empresa de instalaciones eléctricas, domótica Loxone y energía solar en la Comunidad de Madrid. Liderado por <strong>Kerling Abraham Natale Hidalgo</strong> (Electricista Especialista).
             </p>
             <div className="insignias-certificacion-pie">
               <span className="insignia-pie">REBT MADRID</span>
@@ -58,7 +58,7 @@ export default function Footer({ onOpenQuote }) {
               </li>
               <li>
                 <a href="#sobre-mi" onClick={(e) => scrollToSection(e, 'sobre-mi')}>
-                  Ing. Kerling Natale
+                  Kerling Natale
                 </a>
               </li>
             </ul>

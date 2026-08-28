@@ -41,18 +41,11 @@ export default function AboutKerling({ onOpenQuote }) {
       ref={sectionRef}
       style={{
         width: '100%',
-        height: '100vh',
-        maxHeight: '100vh',
-        backgroundColor: '#050A14',
-        paddingTop: 'clamp(85px, 12vh, 115px)',
-        paddingBottom: 'clamp(30px, 4vh, 50px)',
-        paddingLeft: '4vw',
-        paddingRight: '4vw',
-        borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
-        boxSizing: 'border-box',
+        minHeight: '100vh',
+        backgroundColor: '#030712',
+        padding: '70px 4vw',
         position: 'relative',
-        overflow: 'hidden',
+        boxSizing: 'border-box',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -85,7 +78,7 @@ export default function AboutKerling({ onOpenQuote }) {
           zIndex: 2,
         }}
       >
-        {/* FOTO E IDENTIDAD DEL INGENIERO */}
+        {/* FOTO E IDENTIDAD DE KERLING NATALE */}
         <div
           className="lado-imagen-perfil"
           style={{
@@ -98,7 +91,7 @@ export default function AboutKerling({ onOpenQuote }) {
         >
           <img
             src="/images/kerling_portrait.png"
-            alt="Ingeniero Kerling Abraham Natale Hidalgo — Dirección Técnica DEN"
+            alt="Kerling Abraham Natale Hidalgo — Dirección Técnica DEN"
             style={{
               width: '100%',
               height: 'auto',
@@ -129,19 +122,19 @@ export default function AboutKerling({ onOpenQuote }) {
                 letterSpacing: '1px',
               }}
             >
-              ING. KERLING ABRAHAM NATALE HIDALGO
+              KERLING ABRAHAM NATALE HIDALGO
             </span>
             <span
               style={{
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '10px',
-                color: 'var(--color-electrico)',
+                color: '#FFEE00',
                 letterSpacing: '1.5px',
                 marginTop: '2px',
                 fontWeight: 700,
               }}
             >
-              DIRECTOR TÉCNICO & INGENIERO ELECTRICISTA COLEGIADO
+              DIRECTOR TÉCNICO & ELECTRICISTA ESPECIALISTA
             </span>
           </div>
         </div>
@@ -200,10 +193,47 @@ export default function AboutKerling({ onOpenQuote }) {
             }}
           >
             {[
-              { title: 'ELECTRICISTA CATEGORÍA ESPECIALISTA', sub: 'Comunidad de Madrid', icon: '⚡' },
-              { title: 'CERTIFICACIÓN DE INSTALACIONES', sub: 'Legalización y Seguridad REBT', icon: '📜' },
-              { title: 'CERTIFICACIÓN FOTOVOLTAICA', sub: 'Sistemas Solares y Baterías', icon: '☀️' },
-              { title: 'PARTNER LOXONE DOMÓTICA', sub: 'Instalación y Programación Smart', icon: '🤖' },
+              {
+                title: 'ELECTRICISTA CATEGORÍA ESPECIALISTA',
+                sub: 'Comunidad de Madrid',
+                icon: (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFEE00" strokeWidth="2">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                ),
+              },
+              {
+                title: 'CERTIFICACIÓN DE INSTALACIONES',
+                sub: 'Legalización y Seguridad REBT',
+                icon: (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-electrico)" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  </svg>
+                ),
+              },
+              {
+                title: 'CERTIFICACIÓN FOTOVOLTAICA',
+                sub: 'Sistemas Solares y Baterías',
+                icon: (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFEE00" strokeWidth="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                  </svg>
+                ),
+              },
+              {
+                title: 'PARTNER LOXONE DOMÓTICA',
+                sub: 'Instalación y Programación Smart',
+                icon: (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-electrico)" strokeWidth="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                  </svg>
+                ),
+              },
             ].map((cert, idx) => (
               <div
                 key={idx}
@@ -217,7 +247,7 @@ export default function AboutKerling({ onOpenQuote }) {
                   gap: '10px',
                 }}
               >
-                <span style={{ fontSize: '16px' }}>{cert.icon}</span>
+                <span style={{ display: 'flex', alignItems: 'center', flexShrink: 0 }}>{cert.icon}</span>
                 <div>
                   <h4 style={{ fontFamily: 'var(--fuente-titulos)', fontSize: '10px', color: '#FFFFFF', margin: 0, fontWeight: 800 }}>
                     {cert.title}

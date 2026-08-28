@@ -70,7 +70,7 @@ export default function BuyingGuideAndProcess({ onOpenQuote }) {
     {
       num: '03',
       paso: 'EJECUCIÓN & CERTIFICACIÓN',
-      desc: 'Supervisión directa por el Ing. Kerling Natale y emisión de certificado oficial CIE.',
+      desc: 'Supervisión directa por Kerling Natale y emisión de certificado oficial CIE.',
       tiempo: 'Llave en Mano',
     },
   ];
@@ -80,8 +80,8 @@ export default function BuyingGuideAndProcess({ onOpenQuote }) {
       id="como-trabajamos"
       style={{
         width: '100%',
-        backgroundColor: '#070C16',
-        padding: '120px 4vw',
+        backgroundColor: '#030712',
+        padding: '70px 4vw',
         borderTop: '1px solid var(--color-electrico-borde)',
         borderBottom: '1px solid var(--color-electrico-borde)',
         boxSizing: 'border-box',

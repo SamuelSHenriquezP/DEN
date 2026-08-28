@@ -30,7 +30,7 @@ export default function EmergencyRadar() {
           <span className="texto-gradiente-dorado">GUADARRAMA, SIERRA Y MADRID</span>
         </h2>
         <p className="descripcion-seccion">
-          Atención técnica y resolución de averías eléctricas (saltos de diferencial, cortocircuitos, fallo de cuadro general) con atención directa del Ingeniero Kerling Natale.
+          Atención técnica y resolución de averías eléctricas (saltos de diferencial, cortocircuitos, fallo de cuadro general) con atención directa de Kerling Natale.
         </p>
       </div>
 

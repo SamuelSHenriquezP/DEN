@@ -6,16 +6,11 @@ export default function FinalCircuitContact({ onOpenQuote }) {
       id="contacto"
       style={{
         width: '100%',
-        height: '100vh',
-        maxHeight: '100vh',
-        backgroundColor: '#030508',
-        paddingTop: 'clamp(85px, 12vh, 115px)',
-        paddingBottom: 'clamp(30px, 4vh, 50px)',
-        paddingLeft: '4vw',
-        paddingRight: '4vw',
+        minHeight: '100vh',
+        backgroundColor: '#030712',
+        padding: '70px 4vw',
         position: 'relative',
         boxSizing: 'border-box',
-        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -85,7 +80,7 @@ export default function FinalCircuitContact({ onOpenQuote }) {
             lineHeight: 1.5,
           }}
         >
-          Asesoramiento técnico directo con el <strong>Ingeniero Kerling Abraham Natale Hidalgo</strong>. Evaluamos tu reforma de cuadro, instalación domótica Loxone o proyecto fotovoltaico sin compromiso.
+          Asesoramiento técnico directo con <strong>Kerling Abraham Natale Hidalgo</strong> (Electricista Especialista). Evaluamos tu reforma de cuadro, instalación domótica Loxone o proyecto fotovoltaico sin compromiso.
         </p>
 
         {/* BOTÓN CON INTERACCIÓN DE NODO ELÉCTRICO RECEPTOR */}

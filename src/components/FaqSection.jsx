@@ -10,7 +10,7 @@ export default function FaqSection() {
     },
     {
       q: '¿Qué garantía y validez tienen los Boletines Eléctricos (CIE)?',
-      a: 'Kerling Abraham Natale Hidalgo es Ingeniero Electricista e Instalador Autorizado registrado en la Comunidad de Madrid. Todos los Certificados de Instalación Eléctrica (CIE) emitidos cuentan con garantía de legalización ante la Consejería de Industria y las compañías distribuidoras (i-DE, UFD).',
+      a: 'Kerling Abraham Natale Hidalgo es Electricista Especialista e Instalador Autorizado registrado en la Comunidad de Madrid. Todos los Certificados de Instalación Eléctrica (CIE) emitidos cuentan con garantía de legalización ante la Consejería de Industria y las compañías distribuidoras (i-DE, UFD).',
     },
     {
       q: '¿Cuánto tiempo requiere la instalación de un sistema fotovoltaico con batería?',

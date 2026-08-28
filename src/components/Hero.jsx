@@ -44,7 +44,7 @@ export default function Hero({ onOpenQuote }) {
       </h1>
 
       <p className="descripcion-portada animacion-entrada">
-        Diseñamos, reformamos y certificamos instalaciones eléctricas en viviendas y locales. Trabajos limpios, bien hechos y adaptados al Reglamento Electrotécnico para Baja Tensión, con la tranquilidad de contar con la supervisión directa del <strong className="destacado-dorado">Ingeniero Kerling Abraham Natale Hidalgo</strong>.
+        Diseñamos, reformamos y certificamos instalaciones eléctricas en viviendas y locales. Trabajos limpios, bien hechos y adaptados al Reglamento Electrotécnico para Baja Tensión, con la tranquilidad de contar con la supervisión directa de <strong className="destacado-dorado">Kerling Abraham Natale Hidalgo</strong>.
       </p>
 
       {/* BOTONES DE INTERACCIÓN PRINCIPALES */}
@@ -100,7 +100,7 @@ export default function Hero({ onOpenQuote }) {
 
         <div className="item-indicador">
           <span className="etiqueta-indicador">ATENCIÓN DIRECTA</span>
-          <span className="valor-indicador dorado">Supervisión por el Ingeniero</span>
+          <span className="valor-indicador dorado">Atención Especialista</span>
         </div>
       </div>
 

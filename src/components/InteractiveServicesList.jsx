@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 export default function InteractiveServicesList() {
   const [activeIdx, setActiveIdx] = useState(0);
-  const [activeTab, setActiveTab] = useState('overview'); // 'overview' | 'rebt' | 'metrics'
-  const [viewMode, setViewMode] = useState('3d'); // '3d' | 'grid'
-  const [isAutoplay, setIsAutoplay] = useState(false);
-  const [detailModalService, setDetailModalService] = useState(null);
 
   const servicios = [
     {
@@ -20,7 +16,7 @@ export default function InteractiveServicesList() {
       glowColor: '#10B981',
       cardBg: '#081622',
       tags: ['Procesamiento Local', 'Sin Cuotas Mensuales', 'App Control Total'],
-      specs: { procesador: 'Miniserver V2', integracion: 'Clima + DALI + Accesos', soporte: 'Ingeniero Directo' },
+      specs: { procesador: 'Miniserver V2', integracion: 'Clima + DALI + Accesos', soporte: 'Atención Directa' },
       metrics: [
         { label: 'Automatización Local', val: 100 },
         { label: 'Ahorro Energético', val: 40 },
@@ -226,25 +222,6 @@ export default function InteractiveServicesList() {
     },
   ];
 
-  // AUTOPLAY CONTROL
-  useEffect(() => {
-    let interval;
-    if (isAutoplay) {
-      interval = setInterval(() => {
-        setActiveIdx((prev) => (prev + 1) % servicios.length);
-      }, 5000);
-    }
-    return () => clearInterval(interval);
-  }, [isAutoplay, servicios.length]);
-
-  const handleNext = () => {
-    setActiveIdx((prev) => (prev + 1) % servicios.length);
-  };
-
-  const handlePrev = () => {
-    setActiveIdx((prev) => (prev - 1 + servicios.length) % servicios.length);
-  };
-
   const activeService = servicios[activeIdx];
 
   return (
@@ -252,16 +229,11 @@ export default function InteractiveServicesList() {
       id="servicios"
       style={{
         width: '100%',
-        height: '100vh',
-        maxHeight: '100vh',
+        minHeight: '100vh',
         backgroundColor: '#030712',
-        paddingTop: 'clamp(85px, 12vh, 115px)',
-        paddingBottom: 'clamp(30px, 4vh, 50px)',
-        paddingLeft: '4vw',
-        paddingRight: '4vw',
+        padding: '70px 4vw',
         position: 'relative',
         boxSizing: 'border-box',
-        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -284,779 +256,296 @@ export default function InteractiveServicesList() {
         }}
       ></div>
 
-      <div style={{ maxWidth: '1280px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
+      <div style={{ maxWidth: '1280px', margin: '0 auto', width: '100%', position: 'relative', zIndex: 2 }}>
         {/* ENCABEZADO Y CONTROLES DE NAVEGACIÓN */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            flexWrap: 'wrap',
-            gap: '24px',
-            marginBottom: '48px',
-          }}
-        >
-          <div>
-            <div
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '10px',
-                backgroundColor: 'rgba(0, 163, 255, 0.08)',
-                border: '1px solid var(--color-electrico-borde)',
-                padding: '8px 22px',
-                borderRadius: '100px',
-                marginBottom: '16px',
-                boxShadow: '0 0 20px rgba(0, 163, 255, 0.2)',
-              }}
-            >
-              <span
-                style={{
-                  width: '8px',
-                  height: '8px',
-                  borderRadius: '50%',
-                  backgroundColor: activeService.glowColor,
-                  boxShadow: `0 0 12px ${activeService.glowColor}`,
-                  transition: 'background-color 0.5s ease',
-                }}
-              ></span>
-              <span
-                style={{
-                  fontFamily: 'var(--fuente-tecnica)',
-                  fontSize: '11px',
-                  color: 'var(--color-electrico)',
-                  fontWeight: 800,
-                  letterSpacing: '2px',
-                }}
-              >
-                02 // SHOWCASE DE INGENIERÍA ELÉCTRICA
-              </span>
-            </div>
-
-            <h2
-              style={{
-                fontFamily: 'var(--fuente-titulos)',
-                fontSize: 'clamp(2.2rem, 4.8vw, 4rem)',
-                fontWeight: 800,
-                color: '#FFFFFF',
-                lineHeight: 1.05,
-                margin: 0,
-              }}
-            >
-              Soluciones Eléctricas <span style={{ color: activeService.glowColor, transition: 'color 0.5s ease' }}>Completas</span>
-            </h2>
-          </div>
-
-          {/* BARRA DE MODOS Y AUTOPLAY */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
-            <button
-              onClick={() => setIsAutoplay(!isAutoplay)}
-              style={{
-                backgroundColor: isAutoplay ? activeService.glowColor : '#0E1B2E',
-                color: isAutoplay ? '#FFFFFF' : '#94A3B8',
-                border: '1px solid var(--color-electrico-borde)',
-                padding: '10px 20px',
-                borderRadius: '100px',
-                fontFamily: 'var(--fuente-tecnica)',
-                fontSize: '10px',
-                fontWeight: 800,
-                letterSpacing: '1.5px',
-                cursor: 'pointer',
-                transition: 'all 0.3s ease',
-              }}
-            >
-              {isAutoplay ? '⏸ PAUSAR TOUR' : '▶ TOUR AUTOMÁTICO'}
-            </button>
-
-            <div
-              style={{
-                backgroundColor: '#0E1B2E',
-                border: '1px solid var(--color-electrico-borde)',
-                borderRadius: '100px',
-                padding: '4px',
-                display: 'flex',
-                gap: '4px',
-              }}
-            >
-              <button
-                onClick={() => setViewMode('3d')}
-                style={{
-                  backgroundColor: viewMode === '3d' ? 'var(--color-electrico)' : 'transparent',
-                  color: viewMode === '3d' ? '#FFFFFF' : '#94A3B8',
-                  border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '100px',
-                  fontFamily: 'var(--fuente-tecnica)',
-                  fontSize: '10px',
-                  fontWeight: 800,
-                  letterSpacing: '1px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                🎴 ESCENARIO 3D
-              </button>
-              <button
-                onClick={() => setViewMode('grid')}
-                style={{
-                  backgroundColor: viewMode === 'grid' ? 'var(--color-electrico)' : 'transparent',
-                  color: viewMode === 'grid' ? '#FFFFFF' : '#94A3B8',
-                  border: 'none',
-                  padding: '8px 18px',
-                  borderRadius: '100px',
-                  fontFamily: 'var(--fuente-tecnica)',
-                  fontSize: '10px',
-                  fontWeight: 800,
-                  letterSpacing: '1px',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                📊 VISTA GRID
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* MODALIDAD 1: ESCENARIO 3D SÓLIDO SIN TRANSPARENCIAS MOLESTAS */}
-        {viewMode === '3d' && (
-          <div>
-            <div
-              style={{
-                position: 'relative',
-                minHeight: '620px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                perspective: '1200px',
-                marginBottom: '40px',
-              }}
-            >
-              {/* FLECHA IZQUIERDA */}
-              <button
-                onClick={handlePrev}
-                style={{
-                  position: 'absolute',
-                  left: '10px',
-                  zIndex: 30,
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '50%',
-                  backgroundColor: '#0E1B2E',
-                  border: `1.5px solid ${activeService.glowColor}`,
-                  color: '#FFFFFF',
-                  fontSize: '22px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.8)',
-                  transition: 'all 0.3s ease',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              >
-                ←
-              </button>
-
-              {/* TARJETAS SÓLIDAS */}
-              <div
-                style={{
-                  position: 'relative',
-                  width: '100%',
-                  maxWidth: '920px',
-                  height: '560px',
-                }}
-              >
-                {servicios.map((srv, idx) => {
-                  const offset = (idx - activeIdx + servicios.length) % servicios.length;
-                  let normalizedOffset = offset;
-                  if (offset > servicios.length / 2) {
-                    normalizedOffset = offset - servicios.length;
-                  }
-
-                  const isActive = normalizedOffset === 0;
-                  const isPrev = normalizedOffset === -1;
-                  const isNext = normalizedOffset === 1;
-                  const isVisible = isActive || isPrev || isNext;
-
-                  let translateX = 0;
-                  let scale = 1;
-                  let opacity = 1;
-                  let zIndex = 1;
-                  let rotateY = 0;
-
-                  if (isActive) {
-                    translateX = 0;
-                    scale = 1;
-                    opacity = 1;
-                    zIndex = 20;
-                    rotateY = 0;
-                  } else if (isNext) {
-                    translateX = window.innerWidth > 768 ? 240 : 80;
-                    scale = 0.88;
-                    opacity = 0.7;
-                    zIndex = 10;
-                    rotateY = -12;
-                  } else if (isPrev) {
-                    translateX = window.innerWidth > 768 ? -240 : -80;
-                    scale = 0.88;
-                    opacity = 0.7;
-                    zIndex = 10;
-                    rotateY = 12;
-                  } else {
-                    translateX = 0;
-                    scale = 0.7;
-                    opacity = 0;
-                    zIndex = 1;
-                    rotateY = 0;
-                  }
-
-                  if (!isVisible) return null;
-
-                  return (
-                    <div
-                      key={srv.num}
-                      onClick={() => setActiveIdx(idx)}
-                      style={{
-                        position: 'absolute',
-                        inset: 0,
-                        transform: `translateX(${translateX}px) scale(${scale}) rotateY(${rotateY}deg)`,
-                        opacity: opacity,
-                        zIndex: zIndex,
-                        transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
-                        cursor: isActive ? 'default' : 'pointer',
-                      }}
-                    >
-                      {/* CONTENEDOR 100% SÓLIDO SIN SANGRADO DE TRANSPARENCIA */}
-                      <div
-                        style={{
-                          width: '100%',
-                          height: '100%',
-                          backgroundColor: srv.cardBg,
-                          border: isActive ? `2.5px solid ${srv.glowColor}` : '1.5px solid var(--color-electrico-borde)',
-                          borderRadius: '32px',
-                          padding: '36px 40px',
-                          boxSizing: 'border-box',
-                          boxShadow: isActive
-                            ? `0 30px 80px rgba(0, 0, 0, 0.95), 0 0 60px ${srv.glowColor}44`
-                            : '0 15px 35px rgba(0, 0, 0, 0.8)',
-                          display: 'flex',
-                          flexDirection: 'column',
-                          justifyContent: 'space-between',
-                          overflow: 'hidden',
-                          position: 'relative',
-                        }}
-                      >
-                        {/* ILUSTRACIÓN DE FONDO CON CORTE TOTAL */}
-                        <img
-                          src={srv.img}
-                          alt={srv.titulo}
-                          style={{
-                            position: 'absolute',
-                            top: 0,
-                            right: 0,
-                            width: '55%',
-                            height: '100%',
-                            objectFit: 'cover',
-                            opacity: isActive ? 0.3 : 0.1,
-                            pointerEvents: 'none',
-                          }}
-                        />
-
-                        {/* FILA SUPERIOR */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2 }}>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <span
-                              style={{
-                                width: '10px',
-                                height: '10px',
-                                borderRadius: '50%',
-                                backgroundColor: srv.glowColor,
-                                boxShadow: `0 0 14px ${srv.glowColor}`,
-                              }}
-                            ></span>
-                            <span
-                              style={{
-                                fontFamily: 'var(--fuente-tecnica)',
-                                fontSize: '11px',
-                                fontWeight: 800,
-                                color: srv.glowColor,
-                                letterSpacing: '2px',
-                              }}
-                            >
-                              SERVICIO // {srv.num}
-                            </span>
-                          </div>
-
-                          <span
-                            style={{
-                              backgroundColor: '#050A14',
-                              border: `1px solid ${srv.badgeColor}`,
-                              color: srv.badgeColor,
-                              fontFamily: 'var(--fuente-tecnica)',
-                              fontSize: '11px',
-                              fontWeight: 800,
-                              padding: '6px 18px',
-                              borderRadius: '100px',
-                              boxShadow: `0 0 20px ${srv.badgeColor}44`,
-                            }}
-                          >
-                            ✓ {srv.badge}
-                          </span>
-                        </div>
-
-                        {/* CUERPO PRINCIPAL CON PESTAÑAS */}
-                        <div style={{ position: 'relative', zIndex: 2, margin: '16px 0' }}>
-                          <span
-                            style={{
-                              fontFamily: 'var(--fuente-tecnica)',
-                              fontSize: '10px',
-                              color: srv.glowColor,
-                              letterSpacing: '2px',
-                              display: 'block',
-                              marginBottom: '6px',
-                              fontWeight: 700,
-                            }}
-                          >
-                            {srv.subtitulo}
-                          </span>
-
-                          <h3
-                            style={{
-                              fontFamily: 'var(--fuente-titulos)',
-                              fontSize: 'clamp(1.6rem, 3vw, 2.3rem)',
-                              color: '#FFFFFF',
-                              fontWeight: 800,
-                              marginBottom: '16px',
-                              lineHeight: 1.15,
-                            }}
-                          >
-                            {srv.titulo}
-                          </h3>
-
-                          {isActive ? (
-                            <div>
-                              <div
-                                style={{
-                                  display: 'flex',
-                                  gap: '12px',
-                                  marginBottom: '16px',
-                                  borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-                                  paddingBottom: '10px',
-                                }}
-                              >
-                                {[
-                                  { id: 'overview', name: '01 // RESUMEN' },
-                                  { id: 'rebt', name: '02 // REBT Y GARANTÍA' },
-                                  { id: 'metrics', name: '03 // MÉTRICAS EN VIVO' },
-                                ].map((tab) => (
-                                  <button
-                                    key={tab.id}
-                                    onClick={() => setActiveTab(tab.id)}
-                                    style={{
-                                      background: 'transparent',
-                                      border: 'none',
-                                      color: activeTab === tab.id ? srv.glowColor : '#64748B',
-                                      fontFamily: 'var(--fuente-tecnica)',
-                                      fontSize: '10px',
-                                      fontWeight: 800,
-                                      letterSpacing: '1px',
-                                      cursor: 'pointer',
-                                      paddingBottom: '4px',
-                                      borderBottom: activeTab === tab.id ? `2px solid ${srv.glowColor}` : '2px solid transparent',
-                                      transition: 'all 0.3s ease',
-                                    }}
-                                  >
-                                    {tab.name}
-                                  </button>
-                                ))}
-                              </div>
-
-                              {activeTab === 'overview' && (
-                                <p style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '14px', color: '#CBD5E1', lineHeight: '1.65', margin: 0, minHeight: '68px' }}>
-                                  {srv.desc}
-                                </p>
-                              )}
-
-                              {activeTab === 'rebt' && (
-                                <div style={{ backgroundColor: '#050A14', border: '1px solid var(--color-electrico-borde)', padding: '14px 18px', borderRadius: '14px', minHeight: '68px' }}>
-                                  <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '9px', color: srv.glowColor, display: 'block', marginBottom: '4px', fontWeight: 800 }}>
-                                    CUMPLIMIENTO NORMATIVO & SUPERVISIÓN TÉCNICA
-                                  </span>
-                                  <p style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '12.5px', color: '#E2E8F0', margin: 0, lineHeight: '1.5' }}>
-                                    {srv.rebtDetail}
-                                  </p>
-                                </div>
-                              )}
-
-                              {activeTab === 'metrics' && (
-                                <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', minHeight: '68px' }}>
-                                  {srv.metrics.map((m, i) => (
-                                    <div key={i}>
-                                      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '10px', fontFamily: 'var(--fuente-tecnica)', color: '#CBD5E1', marginBottom: '4px' }}>
-                                        <span>{m.label}</span>
-                                        <span style={{ color: srv.glowColor, fontWeight: 800 }}>{m.val}%</span>
-                                      </div>
-                                      <div style={{ width: '100%', height: '5px', backgroundColor: 'rgba(255, 255, 255, 0.1)', borderRadius: '10px', overflow: 'hidden' }}>
-                                        <div
-                                          style={{
-                                            width: `${m.val}%`,
-                                            height: '100%',
-                                            backgroundColor: srv.glowColor,
-                                            boxShadow: `0 0 10px ${srv.glowColor}`,
-                                            transition: 'width 0.8s ease',
-                                          }}
-                                        ></div>
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <p style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '13px', color: '#94A3B8', lineHeight: '1.6', margin: 0 }}>
-                              {srv.desc}
-                            </p>
-                          )}
-                        </div>
-
-                        {/* ACCIONES Y BOTÓN DE VER MÁS DETALLES COMPLETO */}
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 2, flexWrap: 'wrap', gap: '12px' }}>
-                          <button
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              setDetailModalService(srv);
-                            }}
-                            style={{
-                              backgroundColor: 'rgba(0, 163, 255, 0.08)',
-                              border: `1.5px solid ${srv.glowColor}`,
-                              color: srv.glowColor,
-                              fontFamily: 'var(--fuente-tecnica)',
-                              fontSize: '11px',
-                              fontWeight: 800,
-                              padding: '12px 24px',
-                              borderRadius: '100px',
-                              cursor: 'pointer',
-                              letterSpacing: '1px',
-                              transition: 'all 0.3s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.currentTarget.style.backgroundColor = srv.glowColor;
-                              e.currentTarget.style.color = '#FFFFFF';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.currentTarget.style.backgroundColor = 'rgba(0, 163, 255, 0.08)';
-                              e.currentTarget.style.color = srv.glowColor;
-                            }}
-                          >
-                            🔍 VER MÁS DETALLES +
-                          </button>
-
-                          <a
-                            href={`https://wa.me/34682178499?text=Hola,%20quisiera%20consultar%20sobre%20el%20servicio%20de%20${encodeURIComponent(srv.titulo)}.`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              backgroundColor: srv.glowColor,
-                              color: '#FFFFFF',
-                              fontFamily: 'var(--fuente-tecnica)',
-                              fontSize: '11px',
-                              fontWeight: 800,
-                              padding: '12px 28px',
-                              borderRadius: '100px',
-                              textDecoration: 'none',
-                              letterSpacing: '1.5px',
-                              boxShadow: `0 0 25px ${srv.glowColor}66`,
-                            }}
-                          >
-                            SOLICITAR SERVICIO →
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              {/* FLECHA DERECHA */}
-              <button
-                onClick={handleNext}
-                style={{
-                  position: 'absolute',
-                  right: '10px',
-                  zIndex: 30,
-                  width: '56px',
-                  height: '56px',
-                  borderRadius: '50%',
-                  backgroundColor: '#0E1B2E',
-                  border: `1.5px solid ${activeService.glowColor}`,
-                  color: '#FFFFFF',
-                  fontSize: '22px',
-                  cursor: 'pointer',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  boxShadow: '0 10px 30px rgba(0, 0, 0, 0.8)',
-                  transition: 'all 0.3s ease',
-                }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.1)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
-              >
-                →
-              </button>
-            </div>
-
-            {/* SELECTOR DE PUNTOS INFERIORES */}
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                gap: '10px',
-                flexWrap: 'wrap',
-              }}
-            >
-              {servicios.map((s, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveIdx(i)}
-                  style={{
-                    backgroundColor: activeIdx === i ? s.glowColor : '#0E1B2E',
-                    color: activeIdx === i ? '#FFFFFF' : '#64748B',
-                    border: activeIdx === i ? `1px solid ${s.glowColor}` : '1px solid var(--color-electrico-borde)',
-                    padding: '8px 16px',
-                    borderRadius: '100px',
-                    fontFamily: 'var(--fuente-tecnica)',
-                    fontSize: '10px',
-                    fontWeight: 800,
-                    letterSpacing: '1px',
-                    cursor: 'pointer',
-                    boxShadow: activeIdx === i ? `0 0 20px ${s.glowColor}55` : 'none',
-                    transition: 'all 0.3s ease',
-                  }}
-                >
-                  {s.num} {s.titulo.split(' ')[0]}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* MODALIDAD 2: VISTA EN GRID TRADICIONAL COMPACTO */}
-        {viewMode === 'grid' && (
+        <div style={{ marginBottom: '40px' }}>
           <div
             style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '24px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '10px',
+              backgroundColor: 'rgba(0, 163, 255, 0.08)',
+              border: '1px solid var(--color-electrico-borde)',
+              padding: '8px 22px',
+              borderRadius: '100px',
+              marginBottom: '16px',
             }}
           >
-            {servicios.map((srv, idx) => (
-              <div
-                key={srv.num}
-                style={{
-                  backgroundColor: srv.cardBg,
-                  border: `1px solid ${srv.glowColor}44`,
-                  borderRadius: '24px',
-                  padding: '28px 24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  transition: 'all 0.3s ease',
-                }}
-              >
-                <div>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '14px' }}>
-                    <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '11px', color: srv.glowColor, fontWeight: 800 }}>
-                      //{srv.num}
-                    </span>
-                    <span style={{ backgroundColor: '#050A14', border: `1px solid ${srv.badgeColor}`, color: srv.badgeColor, fontSize: '9px', fontFamily: 'var(--fuente-tecnica)', padding: '3px 10px', borderRadius: '100px' }}>
-                      {srv.badge}
-                    </span>
-                  </div>
-
-                  <h3 style={{ fontFamily: 'var(--fuente-titulos)', fontSize: '18px', color: '#FFFFFF', fontWeight: 800, marginBottom: '10px' }}>
-                    {srv.titulo}
-                  </h3>
-                  <p style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '13px', color: '#94A3B8', lineHeight: '1.6', marginBottom: '20px' }}>
-                    {srv.desc}
-                  </p>
-                </div>
-
-                <button
-                  onClick={() => setDetailModalService(srv)}
-                  style={{
-                    backgroundColor: 'rgba(0, 163, 255, 0.08)',
-                    border: `1px solid ${srv.glowColor}`,
-                    color: srv.glowColor,
-                    fontFamily: 'var(--fuente-tecnica)',
-                    fontSize: '10px',
-                    fontWeight: 800,
-                    padding: '10px 0',
-                    borderRadius: '100px',
-                    cursor: 'pointer',
-                    letterSpacing: '1px',
-                  }}
-                >
-                  🔍 VER MÁS DETALLES +
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* MODAL ULTRA COMPLETO "VER MÁS DETALLES" AL HACER CLIC EN EL BOTÓN */}
-      {detailModalService && (
-        <div
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 999999,
-            backgroundColor: 'rgba(3, 5, 8, 0.92)',
-            backdropFilter: 'blur(20px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '24px',
-            overflowY: 'auto',
-          }}
-          onClick={() => setDetailModalService(null)}
-        >
-          <div
-            style={{
-              backgroundColor: '#0B1526',
-              border: `2px solid ${detailModalService.glowColor}`,
-              borderRadius: '28px',
-              padding: '40px',
-              maxWidth: '720px',
-              width: '100%',
-              boxShadow: `0 30px 90px rgba(0, 0, 0, 0.95), 0 0 60px ${detailModalService.glowColor}55`,
-              position: 'relative',
-              animation: 'modalSlideUp 0.35s ease-out',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setDetailModalService(null)}
+            <span
               style={{
-                position: 'absolute',
-                top: '20px',
-                right: '20px',
-                background: 'transparent',
-                border: 'none',
-                color: '#94A3B8',
-                fontSize: '24px',
-                cursor: 'pointer',
+                width: '8px',
+                height: '8px',
+                borderRadius: '50%',
+                backgroundColor: activeService.glowColor,
+                boxShadow: `0 0 12px ${activeService.glowColor}`,
+                transition: 'background-color 0.5s ease',
               }}
-            >
-              ✕
-            </button>
-
+            ></span>
             <span
               style={{
                 fontFamily: 'var(--fuente-tecnica)',
                 fontSize: '11px',
-                color: detailModalService.glowColor,
+                color: 'var(--color-electrico)',
+                fontWeight: 800,
                 letterSpacing: '2px',
-                display: 'block',
-                marginBottom: '8px',
-                fontWeight: 800,
               }}
             >
-              EXPEDIENTE TÉCNICO COMPLETO // {detailModalService.num}
+              02 // SHOWCASE DE INGENIERÍA ELÉCTRICA
             </span>
+          </div>
 
-            <h3
+          <h2
+            style={{
+              fontFamily: 'var(--fuente-titulos)',
+              fontSize: 'clamp(2.2rem, 4.8vw, 4rem)',
+              fontWeight: 800,
+              color: '#FFFFFF',
+              lineHeight: 1.05,
+              margin: 0,
+            }}
+          >
+            Soluciones Eléctricas <span style={{ color: activeService.glowColor, transition: 'color 0.5s ease' }}>Completas</span>
+          </h2>
+        </div>
+
+        {/* MODO SHOWCASE: IMAGEN CLARA 100% Y EXPLICACIÓN COMPLETA DE TRABAJO */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: window.innerWidth > 992 ? '1fr 1.1fr' : '1fr',
+            gap: '36px',
+            alignItems: 'start',
+            backgroundColor: '#0E1B2E',
+            border: `1.5px solid ${activeService.glowColor}`,
+            borderRadius: '28px',
+            padding: '36px',
+            boxShadow: `0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px ${activeService.glowColor}25`,
+            marginBottom: '32px',
+            transition: 'all 0.4s ease',
+          }}
+        >
+          {/* COLUMNA IZQUIERDA: IMAGEN 100% CLARA Y NÍTIDA */}
+          <div style={{ position: 'relative', width: '100%', height: '100%', minHeight: '360px', borderRadius: '20px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
+            <img
+              src={activeService.img}
+              alt={activeService.titulo}
               style={{
-                fontFamily: 'var(--fuente-titulos)',
-                fontSize: '30px',
-                color: '#FFFFFF',
+                width: '100%',
+                height: '100%',
+                maxHeight: '480px',
+                objectFit: 'cover',
+                display: 'block',
+                borderRadius: '20px',
+              }}
+            />
+            {/* INSIGNIA SUPERIOR EN LA IMAGEN */}
+            <div
+              style={{
+                position: 'absolute',
+                top: '16px',
+                right: '16px',
+                backgroundColor: '#030712',
+                border: `1px solid ${activeService.badgeColor}`,
+                color: activeService.badgeColor,
+                fontFamily: 'var(--fuente-tecnica)',
+                fontSize: '10px',
                 fontWeight: 800,
-                marginBottom: '16px',
+                padding: '6px 14px',
+                borderRadius: '100px',
+                boxShadow: `0 0 15px ${activeService.badgeColor}44`,
               }}
             >
-              {detailModalService.titulo}
-            </h3>
+              ✓ {activeService.badge}
+            </div>
+          </div>
 
-            <p
+          {/* COLUMNA DERECHA: EXPLICACIÓN COMPLETA DEL TRABAJO */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <span
+                  style={{
+                    width: '8px',
+                    height: '8px',
+                    borderRadius: '50%',
+                    backgroundColor: activeService.glowColor,
+                    boxShadow: `0 0 10px ${activeService.glowColor}`,
+                  }}
+                ></span>
+                <span
+                  style={{
+                    fontFamily: 'var(--fuente-tecnica)',
+                    fontSize: '11px',
+                    fontWeight: 800,
+                    color: activeService.glowColor,
+                    letterSpacing: '2px',
+                  }}
+                >
+                  SERVICIO // {activeService.num} • {activeService.categoria}
+                </span>
+              </div>
+
+              <h3
+                style={{
+                  fontFamily: 'var(--fuente-titulos)',
+                  fontSize: 'clamp(1.6rem, 2.8vw, 2.2rem)',
+                  color: '#FFFFFF',
+                  fontWeight: 800,
+                  lineHeight: 1.15,
+                  margin: '0 0 6px 0',
+                }}
+              >
+                {activeService.titulo}
+              </h3>
+
+              <p
+                style={{
+                  fontFamily: 'var(--fuente-tecnica)',
+                  fontSize: '10.5px',
+                  color: '#FFEE00',
+                  letterSpacing: '1px',
+                  margin: '0 0 16px 0',
+                  fontWeight: 700,
+                }}
+              >
+                {activeService.subtitulo}
+              </p>
+
+              <p
+                style={{
+                  fontFamily: 'var(--fuente-cuerpo)',
+                  fontSize: '14px',
+                  color: '#CBD5E1',
+                  lineHeight: '1.65',
+                  margin: 0,
+                }}
+              >
+                {activeService.desc}
+              </p>
+            </div>
+
+            {/* DETALLE TÉCNICO REBT */}
+            <div
               style={{
-                fontFamily: 'var(--fuente-cuerpo)',
-                fontSize: '14.5px',
-                color: '#CBD5E1',
-                lineHeight: '1.65',
-                marginBottom: '28px',
+                backgroundColor: '#050A14',
+                borderLeft: `3px solid ${activeService.glowColor}`,
+                padding: '14px 18px',
+                borderRadius: '0 12px 12px 0',
               }}
             >
-              {detailModalService.desc}
-            </p>
-
-            {/* SECCIÓN DE EQUIPACIÓN UTILIZADA */}
-            <div style={{ marginBottom: '24px' }}>
-              <h4 style={{ fontFamily: 'var(--fuente-titulos)', fontSize: '14px', color: detailModalService.glowColor, marginBottom: '12px', letterSpacing: '1px' }}>
-                ⚙️ EQUIPOS Y TECNOLOGÍA UTILIZADA
-              </h4>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '10px' }}>
-                {detailModalService.equipos.map((eq, i) => (
-                  <div key={i} style={{ backgroundColor: '#050A14', border: '1px solid var(--color-electrico-borde)', padding: '10px 14px', borderRadius: '12px', fontFamily: 'var(--fuente-cuerpo)', fontSize: '12px', color: '#E2E8F0' }}>
-                    ✓ {eq}
-                  </div>
-                ))}
-              </div>
+              <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '10px', color: activeService.glowColor, letterSpacing: '1.5px', fontWeight: 800, display: 'block', marginBottom: '4px' }}>
+                ESPECIFICACIÓN REBT
+              </span>
+              <p style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '12.5px', color: '#94A3B8', margin: 0, lineHeight: '1.55' }}>
+                {activeService.rebtDetail}
+              </p>
             </div>
 
-            {/* PASOS DEL PROCESO DE INGENIERÍA */}
-            <div style={{ marginBottom: '28px' }}>
-              <h4 style={{ fontFamily: 'var(--fuente-titulos)', fontSize: '14px', color: detailModalService.glowColor, marginBottom: '12px', letterSpacing: '1px' }}>
-                📌 FLUSO DE TRABAJO E INSPECCIÓN
-              </h4>
+            {/* PASOS DE EJECUCIÓN (LO QUE SE HACE) */}
+            <div>
+              <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '10px', color: '#FFFFFF', letterSpacing: '1.5px', fontWeight: 800, display: 'block', marginBottom: '10px' }}>
+                PASOS DE EJECUCIÓN DEL TRABAJO
+              </span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {detailModalService.pasos.map((p, i) => (
-                  <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '12px', backgroundColor: '#050A14', padding: '10px 16px', borderRadius: '12px' }}>
-                    <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '11px', color: detailModalService.glowColor, fontWeight: 800 }}>
-                      0{i + 1}.
+                {activeService.pasos.map((paso, idx) => (
+                  <div key={idx} style={{ display: 'flex', alignItems: 'center', gap: '10px', backgroundColor: '#050A14', padding: '8px 14px', borderRadius: '10px', border: '1px solid rgba(255, 255, 255, 0.05)' }}>
+                    <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '10px', color: activeService.glowColor, fontWeight: 800 }}>
+                      0{idx + 1}.
                     </span>
-                    <span style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '12.5px', color: '#CBD5E1' }}>
-                      {p}
+                    <span style={{ fontFamily: 'var(--fuente-cuerpo)', fontSize: '12px', color: '#E2E8F0' }}>
+                      {paso}
                     </span>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* EQUIPACIÓN Y COMPONENTES */}
+            <div>
+              <span style={{ fontFamily: 'var(--fuente-tecnica)', fontSize: '10px', color: '#FFFFFF', letterSpacing: '1.5px', fontWeight: 800, display: 'block', marginBottom: '8px' }}>
+                EQUIPAMIENTO UTILIZADO
+              </span>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+                {activeService.equipos.map((eq, idx) => (
+                  <span
+                    key={idx}
+                    style={{
+                      fontFamily: 'var(--fuente-tecnica)',
+                      fontSize: '9.5px',
+                      color: '#94A3B8',
+                      backgroundColor: '#050A14',
+                      border: '1px solid var(--color-electrico-borde)',
+                      padding: '4px 10px',
+                      borderRadius: '100px',
+                    }}
+                  >
+                    ✓ {eq}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* ENLACE DIRECTO WHATSAPP */}
             <a
-              href={`https://wa.me/34682178499?text=Hola,%20he%20visto%20el%20expediente%20t%C3%A9cnico%20de%20${encodeURIComponent(detailModalService.titulo)}%20y%20quiero%20solicitar%20presupuesto.`}
+              href={`https://wa.me/34682178499?text=Hola,%20quisiera%20consultar%20por%20el%20servicio%20de%20${encodeURIComponent(activeService.titulo)}`}
               target="_blank"
               rel="noopener noreferrer"
               style={{
-                display: 'inline-block',
+                display: 'block',
                 width: '100%',
                 textAlign: 'center',
-                backgroundColor: detailModalService.glowColor,
+                backgroundColor: activeService.glowColor,
                 color: '#FFFFFF',
                 fontFamily: 'var(--fuente-tecnica)',
-                fontSize: '12px',
+                fontSize: '11px',
                 fontWeight: 800,
-                padding: '16px 0',
+                padding: '14px 0',
                 borderRadius: '100px',
                 textDecoration: 'none',
                 letterSpacing: '1.5px',
-                boxShadow: `0 0 35px ${detailModalService.glowColor}66`,
+                marginTop: '10px',
+                boxShadow: `0 0 25px ${activeService.glowColor}55`,
               }}
             >
-              SOLICITAR PRESUPUESTO PARA ESTE SERVICIO POR WHATSAPP →
+              SOLICITAR PRESUPUESTO PARA ESTE TRABAJO →
             </a>
           </div>
         </div>
-      )}
 
-      <style>{`
-        @keyframes modalSlideUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
+        {/* SELECTOR DE PUNTOS INFERIORES */}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '10px',
+            flexWrap: 'wrap',
+          }}
+        >
+          {servicios.map((s, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveIdx(i)}
+              style={{
+                backgroundColor: activeIdx === i ? s.glowColor : '#0E1B2E',
+                color: activeIdx === i ? '#FFFFFF' : '#64748B',
+                border: activeIdx === i ? `1px solid ${s.glowColor}` : '1px solid var(--color-electrico-borde)',
+                padding: '10px 18px',
+                borderRadius: '100px',
+                fontFamily: 'var(--fuente-tecnica)',
+                fontSize: '10.5px',
+                fontWeight: 800,
+                letterSpacing: '1px',
+                cursor: 'pointer',
+                boxShadow: activeIdx === i ? `0 0 20px ${s.glowColor}55` : 'none',
+                transition: 'all 0.3s ease',
+              }}
+            >
+              {s.num} {s.titulo.split(' ')[0]}
+            </button>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

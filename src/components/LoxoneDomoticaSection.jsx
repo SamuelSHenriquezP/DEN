@@ -5,7 +5,20 @@ export default function LoxoneDomoticaSection({ onOpenQuote }) {
     {
       titulo: 'Automatización Integral de Viviendas',
       desc: 'Una casa inteligente no es solo control remoto, es automatización real. El sistema aprende tus hábitos y optimiza cada función para mejorar el confort y reducir el consumo energético.',
-      icon: '🤖',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-electrico)" strokeWidth="2">
+          <rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect>
+          <rect x="9" y="9" width="6" height="6"></rect>
+          <line x1="9" y1="1" x2="9" y2="4"></line>
+          <line x1="15" y1="1" x2="15" y2="4"></line>
+          <line x1="9" y1="20" x2="9" y2="23"></line>
+          <line x1="15" y1="20" x2="15" y2="23"></line>
+          <line x1="20" y1="9" x2="23" y2="9"></line>
+          <line x1="20" y1="15" x2="23" y2="15"></line>
+          <line x1="1" y1="9" x2="4" y2="9"></line>
+          <line x1="1" y1="15" x2="4" y2="15"></line>
+        </svg>
+      ),
       caracteristicas: [
         'Control total desde app o pulsadores inteligentes',
         'Escenarios automáticos personalizados',
@@ -16,7 +29,11 @@ export default function LoxoneDomoticaSection({ onOpenQuote }) {
     {
       titulo: 'Eficiencia Energética Inteligente',
       desc: 'Loxone permite gestionar el consumo energético de forma avanzada, priorizando autoconsumo solar, climatización eficiente y optimización automática de recursos.',
-      icon: '⚡',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFEE00" strokeWidth="2">
+          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+        </svg>
+      ),
       caracteristicas: [
         'Control inteligente de climatización',
         'Gestión automática de persianas según orientación solar',
@@ -27,7 +44,11 @@ export default function LoxoneDomoticaSection({ onOpenQuote }) {
     {
       titulo: 'Seguridad y Control de Accesos',
       desc: 'Mayor protección y tranquilidad gracias a sistemas integrados de control de acceso, alarmas técnicas y simulación de presencia.',
-      icon: '🛡️',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-electrico)" strokeWidth="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+        </svg>
+      ),
       caracteristicas: [
         'Videoportero conectado',
         'Control de accesos inteligente',
@@ -38,7 +59,12 @@ export default function LoxoneDomoticaSection({ onOpenQuote }) {
     {
       titulo: 'Audio Multiroom y Experiencia Premium',
       desc: 'Sistema de sonido integrado en toda la vivienda con control centralizado y sin instalaciones visibles, ofreciendo una experiencia moderna y elegante.',
-      icon: '🎵',
+      icon: (
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FFEE00" strokeWidth="2">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+      ),
       caracteristicas: [
         'Sonido en cada estancia',
         'Control centralizado desde app',
@@ -53,16 +79,11 @@ export default function LoxoneDomoticaSection({ onOpenQuote }) {
       id="domotica-loxone"
       style={{
         width: '100%',
-        height: '100vh',
-        maxHeight: '100vh',
-        backgroundColor: '#070E1A',
-        paddingTop: 'clamp(85px, 12vh, 115px)',
-        paddingBottom: 'clamp(30px, 4vh, 50px)',
-        paddingLeft: '4vw',
-        paddingRight: '4vw',
+        minHeight: '100vh',
+        backgroundColor: '#030712',
+        padding: '70px 4vw',
         position: 'relative',
         boxSizing: 'border-box',
-        overflow: 'hidden',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FollowTheCurrentCursor from './components/FollowTheCurrentCursor';
 import DockNav from './components/DockNav';
-import ScreenSlideContainer from './components/ScreenSlideContainer';
 import SystemActivationHero from './components/SystemActivationHero';
-import PartnersTicker from './components/PartnersTicker';
 import InteractiveServicesList from './components/InteractiveServicesList';
 import LoxoneDomoticaSection from './components/LoxoneDomoticaSection';
 import AboutKerling from './components/AboutKerling';
@@ -12,15 +10,47 @@ import FinalCircuitContact from './components/FinalCircuitContact';
 import QuoteModal from './components/WizardQuote';
 import FloatingWhatsApp from './components/FloatingWhatsApp';
 
+const SECTION_IDS = [
+  'inicio',
+  'servicios',
+  'domotica',
+  'sobre-mi',
+  'certificaciones',
+  'contacto',
+];
+
 export default function App() {
   const [activeSectionIdx, setActiveSectionIdx] = useState(0);
   const [isQuoteOpen, setIsQuoteOpen] = useState(false);
 
-  const handleSystemPowerOn = () => {
-    // AL PULSAR POWER ON: DESPLAZAMIENTO CINEMÁTICO DE LA PANTALLA 0 (HERO) A LA PANTALLA 1 (SERVICIOS)
-    setTimeout(() => {
-      setActiveSectionIdx(1);
-    }, 1600);
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPos = window.scrollY + window.innerHeight / 3;
+      SECTION_IDS.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPos >= top && scrollPos < top + height) {
+            setActiveSectionIdx(idx);
+          }
+        }
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleNavigate = (idx) => {
+    setActiveSectionIdx(idx);
+    const targetId = SECTION_IDS[idx];
+    if (targetId) {
+      const el = document.getElementById(targetId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
   };
 
   return (
@@ -28,90 +58,104 @@ export default function App() {
       style={{
         background: '#030712',
         color: '#FFFFFF',
-        width: '100vw',
-        height: '100vh',
-        overflow: 'hidden',
+        width: '100%',
+        minHeight: '100vh',
+        overflowX: 'hidden',
         position: 'relative',
       }}
     >
-      {/* CURSTOR ELÉCTRICO DESKTOP */}
+      {/* CURSOR ELÉCTRICO DESKTOP */}
       <FollowTheCurrentCursor />
 
-      {/* DOCK NAV SUPERIOR CON CONEXIÓN DE PANTALLAS */}
+      {/* DOCK NAV SUPERIOR CON NAVEGACIÓN SUAVE */}
       <DockNav
         activeIndex={activeSectionIdx}
-        onNavigate={(idx) => setActiveSectionIdx(idx)}
+        onNavigate={handleNavigate}
         onOpenQuote={() => setIsQuoteOpen(true)}
       />
 
-      {/* CONTENEDOR MAESTRO DE MOVIMIENTO PANTALLA A PANTALLA (100VH SNAP TRANSITION) */}
-      <ScreenSlideContainer
-        activeIndex={activeSectionIdx}
-        onSectionChange={(newIdx) => setActiveSectionIdx(newIdx)}
-      >
-        {/* PANTALLA 0: HERO IGNITION SYSTEM (POWER ON) */}
-        <div>
+      {/* CONTENEDOR MAESTRO CON SCROLL SUAVE Y ANIMACIONES DE ENTRADA */}
+      <main style={{ width: '100%' }}>
+        {/* SECCIÓN 0: HERO (POWER ON) */}
+        <div id="inicio">
           <SystemActivationHero
-            onPowerOn={handleSystemPowerOn}
             onOpenQuote={() => setIsQuoteOpen(true)}
           />
-          <PartnersTicker />
         </div>
 
-        {/* PANTALLA 1: SHOWCASE 3D DE SERVICIOS ELÉCTRICOS */}
-        <div>
+        {/* SECCIÓN 1: SERVICIOS */}
+        <div id="servicios">
           <InteractiveServicesList />
         </div>
 
-        {/* PANTALLA 2: DOMÓTICA AVANZADA LOXONE PARTNER */}
-        <div>
+        {/* SECCIÓN 2: LOXONE DOMÓTICA */}
+        <div id="domotica">
           <LoxoneDomoticaSection onOpenQuote={() => setIsQuoteOpen(true)} />
         </div>
 
-        {/* PANTALLA 3: SOBRE MÍ - ING. KERLING ABRAHAM NATALE */}
-        <div>
+        {/* SECCIÓN 3: SOBRE MÍ */}
+        <div id="sobre-mi">
           <AboutKerling onOpenQuote={() => setIsQuoteOpen(true)} />
         </div>
 
-        {/* PANTALLA 4: CERTIFICACIONES Y GARANTÍA LEGAL REBT */}
-        <div>
+        {/* SECCIÓN 4: CERTIFICACIONES */}
+        <div id="certificaciones">
           <CertificationsSection />
         </div>
 
-        {/* PANTALLA 5: CONTACTO Y PRESUPUESTO FINAL */}
-        <div>
+        {/* SECCIÓN 5: CONTACTO Y FOOTER */}
+        <div id="contacto">
           <FinalCircuitContact onOpenQuote={() => setIsQuoteOpen(true)} />
           <footer
             style={{
-              borderTop: '1px solid var(--color-electrico-borde)',
-              padding: '24px 4vw',
-              backgroundColor: '#040812',
+              borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+              padding: '32px 4vw',
+              backgroundColor: '#030712',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
               flexWrap: 'wrap',
               gap: '16px',
-              fontFamily: 'var(--fuente-tecnica)',
-              fontSize: '11px',
-              color: '#94A3B8',
+              fontFamily: 'var(--fuente-cuerpo)',
+              fontSize: '13px',
+              color: 'rgba(255, 255, 255, 0.5)',
             }}
           >
-            <span>
-              © 2026 <strong>Dynamic Electric Natale</strong> — Ing. Kerling Abraham Natale Hidalgo.
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <img src="/Logo DEN.png" alt="Dynamic Electric Natale" style={{ height: '32px', width: 'auto' }} />
+            </div>
+
+            <span style={{ textAlign: 'center', maxWidth: '600px' }}>
+              © {new Date().getFullYear()} Dynamic Electric Natale — Kerling Abraham Natale Hidalgo. Electricista Especialista · Guadarrama, Madrid.
             </span>
-            <div style={{ display: 'flex', gap: '20px' }}>
-              <a href="https://www.instagram.com/dynamic_electric_natale" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-electrico)', textDecoration: 'none' }}>
+
+            <div style={{ display: 'flex', gap: '16px' }}>
+              <a
+                href="https://www.instagram.com/dynamic_electric_natale"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'rgba(255, 255, 255, 0.7)', textDecoration: 'none', transition: 'color 0.3s' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-electrico)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)')}
+              >
                 Instagram
               </a>
-              <a href="https://www.tiktok.com/@dynamic.electric.natale" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-electrico)', textDecoration: 'none' }}>
+              <a
+                href="https://www.tiktok.com/@dynamic.electric.natale"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'rgba(255, 255, 255, 0.7)', textDecoration: 'none', transition: 'color 0.3s' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-electrico)')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.7)')}
+              >
                 TikTok
               </a>
             </div>
           </footer>
         </div>
-      </ScreenSlideContainer>
+      </main>
 
-      {/* INDICADOR LATERAL DE NAVEGACIÓN EN PANTALLA DE PANTALLA A PANTALLA */}
+      {/* INDICADOR LATERAL DE NAVEGACIÓN */}
       <div
         style={{
           position: 'fixed',
@@ -123,7 +167,7 @@ export default function App() {
           flexDirection: 'column',
           alignItems: 'center',
           gap: '12px',
-          backgroundColor: 'rgba(3, 5, 8, 0.85)',
+          backgroundColor: 'rgba(3, 7, 18, 0.85)',
           border: '1px solid rgba(255, 255, 255, 0.12)',
           backdropFilter: 'blur(12px)',
           padding: '16px 10px',
@@ -131,11 +175,11 @@ export default function App() {
           boxShadow: '0 10px 30px rgba(0,0,0,0.8)',
         }}
       >
-        {[0, 1, 2, 3, 4, 5].map((idx) => (
+        {SECTION_IDS.map((id, idx) => (
           <button
             key={idx}
-            onClick={() => setActiveSectionIdx(idx)}
-            title={`Pantalla 0${idx + 1}`}
+            onClick={() => handleNavigate(idx)}
+            title={`Sección ${idx + 1}`}
             style={{
               width: activeSectionIdx === idx ? '10px' : '8px',
               height: activeSectionIdx === idx ? '26px' : '8px',

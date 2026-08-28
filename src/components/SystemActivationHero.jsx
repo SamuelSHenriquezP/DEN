@@ -176,13 +176,13 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
       style={{
         minHeight: '100vh',
         width: '100%',
-        backgroundColor: '#030508',
+        backgroundColor: '#030712',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
         position: 'relative',
-        padding: '120px 4vw 60px',
+        padding: '90px 4vw 50px',
         overflow: 'hidden',
         boxSizing: 'border-box',
       }}
@@ -364,8 +364,8 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                 width: '8px',
                 height: '8px',
                 borderRadius: '50%',
-                backgroundColor: 'var(--color-electrico)',
-                boxShadow: '0 0 16px var(--color-electrico)',
+                backgroundColor: '#FFEE00',
+                boxShadow: '0 0 16px #FFEE00',
               }}
             ></span>
             <span>ENERGÍA SEGURA, SOLUCIONES CONFIABLES • GUADARRAMA, MADRID</span>
@@ -411,7 +411,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             </span>
           </h1>
 
-          {/* ETIQUETA INGENIERO KERLING NATALE */}
+          {/* ETIQUETA KERLING NATALE */}
           <div
             className="revelar-sub-dramatico"
             style={{
@@ -423,9 +423,9 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
               marginBottom: '48px',
             }}
           >
-            Instalaciones eléctricas, fotovoltaica, domótica avanzada Loxone, telecomunicaciones, certificaciones e inspecciones por el{' '}
+            Instalaciones eléctricas, fotovoltaica, domótica avanzada Loxone, telecomunicaciones, certificaciones e inspecciones por{' '}
             <strong style={{ color: '#FFFFFF', fontWeight: 700 }}>
-              Ingeniero Kerling Abraham Natale Hidalgo
+              Kerling Abraham Natale Hidalgo
             </strong> (Electricista Categoría Especialista · Guadarrama, Madrid). Garantizando máxima seguridad y legalidad.
           </div>
 
@@ -502,10 +502,10 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
             }}
           >
             {[
-              { text: 'Ahorro Fotovoltaico hasta 95%', icon: '☀️' },
-              { text: 'Boletines Oficiales CIE 24-48h', icon: '📋' },
-              { text: 'Domótica Loxone Sin Cuotas', icon: '⚡' },
-              { text: 'Revisión Termográfica FLIR', icon: '🔍' },
+              { text: 'Ahorro Fotovoltaico hasta 95%', code: 'SOLAR' },
+              { text: 'Boletines Oficiales CIE 24-48h', code: 'CIE' },
+              { text: 'Domótica Loxone Sin Cuotas', code: 'LOXONE' },
+              { text: 'Revisión Termográfica FLIR', code: 'FLIR' },
             ].map((b, i) => (
               <div
                 key={i}
@@ -523,7 +523,7 @@ export default function SystemActivationHero({ onPowerOn, onOpenQuote }) {
                   borderRadius: '100px',
                 }}
               >
-                <span>{b.icon}</span>
+                <span style={{ color: '#FFEE00', fontWeight: 800 }}>[{b.code}]</span>
                 <span style={{ fontWeight: 700, color: '#FFFFFF' }}>{b.text}</span>
               </div>
             ))}
